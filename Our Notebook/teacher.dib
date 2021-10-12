@@ -137,7 +137,7 @@ Lesson.ResetChallenge();
 
 #!csharp
 
-Func<ListNode, int, IEnumerable<int>> AddLast = (root, data) => Enumerable.Empty<int>();
+Func<ListNode, int, ListNode> AddLast = (root, data) => null;
 
 #!csharp
 
@@ -145,29 +145,39 @@ Lesson.CurrentChallenge.AddRule("Checking traversal", context =>
 {    
 
     var sampleInput = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+
     var correctans = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 11};
     
     int x = 11;
 
+
+    // creating root of LinkedList
     ListNode sample = new ListNode(sampleInput[0], null);
 
+    // temporary head node
     ListNode temp = sample;
 
+    //creating LinkedList
     for(int i = 1; i < sampleInput.Length; i++){
         temp.next = new ListNode(sampleInput[i], null);
         temp = temp.next;
     }
 
-    var ans = AddLast(sample, x);
+    //Getting root after performing addLast 
+    ListNode root = AddLast(sample, x);
+
+    //checking for ans
+    var ans = Traverse(root);
     
     if (ans.All(correctans.Contains) && correctans.Count() == ans.Count())
     {
-        context.Pass("Added node successfully");
+        context.Pass("Node added successfully");
     }
     else
     {
-        context.Fail("Adding node failed");
+        context.Fail("Node add failed !");
     }
+
 });
 
 #!csharp
@@ -224,18 +234,21 @@ AddLast = (root, val) =>
 
 AddLast = (root, val) => 
 {
-    var ans = new List<int>();
+    if(root == null){
+        root = new ListNode(val, null);
+        return root;
+    }
+
     ListNode temp = root;
+
     while(temp.next != null){
-        ans.Add(temp.value);
         temp = temp.next;
     }
 
-    ans.Add(temp.value);
     temp.next = new ListNode(val, null);
-    temp = temp.next;
-    ans.Add(temp.value);
-    return ans;
+    
+    return root;
+
 };
 
 #!csharp
