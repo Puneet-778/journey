@@ -4,4 +4,4 @@
 
 #!csharp
 
-#!start-lesson --from-file "teacher.dib"
+#!start-lesson --from-file "LinkedList_Teacher.dib"
