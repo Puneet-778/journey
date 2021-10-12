@@ -313,12 +313,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 2 completed!");
+            context.SetMessage("Challenge 3 completed!");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 2 not complete");
+            context.SetMessage("Challenge 3 not complete");
         }
     });
 
@@ -372,3 +372,111 @@ AddFirst = (root, val) =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Reverse a LinkedList
+
+#!csharp
+
+Func<ListNode, ListNode> Reverse = root => null;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Reversing LinkedList", context =>
+{    
+
+    var sampleInput = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+
+    var correctans = new int[] {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    
+    // creating root of LinkedList
+    ListNode sample = new ListNode(sampleInput[0], null);
+
+    // temporary head node
+    ListNode temp = sample;
+
+    //creating LinkedList
+    for(int i = 1; i < sampleInput.Length; i++){
+        temp.next = new ListNode(sampleInput[i], null);
+        temp = temp.next;
+    }
+
+    //Getting root after performing addLast 
+    ListNode root = Reverse(sample);
+
+    //checking for ans
+    var ans = Traverse(root);
+    
+    if (ans.All(correctans.Contains) && correctans.Count() == ans.Count())
+    {
+        context.Pass("LinkedList reversed successfully");
+    }
+    else
+    {
+        context.Fail("LinkedList reverse Fail !");
+    }
+
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 4 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 4 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 4: Reverse a LinkedList
+
+#!csharp
+
+Reverse = (root) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Reverse = (root) => 
+{
+    if(root == null){
+        return root;
+    }
+
+    ListNode prev = null;
+    ListNode temp = root;
+
+    while(temp != null){
+        ListNode next = temp.next;
+        temp.next = prev;
+        prev = temp;
+        temp = next;
+    }
+    
+    return prev;
+
+};
