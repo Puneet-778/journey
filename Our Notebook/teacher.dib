@@ -141,7 +141,7 @@ Func<ListNode, int, ListNode> AddLast = (root, data) => null;
 
 #!csharp
 
-Lesson.CurrentChallenge.AddRule("Checking traversal", context =>
+Lesson.CurrentChallenge.AddRule("Checking if node is added correctly at the end", context =>
 {    
 
     var sampleInput = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
@@ -212,9 +212,9 @@ In this challenge, you will be writing an algorithm for adding a node at the end
 
 The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next node in the Linked list.
 
-Your will write your answer as a lambda and assign it to `AddLast`. The lambda should have type `Func<ListNode, int, IEnumerable<int>>`.
+Your will write your answer as a lambda and assign it to `AddLast`. The lambda should have type `Func<ListNode, int, ListNode>`.
 
-It should output the list of values for each node in the Linked list after adding given node at last.
+It should return head of LinkedList after adding given node at the end of LinkedList.
 
 #!csharp
 
@@ -248,6 +248,124 @@ AddLast = (root, val) =>
     temp.next = new ListNode(val, null);
     
     return root;
+
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Add node at start
+
+#!csharp
+
+Func<ListNode, int, ListNode> AddFirst = (root, data) => null;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking if node is added correctly at the beginning", context =>
+{    
+
+    var sampleInput = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+
+    var correctans = new int[] {11, 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+    
+    int x = 11;
+
+
+    // creating root of LinkedList
+    ListNode sample = new ListNode(sampleInput[0], null);
+
+    // temporary head node
+    ListNode temp = sample;
+
+    //creating LinkedList
+    for(int i = 1; i < sampleInput.Length; i++){
+        temp.next = new ListNode(sampleInput[i], null);
+        temp = temp.next;
+    }
+
+    //Getting root after performing addLast 
+    ListNode root = AddFirst(sample, x);
+
+    //checking for ans
+    var ans = Traverse(root);
+    
+    if (ans.All(correctans.Contains) && correctans.Count() == ans.Count())
+    {
+        context.Pass("Node added successfully");
+    }
+    else
+    {
+        context.Fail("Node add failed !");
+    }
+
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 2 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 2 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 3: Add a node at the beginning of LinkedList
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for adding a node at the beginning of LinkedList. 
+
+The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
+
+Your will write your answer as a lambda and assign it to `AddFirst`. The lambda should have type `Func<ListNode, int, ListNode>`.
+
+It should return the head of LinkedList after adding given node at the beginning of LinkedList.
+
+#!csharp
+
+AddFirst = (root, val) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+AddFirst = (root, val) => 
+{
+    if(root == null){
+        root = new ListNode(val, null);
+        return root;
+    }
+
+    ListNode temp = new ListNode(val,root);
+    
+    return temp;
 
 };
 
