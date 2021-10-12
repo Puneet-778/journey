@@ -1,0 +1,69 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+
+#!csharp
+
+#!start-lesson --from-file "Teacher.dib"
+
+#!markdown
+
+# Challenge 1: Find the nth Fibonacci
+
+#!markdown
+
+In this challenge, you will be solving the Fibonaaci problem, but this time using the technique of Dynamic Programming. 
+A fibonacci sequence is like : 0  1 1 2 3 5 8 13 ......., where every term except the first two are the sum of the previous two terms. 
+Your answer should return the nth term of the fibonacci sequence.
+
+#!csharp
+
+Fibonacci = number =>
+{
+    if(number==1)return 0;
+    if(number==2)return 1;
+    var dp = new int[number];
+    dp[0] = 0;
+    dp[1] = 1;
+    for(int i = 2; i < number; i++)
+        dp[i] = dp[i-1]+dp[i-2];
+    return dp[number-1];
+};
+
+#!markdown
+
+# Challenge 2: Tribonacci Number
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+Tribonacci = number =>
+{
+      if(number==1)return 0;
+    if(number==2 || number==3)return 1;
+    var dp = new int[number];
+    dp[0] = 0;
+    dp[1] = 1;
+    dp[2] = 1;
+    for(int i = 3; i < number; i++)
+        dp[i] = dp[i-1]+dp[i-2]+dp[i-3];
+    return dp[number-1];
+};
+
+#!markdown
+
+# Challenge 3: Maximum Subarray Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MaxSubarraySum = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};

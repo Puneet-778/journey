@@ -1,0 +1,281 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+#r "nuget: Interactive.Extension.ImageSharp"
+
+#!csharp
+
+using Microsoft.DotNet.Interactive.Journey;
+using Microsoft.DotNet.Interactive;
+using Microsoft.DotNet.Interactive.Commands;
+using Microsoft.DotNet.Interactive.CSharp;
+using Microsoft.DotNet.Interactive.Events;
+using SixLabors.ImageSharp;
+using System.IO;
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Dynamic Programming
+
+#!csharp
+
+Func<int, int> Fibonacci = inputArray => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Fibonacci Number", context =>
+{
+    var correctAns = 8;
+    var ans = Fibonacci(7);
+
+    if (correctAns == ans)
+    {
+        context.Pass("Correct nth Fibonacci");
+    }
+    else
+    {
+        context.Fail("Incorrect nth Fibonacci", 
+        "Remember, a fibonacci term is sum of its two previous terms.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 1 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 1 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 1: Find the nth Fibonacci
+
+#!markdown
+
+In this challenge, you will be solving the Fibonaaci problem, but this time using the technique of Dynamic Programming. 
+A fibonacci sequence is like : 0  1 1 2 3 5 8 13 ......., where every term except the first two are the sum of the previous two terms. 
+Your answer should return the nth term of the fibonacci sequence.
+
+#!csharp
+
+Fibonacci = number =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Fibonacci = number => 
+{   if(number==1)return 0;
+    if(number==2)return 1;
+    var dp = new int[number];
+    dp[0] = 0;
+    dp[1] = 1;
+    for(int i = 2; i < number; i++)
+        dp[i] = dp[i-1]+dp[i-2];
+    return dp[number-1];
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Tribonacci Number
+
+#!csharp
+
+Func<int, int> Tribonacci = number => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Tribonacci number", context =>
+{
+    // 0 1 1 2 4 7
+    var correctAns = 7;
+    
+    var ans = Tribonacci(6);
+    if (correctAns == ans)
+    {
+        context.Pass("Correct nth Tribonacci");
+    }
+    else
+    {
+        context.Fail("Incorrect Tribonacci ",
+        "Remember, Tribonacci number is the sum of previous 3 tribonacci number");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 2 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 2 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 2: Tribonacci Number
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+Tribonacci = number =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Tribonacci = number => 
+{   if(number==1)return 0;
+    if(number==2 || number==3)return 1;
+    var dp = new int[number];
+    dp[0] = 0;
+    dp[1] = 1;
+    dp[2] = 1;
+    for(int i = 3; i < number; i++)
+        dp[i] = dp[i-1]+dp[i-2]+dp[i-3];
+    return dp[number-1];
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Maximum Subarray Sum
+
+#!csharp
+
+Func<int[], int> MaxSubarraySum = inputArray => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for maximum sum subarray", context =>
+{
+    // 0 1 1 2 4 7
+    var correctAns = 18;
+    
+    var ans = MaxSubarraySum(new int[]{-1,3,-44,2,-1,6,11});
+    if (correctAns == ans)
+    {
+        context.Pass("Correct Max Subarray Sum");
+    }
+    else
+    {
+        context.Fail("Incorrect Max Subarray Sum",
+        "Try Dynamic Programming");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 2 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 2 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 3: Maximum Subarray Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MaxSubarraySum = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+MaxSubarraySum = inputArray => 
+{   
+    var dp = new int[inputArray.Count()];
+    dp[0] = inputArray[0];
+    for(int i = 1; i < inputArray.Count(); i++){
+        dp[i] = Math.Max(inputArray[i],dp[i-1]+inputArray[i]);
+    }
+    for(int i = 0; i < inputArray.Count(); i++)
+    Console.WriteLine(dp[i]);
+    return dp[inputArray.Count()-1];
+};
