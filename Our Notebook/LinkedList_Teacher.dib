@@ -572,7 +572,7 @@ In this challenge, you will be writing an algorithm for finding middle point of 
 
 The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
 
-Your will write your answer as a lambda and assign it to `Reverse`. The lambda should have type `Func<ListNode, ListNode>`.
+Your will write your answer as a lambda and assign it to `MidPoint`. The lambda should have type `Func<ListNode, ListNode>`.
 
 It should return the address of node which is present at the mid-point of  LinkedList.
 
@@ -698,7 +698,7 @@ In this challenge, you will be writing an algorithm for finding K-th node from e
 
 The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
 
-Your will write your answer as a lambda and assign it to `Reverse`. The lambda should have type `Func<ListNode, int, ListNode>`.
+Your will write your answer as a lambda and assign it to `KnodeFromEnd`. The lambda should have type `Func<ListNode, int, ListNode>`.
 
 It should return the address of node which is k-th node from end of LinkedList.
 
@@ -732,6 +732,127 @@ KnodeFromEnd = (root, k) =>
     }
 
     return slow;
+
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Delete n-th node from linkedlist
+
+#!csharp
+
+Func<ListNode, int, ListNode> DeleteNode = (root, n) => null;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Delete n-th node from LinkedList", context =>
+{    
+
+    var sampleInput = new int[] {1, 2, 3, 4, 5, 6 ,7, 8, 9, 10};
+
+    int n = 6;
+
+    var correctans = new int[] {1, 2, 3, 4, 5, 7, 8, 9, 10};
+    
+    // creating root of LinkedList
+    ListNode sample = new ListNode(sampleInput[0], null);
+
+    // temporary head node
+    ListNode temp = sample;
+
+    //creating LinkedList
+    for(int i = 1; i < sampleInput.Length; i++){
+        temp.next = new ListNode(sampleInput[i], null);
+        temp = temp.next;
+    }
+
+    //Getting root after reversing LinkedList 
+    ListNode root = KnodeFromEnd(sample, n);
+
+    //checking for ans
+    var ans = Traverse(root);
+    
+    if (ans.All(correctans.Contains) && correctans.Count() == ans.Count())
+    {
+        context.Pass("Node deleted Successfully");
+    }
+    else
+    {
+        context.Fail("Wrong Node deleted!");
+    }
+
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 7 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 7 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 8 : Delete N-th node from LinkedList
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for deleting N-th node from LinkedList. 
+
+The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
+
+Your will write your answer as a lambda and assign it to `DeleteNode`. The lambda should have type `Func<ListNode, int, ListNode>`.
+
+It should return the address of root node after deleting N-th node.
+
+Note: 1st Node is at 0-th index.
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+KnodeFromEnd = (root, n) => 
+{
+    if( n == 1){
+        ListNode ansNode = root.next;
+        root.next = null;
+        return ansNode;
+    }
+
+
+    ListNode temp = root;
+    ListNode prev = null;
+
+    n -= 1;
+
+    while(n-- > 0){
+        prev = temp;
+        temp = temp.next;
+    }
+
+    prev.next = temp.next;
+    temp.next = null;
+
+    return root;
 
 };
 
