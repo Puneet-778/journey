@@ -1,0 +1,132 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+#r "nuget: Interactive.Extension.ImageSharp, *-*"
+
+#!csharp
+
+using Microsoft.DotNet.Interactive.Journey;
+using Microsoft.DotNet.Interactive;
+using Microsoft.DotNet.Interactive.Commands;
+using Microsoft.DotNet.Interactive.CSharp;
+using Microsoft.DotNet.Interactive.Events;
+using SixLabors.ImageSharp;
+using System.IO;
+
+#!csharp
+
+class LinkedList
+{
+    public int value;
+    public LinkedList next;
+
+    public LinkedList(int value, LinkedList next)
+    {
+        this.value = value;
+        this.next = next;
+    }
+}
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Traverse a Linked List
+
+#!csharp
+
+Func<LinkedList, IEnumerable<int>> Traverse = root => Enumerable.Empty<int>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking traversal", context =>
+{    
+    var correctans = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+
+    LinkedList sample = new LinkedList(correctans[0], null);
+
+    LinkedList temp = sample;
+
+    for(int i = 1; i < correctans.Length; i++){
+        temp.next = new LinkedList(correctans[i], null);
+        temp = temp.next;
+    }
+
+    var ans = Traverse(sample);
+    
+    if (ans.All(correctans.Contains) && correctans.Count() == ans.Count())
+    {
+        context.Pass("Traversal correct");
+    }
+    else
+    {
+        context.Fail("Traversal incorrect");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 1 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 1 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 1 : Traverse a LinkedList
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for traversing the nodes of a Linked List. 
+
+The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next node in the Linked list.
+
+Your will write your answer as a lambda and assign it to `Traverse`. The lambda should have type `Func<LinkedList, IEnumerable<int>>`.
+
+It should output the list of values for each node in the Linked list.
+
+#!csharp
+
+Traverse = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Traverse = root => 
+{
+    var ans = new List<int>();
+    LinkedList temp = root;
+    while(temp != null){
+        ans.Add(temp.value);
+        temp = temp.next;
+    }
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
