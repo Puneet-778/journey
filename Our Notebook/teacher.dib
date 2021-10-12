@@ -445,6 +445,16 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 # Challenge 4: Reverse a LinkedList
 
+#!markdown
+
+In this challenge, you will be writing an algorithm for reversing LinkedList. 
+
+The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
+
+Your will write your answer as a lambda and assign it to `Reverse`. The lambda should have type `Func<ListNode, ListNode>`.
+
+It should return the head of LinkedList after reversing the LinkedList.
+
 #!csharp
 
 Reverse = (root) =>
