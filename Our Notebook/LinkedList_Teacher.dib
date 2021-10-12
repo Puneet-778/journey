@@ -698,7 +698,7 @@ In this challenge, you will be writing an algorithm for finding K-th node from e
 
 The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
 
-Your will write your answer as a lambda and assign it to `Reverse`. The lambda should have type `Func<ListNode, k, ListNode>`.
+Your will write your answer as a lambda and assign it to `Reverse`. The lambda should have type `Func<ListNode, int, ListNode>`.
 
 It should return the address of node which is k-th node from end of LinkedList.
 
