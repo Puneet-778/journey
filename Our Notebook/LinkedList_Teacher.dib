@@ -811,7 +811,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 8 : Delete N-th node from LinkedList
+# Challenge 7 : Delete N-th node from LinkedList
 
 #!markdown
 
