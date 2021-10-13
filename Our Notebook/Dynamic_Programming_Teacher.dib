@@ -1044,3 +1044,95 @@ LCS = (text1,text2) =>
     }
     return dp[n,m];
 };
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Longest Increasing Subsequence
+
+#!csharp
+
+Func<int[],int> LIS = inputArray => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Longest common subsequence", context =>
+{
+    var correctAns = 4;
+    var inputArray = new int[]{10,9,2,5,3,7,101,18};
+    var ans = LIS(inputArray);
+    if (ans == correctAns)
+    {
+        context.Pass("Correct LCS length.");
+    }
+    else
+    {
+        context.Fail("Incorrect LCS length.",
+        "Use Dynamic Programming");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 12 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 12 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 12: Longest Increasing Subsequence
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+LIS = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+LIS = nums => 
+{   
+        var dp = new int[nums.Count()];
+        int n = nums.Count();
+        dp[0] = 1;
+        int maxi = 1;
+        for(int i=1;i<n;i++){
+            dp[i]=1;
+            for(int j = 0;j<i;j++){
+                if(nums[i]>nums[j]) dp[i]=Math.Max(dp[i],dp[j]+1);
+            }
+            maxi = Math.Max(maxi,dp[i]);
+        }
+        return maxi;
+};
