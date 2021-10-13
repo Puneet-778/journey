@@ -118,7 +118,6 @@ Func<int, int> Tribonacci = number => 0;
 
 Lesson.CurrentChallenge.AddRule("Checking for Tribonacci number", context =>
 {
-    // 0 1 1 2 4 7
     var correctAns = 7;
     
     var ans = Tribonacci(6);
@@ -207,7 +206,6 @@ Func<int[], int> MaxSubarraySum = inputArray => 0;
 
 Lesson.CurrentChallenge.AddRule("Checking for maximum sum subarray", context =>
 {
-    // 0 1 1 2 4 7
     var correctAns = 18;
     
     var ans = MaxSubarraySum(new int[]{-1,3,-44,2,-1,6,11});
@@ -218,7 +216,7 @@ Lesson.CurrentChallenge.AddRule("Checking for maximum sum subarray", context =>
     else
     {
         context.Fail("Incorrect Max Subarray Sum",
-        "Try Dynamic Programming");
+        "Beware of negative numbers!!");
     }
 });
 
@@ -272,12 +270,12 @@ MaxSubarraySum = inputArray =>
 {   
     var dp = new int[inputArray.Count()];
     dp[0] = inputArray[0];
+    int maxi = Int32.MinValue;
     for(int i = 1; i < inputArray.Count(); i++){
         dp[i] = Math.Max(inputArray[i],dp[i-1]+inputArray[i]);
+        maxi = Math.Max(maxi,dp[i]);
     }
-    for(int i = 0; i < inputArray.Count(); i++)
-    Console.WriteLine(dp[i]);
-    return dp[inputArray.Count()-1];
+    return maxi;
 };
 
 #!csharp
@@ -296,18 +294,17 @@ Func<int[], int> MinCost = inputArray => 0;
 
 Lesson.CurrentChallenge.AddRule("Checking for minimum cost to reach the top floor", context =>
 {
-    // 0 1 1 2 4 7
     var correctAns = 6;
     
     var ans = MinCost(new int[]{1,100,1,1,1,100,1,1,100,1});
     if (correctAns == ans)
     {
-        context.Pass("Correct Max Subarray Sum");
+        context.Pass("Correct Minimum cost");
     }
     else
     {
-        context.Fail("Incorrect Max Subarray Sum",
-        "Try Dynamic Programming");
+        context.Fail("Incorrect Minimum cost",
+        "Use Dynamic programming!!, chose the best from the previous two states.");
     }
 });
 
@@ -383,14 +380,13 @@ Func<int,int, int> FiboGenKSteps = (topFloor,maxSteps) => 0;
 
 Lesson.CurrentChallenge.AddRule("Checking for total ways to reach top floor with K steps", context =>
 {
-    // 0 1 1 2 4 7
     var correctAns = 7;
     var topFloor = 5;
     var maxSteps = 3;
     var ans = FiboGenKSteps(topFloor,maxSteps);
     if (correctAns == ans)
     {
-        context.Pass("Correct Total ways.");
+        context.Pass("Correct total ways.");
     }
     else
     {
@@ -447,7 +443,6 @@ FiboGenKSteps = (inputArray,maxSteps) =>
 
 FiboGenKSteps = (number,maxSteps) => 
 {   
-        // Console.WriteLine(number);
         var dp = new int[number];
         dp[0] = 1;
         for(int i = 1;i<number;i++){
@@ -477,7 +472,6 @@ Func<int[],int,int> MinCostKSteps = (inputArray,maxSteps) => 0;
 
 Lesson.CurrentChallenge.AddRule("Checking for minimum cost to reach the top floor with atmost K steps", context =>
 {
-    // 0 1 1 2 4 7
     var correctAns = 14;
     var maxSteps = 2;
     var cost = new int[]{0,3,5,6,7,1,5,4,3,0};
@@ -543,8 +537,6 @@ MinCostKSteps = (cost,maxSteps) =>
 {   
         var dp = new int[cost.Count()];
         // foreach(var x in cost)Console.WriteLine(x);
-        // Console.WriteLine();
-        // Console.WriteLine();
         dp[0] = cost[0];
         for(int i = 1;i<cost.Count();i++){
             dp[i] = Int32.MaxValue;
@@ -574,7 +566,6 @@ Func<int[],int,IEnumerable<int>> MinCostPath = (inputArray,maxSteps) => new int[
 
 Lesson.CurrentChallenge.AddRule("Checking for minimum cost Path to reach the top floor with atmost K steps", context =>
 {
-    // 0 1 1 2 4 7
     var correctAns = new int[]{0,1,3,5,7,9};
     var maxSteps = 2;
     var cost = new int[]{0,3,5,6,7,1,5,4,3,0};
@@ -642,7 +633,6 @@ MinCostPath = (cost,maxSteps) =>
         var pathIndexes = new int[cost.Count()];
         List<int> path = new List<int>();
         // foreach(var x in cost)Console.WriteLine(x);
-        // Console.WriteLine();
         dp[0] = cost[0];
         pathIndexes[0] = -1;
         for(int i = 1;i<cost.Count();i++){
@@ -671,30 +661,28 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] 2D Dynamic Programming ==> 0/1 Knapsack
+# [Challenge] Minimum Coin Change
 
 #!csharp
 
-Func<int[],int[],int,int> Knapsack = (weight,cost,capacity) => 0;
+Func<int[],int,int> MinCoinChange = (coins,amount) => 0;
 
 #!csharp
 
-Lesson.CurrentChallenge.AddRule("Checking for minimum cost Path to reach the top floor with atmost K steps", context =>
+Lesson.CurrentChallenge.AddRule("Checking for fewest number of coins to make total amount", context =>
 {
-    // 0 1 1 2 4 7
-    var correctAns = 220;
-    var capacity = 50;
-    var weight = new int[]{10,20,30};
-    var cost = new int[]{60,100,120};
-    var ans = Knapsack(weight,cost,capacity);
+    var correctAns = 3;
+    var amount = 11;
+    var coins = new int[]{1,2,5};
+    var ans = MinCoinChange(coins,amount);
     if (ans == correctAns)
     {
-        context.Pass("Correct Maximum Profit");
+        context.Pass("Correct Minimum number coins.");
     }
     else
     {
-        context.Fail("Incorrect Maximum Profit",
-        "Think of using 2D Dynamic Programming with maximum capacity as one dimension and weight/cost as another");
+        context.Fail("Incorrect Minimum number coins.",
+        "Try Dynamic programming");
     }
 });
 
@@ -722,7 +710,103 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 8: 0/1 Knapsack Problem
+# Challenge 8: Minimum number of coins required to make total amount.
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MinCoinChange = (coins,amount) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+MinCoinChange = (coins,amount) => 
+{   
+    var dp = new int[amount+1];
+        int n = coins.Count();
+        dp[0]=0;
+        for(int i=1;i<amount+1;i++){
+            dp[i] = Int32.MaxValue;
+            foreach(int x in coins){
+               if(x<=i){
+                   dp[i] = Math.Min(dp[i],1+dp[i-x]);
+               }
+        
+            }
+        }
+        if(dp[amount]==Int32.MaxValue)return -1;
+        return dp[amount];
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] 2D Dynamic Programming ==> 0/1 Knapsack
+
+#!csharp
+
+Func<int[],int[],int,int> Knapsack = (weight,cost,capacity) => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for maximum profit", context =>
+{
+    var correctAns = 220;
+    var capacity = 50;
+    var weight = new int[]{10,20,30};
+    var cost = new int[]{60,100,120};
+    var ans = Knapsack(weight,cost,capacity);
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Maximum Profit");
+    }
+    else
+    {
+        context.Fail("Incorrect Maximum Profit",
+        "Think of using 2D Dynamic Programming with maximum capacity as one dimension and weight/cost array size as another");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 9 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 9 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 9: 0/1 Knapsack Problem
 
 #!markdown
 
@@ -761,4 +845,106 @@ Knapsack = (weight,cost,capacity) =>
         }
     }
     return dp[n,capacity];
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Total Number of coin changes
+
+#!csharp
+
+Func<int[],int,int> TotalCoinChange = (coins,amount) => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Total number of coin change", context =>
+{
+    var correctAns = 4;
+    var amount = 5;
+    var coins = new int[]{1,2,5};
+    var ans = TotalCoinChange(coins,amount);
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Total number of ways to change coin.");
+    }
+    else
+    {
+        context.Fail("Incorrect Total number of ways to change coin.",
+        "Think of using 2D Dynamic Programming with maximum capacity as one dimension and weight/cost as another");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 10 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 10 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 10: Total Number of Coin change
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+TotalCoinChange = (coins,amount) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+TotalCoinChange = (coins,amount) => 
+{   
+    int fin_amount = amount;
+    int nc = coins.Count();
+    var arr = new int[nc+1,fin_amount+1];
+    for(int i=0;i<nc+1;i++)
+    {
+        arr[i,0]=1;
+    }
+    for(int i=1;i<nc+1;i++)
+    {
+        for(int j=1;j<fin_amount+1;j++)
+        {
+
+            int x;
+            if((j-coins[i-1])<0)
+                x=0;
+            else
+                x=arr[i,j-coins[i-1]]; 
+                arr[i,j]=arr[i-1,j]+x; 
+        }
+    }
+        return arr[nc,fin_amount];
 };
