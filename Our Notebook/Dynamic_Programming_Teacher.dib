@@ -1066,11 +1066,11 @@ Lesson.CurrentChallenge.AddRule("Checking for Longest common subsequence", conte
     var ans = LIS(inputArray);
     if (ans == correctAns)
     {
-        context.Pass("Correct LCS length.");
+        context.Pass("Correct LIS length.");
     }
     else
     {
-        context.Fail("Incorrect LCS length.",
+        context.Fail("Incorrect LIS length.",
         "Use Dynamic Programming");
     }
 });
