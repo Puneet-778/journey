@@ -599,12 +599,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 6 completed!");
+        context.SetMessage("Challenge 7 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 6 not complete");
+        context.SetMessage("Challenge 7 not complete");
     }
 });
 
@@ -663,4 +663,102 @@ MinCostPath = (cost,maxSteps) =>
         path.Reverse();
         // foreach(var x in path)Console.WriteLine(x);
         return path;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] 2D Dynamic Programming ==> 0/1 Knapsack
+
+#!csharp
+
+Func<int[],int[],int,int> Knapsack = (weight,cost,capacity) => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for minimum cost Path to reach the top floor with atmost K steps", context =>
+{
+    // 0 1 1 2 4 7
+    var correctAns = 220;
+    var capacity = 50;
+    var weight = new int[]{10,20,30};
+    var cost = new int[]{60,100,120};
+    var ans = Knapsack(weight,cost,capacity);
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Maximum Profit");
+    }
+    else
+    {
+        context.Fail("Incorrect Maximum Profit",
+        "Think of using 2D Dynamic Programming with maximum capacity as one dimension and weight/cost as another");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 8 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 8 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 8: 0/1 Knapsack Problem
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+Knapsack = (weight,cost,capacity) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Knapsack = (weight,cost,capacity) => 
+{   
+    var n = weight.Count();
+    var dp = new int[n+1,capacity+1]; 
+    for(int i = 0; i <= n; i++)
+    {
+        for(int w = 0; w <= capacity; w++)
+        {
+            if (i == 0 || w == 0)
+                dp[i,w] = 0;
+            else if (weight[i - 1] <= w)
+                dp[i,w] = Math.Max(cost[i - 1] + dp[i - 1,w - weight[i - 1]], dp[i - 1,w]);
+            else
+                dp[i,w] = dp[i - 1,w];
+        }
+    }
+    return dp[n,capacity];
 };
