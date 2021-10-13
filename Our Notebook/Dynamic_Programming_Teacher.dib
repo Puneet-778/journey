@@ -279,3 +279,185 @@ MaxSubarraySum = inputArray =>
     Console.WriteLine(dp[i]);
     return dp[inputArray.Count()-1];
 };
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Fibonacci Application
+
+#!csharp
+
+Func<int[], int> MinCost = inputArray => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for minimum cost to reach the top floor", context =>
+{
+    // 0 1 1 2 4 7
+    var correctAns = 6;
+    
+    var ans = MinCost(new int[]{1,100,1,1,1,100,1,1,100,1});
+    if (correctAns == ans)
+    {
+        context.Pass("Correct Max Subarray Sum");
+    }
+    else
+    {
+        context.Fail("Incorrect Max Subarray Sum",
+        "Try Dynamic Programming");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 2 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 2 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 4: Minimum cost climbing stairs
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MinCost = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+MinCost = cost => 
+{   
+        var dp = new int[cost.Count()];
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        for(int i = 2;i<cost.Count();i++)
+          dp[i] = Math.Min(dp[i-1],dp[i-2])+cost[i];
+        return Math.Min(dp[dp.Count()-1],dp[dp.Count()-2]);
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Fibonacci Generalised
+
+#!csharp
+
+Func<int,int, int> FiboGenKSteps = (inputArray,maxSteps) => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for total ways to reach top floor with K steps", context =>
+{
+    // 0 1 1 2 4 7
+    var correctAns = 7;
+    var floorNumber = 6;
+    var maxSteps = 3;
+    var ans = FiboGenKSteps(floorNumber,maxSteps);
+    if (correctAns == ans)
+    {
+        context.Pass("Correct Total ways.");
+    }
+    else
+    {
+        context.Fail("Incorrect total ways.",
+        "Try Dynamic Programming, try to use the concept of Fibonacci numbers and generalise it");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 2 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 2 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 5: Number of ways to reach top floor with K steps
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+FiboGenKSteps = (inputArray,maxSteps) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+FiboGenKSteps = (number,maxSteps) => 
+{   
+        // Console.WriteLine(number);
+        var dp = new int[number];
+        dp[0] = 0;
+        dp[1] = 1;
+        for(int i = 2;i<number;i++){
+            dp[i] = 0;
+            for(int j = 1;j<=maxSteps;j++){
+                if(i-j >=0) dp[i]+=dp[i-j];
+            }
+        }
+        // for(int i = 0;i<number;i++)Console.WriteLine(dp[i]);
+        Console.WriteLine(dp[number-1]);
+        return dp[number-1];
+};
