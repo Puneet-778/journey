@@ -607,12 +607,18 @@ Func<int[],int,int[]> MoveElementToEnd = (inputArray,toMove) => new int[inputArr
 
 Lesson.CurrentChallenge.AddRule("Checking for Move element to the end", context =>
 {
-    var correctAns = new int[]{1,3,4,2,2,2,2,2,2};
+    var correctAns = new List<int[]>{new int[]{3,1,4,2,2,2,2,2},new int[]{4,3,1,2,2,2,2,2},new int[]{1,3,4,2,2,2,2,2},new int[]{1,4,3,2,2,2,2,2},new int[]{3,4,1,2,2,2,2,2},new int[]{4,1,3,2,2,2,2,2}};
     var inputArray = new int[]{2,1,2,2,2,3,4,2};
     var toMove = 2;
     var ans = MoveElementToEnd(inputArray,toMove);
-
-    if (correctAns.Length == ans.Length && ans.SequenceEqual(correctAns))
+    bool flag = false;
+    for(int i = 0; i<correctAns.Count;i++){
+        if(correctAns[i].Length == ans.Length && ans.All(correctAns[i].Contains)){
+            flag = true;
+            break;
+        }
+    }
+    if (flag)
     {
         context.Pass("Correctly moved element to the end");
     }
