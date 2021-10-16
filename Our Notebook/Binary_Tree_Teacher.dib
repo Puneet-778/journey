@@ -705,3 +705,279 @@ Height = root =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Diameter of Binary Tree
+
+#!csharp
+
+Func<TreeNode, int> Diameter = root => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Diameter of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //     / \   / \
+    //    4   5  6  7
+
+
+    var LeftSubTree = new TreeNode(2, new TreeNode(4, null, null), new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = 4;
+
+    var ans = Diameter(sample);
+    
+    if (correctans ==  ans)
+    {
+        context.Pass("Diameter of binary tree is correct");
+    }
+    else
+    {
+        context.Fail("Diameter of binary tree is incorrect!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 7 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 7 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 7 : Diameter of a Binary Tree
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for calculating the Diameter of a binary tree. 
+
+The diameter of a tree (sometimes called the width) is the number of nodes on the longest path between two end nodes.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `Diameter`. The lambda should have type `Func<TreeNode, int>`.
+
+It should output the height of binary tree.
+
+             1          
+           /   \      
+          2     3     
+         / \   / \
+        4   5  6  7   
+
+        
+        Diameter of above tree  : 4
+
+#!csharp
+
+Diameter = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## Scratchpad
+
+#!csharp
+
+#!model-answer
+// this should pass
+int diameter = 0;
+int helper(TreeNode root){
+    if(root == null){
+        return -1;
+    }
+
+    int x = helper(root.left);
+    int y = helper(root.right);
+
+    diameter = Math.Max(diameter, x+y+2);
+
+    return Math.Max(x, y) + 1;
+}
+
+Diameter = root => 
+{
+    helper(root);
+    return diameter;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Left View of Binary Tree
+
+#!csharp
+
+Func<TreeNode, IEnumerable<int>> LeftView = root => Enumerable.Empty<int>(); 
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Left of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //       \   / \
+    //        5  6  7
+
+
+    var LeftSubTree = new TreeNode(2, null, new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = new int[] {1, 2, 5};
+
+    var ans = LeftView(sample);
+    
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Correct left view");
+    }
+    else
+    {
+        context.Fail("Wrong answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 8 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 8 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 8 : Left View of a Binary Tree
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for printing left view of binary tree.
+
+Left view of a Binary Tree is set of nodes visible when tree is visited from left side.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `LeftView`. The lambda should have type `Func<TreeNode, IEnumerable<int>>`.
+
+It should output the left view of Binary Tree.
+
+Eg 1.
+
+               1        
+            /     \      
+          2        3     
+         / \      / \           
+        4   5    6   7  
+       /     \  /     \
+      8      9  10    11
+        
+      Left View of above tree  : [1,2,4,8]
+             1        
+            /          
+          2          
+         / 
+        4    
+       /   
+      8    
+
+Eg 2.
+
+               1        
+             /   \      
+            2      3     
+            \     / \           
+             5   6   7  
+                /     \
+                10    11
+        
+      Left View of above tree  : [1,2,5,10]
+
+#!csharp
+
+LeftView = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+LeftView = root => 
+{
+    var q = new Queue<TreeNode>();
+    var ans = new List<int>();
+    q.Enqueue(root);
+    // ans.Add(root.data);
+
+    while (q.Count > 0)
+    {
+        int size = q.Count;
+        ans.Add(q.Peek().data);
+        
+        while(size-- > 0){
+            TreeNode temp = q.Dequeue();
+
+            if(! (temp.left is null)){
+                q.Enqueue(temp.left);
+            }
+
+            if(!(temp.right is null)){
+                q.Enqueue(temp.right);
+            }
+        }
+    }
+
+    return ans;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
