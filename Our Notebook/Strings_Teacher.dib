@@ -210,6 +210,103 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Maximum frequency element ( Sorted array)
+
+#!csharp
+
+Func<int[],int> MaxFreqSorted = inputArray => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Maximum frequency element", context =>
+{
+    var correctAns = 6;
+    var inputArray = new int[]{1,1,1,1,3,4,4,5,6,6,6,6,6,7,7,7,7,7};
+    var ans = MaxFreqSorted(inputArray);
+
+    if (correctAns == ans)
+    {
+        context.Pass("Correct Maximum frequency element");
+    }
+    else
+    {
+        context.Fail("Incorrect Maximum frequency element", 
+        "");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 2 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 2 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 3: Maximum frequency element in a sorted array
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MaxFreqSorted = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+MaxFreq = inputArray => 
+{   
+    int maxElement = inputArray[0];
+    int globalMax = 1;
+    int currentMax = 1;
+    for(int i = 1; i < inputArray.length;i++){
+        if(inputArray[i] == inputArray[i-1]){
+            currentMax++;
+        }
+        else {
+            if(currentMax > globalMax){
+                globalMax = currentMax;
+                maxElement - inputArray[i-1];
+            }
+            currentMax = 1;
+        }
+    }
+    return maxElement;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp
