@@ -310,6 +310,101 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Reverse the array
+
+#!csharp
+
+Func<int[],int[]> ReverseArray = inputArray => new int[inputArray.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Reversing  the array", context =>
+{
+    var correctAns = new int[]{8,7,6,5,4,3,2,1};
+    var inputArray = new int[]{1,2,3,4,5,6,7,8};
+    var ans = ReverseArray(inputArray);
+
+    if (correctAns.Length == ans.Length && ans.All(correctAns.Contains))
+    {
+        context.Pass("Correct Reversed array");
+    }
+    else
+    {
+        context.Fail("Incorrect Reversed array", 
+        "Use two pointers, one at the beginning and one at the end of the array, keep swapping till you reach the mid of the array");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 4 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 4 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 4: Reverse the array (in Place)
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ReverseArray = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ReverseArray = inputArray => 
+{   
+    int low = 0;
+    int high = inputArray.Length-1;
+    while(low <= high){
+        int temp = inputArray[low];
+        inputArray[low] = inputArray[high];
+        inputArray[high] = temp;
+        low++; 
+        high--; 
+    }
+    return inputArray;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Rotate the array
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp
