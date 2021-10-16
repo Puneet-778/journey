@@ -408,7 +408,7 @@ Lesson.CurrentChallenge.AddRule("Reversing LinkedList", context =>
     //checking for ans
     var ans = Traverse(root);
     
-    if (ans.All(correctans.Contains) && correctans.Count() == ans.Count())
+    if (ans.All(correctans.Contains) && correctans.Count() == ans.Count() && correctans.SequenceEqual(ans))
     {
         context.Pass("LinkedList reversed successfully");
     }
