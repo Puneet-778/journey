@@ -210,6 +210,296 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Maximum frequency element ( Sorted array)
+
+#!csharp
+
+Func<int[],int> MaxFreqSorted = inputArray => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Maximum frequency element", context =>
+{
+    var correctAns = 7;
+    var inputArray = new int[]{1,1,1,1,3,4,4,5,6,6,6,6,6,7,7,7,7,7,7};
+    var ans = MaxFreqSorted(inputArray);
+
+    if (correctAns == ans)
+    {
+        context.Pass("Correct Maximum frequency element");
+    }
+    else
+    {
+        context.Fail("Incorrect Maximum frequency element", 
+        "Since the array is sorted, keep iterating and increase the count till you find a number that is different than the previous element, check for the maximum frequency element, and reinitialise the counter to zero.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 3 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 3 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 3: Maximum frequency element in a sorted array
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MaxFreqSorted = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+MaxFreqSorted = inputArray => 
+{   
+    int maxElement = inputArray[0];
+    int globalMax = 1;
+    int currentMax = 1;
+    for(int i = 1; i < inputArray.Length;i++){
+        if(inputArray[i] == inputArray[i-1]){
+            currentMax++;
+        }
+        else {
+            if(currentMax > globalMax){
+                globalMax = currentMax;
+                maxElement = inputArray[i-1];
+            }
+            currentMax = 1;
+        }
+    }
+    if(currentMax > globalMax){
+        maxElement = inputArray[inputArray.Length-1];
+    }
+    return maxElement;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Reverse the array
+
+#!csharp
+
+Func<int[],int[]> ReverseArray = inputArray => new int[inputArray.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Reversing  the array", context =>
+{
+    var correctAns = new int[]{8,7,6,5,4,3,2,1};
+    var inputArray = new int[]{1,2,3,4,5,6,7,8};
+    var ans = ReverseArray(inputArray);
+
+    if (correctAns.Length == ans.Length && ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Correct Reversed array");
+    }
+    else
+    {
+        context.Fail("Incorrect Reversed array", 
+        "Use two pointers, one at the beginning and one at the end of the array, keep swapping till you reach the mid of the array");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 4 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 4 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 4: Reverse the array (in Place)
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ReverseArray = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ReverseArray = inputArray => 
+{   
+    int low = 0;
+    int high = inputArray.Length-1;
+    while(low <= high){
+        int temp = inputArray[low];
+        inputArray[low] = inputArray[high];
+        inputArray[high] = temp;
+        low++; 
+        high--; 
+    }
+    return inputArray;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Rotate the array
+
+#!csharp
+
+Func<int[],int,int[]> RotateArray = (inputArray,k) => new int[inputArray.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Rotating  the array", context =>
+{
+    var correctAns = new int[]{5,6,7,8,9,1,2,3,4};
+    var inputArray = new int[]{1,2,3,4,5,6,7,8,9};
+    var k = 4;
+    var ans = RotateArray(inputArray,k);
+
+    if (correctAns.Length == ans.Length && ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Correct Rotated array");
+    }
+    else
+    {
+        context.Fail("Incorrect Rotated array", 
+        "Reversing (Partial/Full) might be helpful!!, think about it!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 5 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 5 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 5: Rotate the array (in Place)
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+RotateArray = (inputArray,k) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+int[] reverse(int[] inputArray, int x, int y)
+{   
+    int low = x;
+    int high = y;
+    while(low <= high){
+        int temp = inputArray[low];
+        inputArray[low] = inputArray[high];
+        inputArray[high] = temp;
+        low++; 
+        high--; 
+    }
+    return inputArray;
+}
+
+RotateArray = (inputArray,k) => 
+{   
+    reverse(inputArray,0,inputArray.Length-1);
+    reverse(inputArray,0,inputArray.Length - k -1);
+    reverse(inputArray,inputArray.Length-k,inputArray.Length-1);
+    return inputArray;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp
