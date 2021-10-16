@@ -94,7 +94,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for traversing the nodes of a Linked List. 
 
-The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next node in the Linked list.
+The type you will be working with is `ListNode`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next node in the Linked list.
 
 Your will write your answer as a lambda and assign it to `Traverse`. The lambda should have type `Func<ListNode, IEnumerable<int>>`.
 
@@ -210,7 +210,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for adding a node at the end of LinkedList. 
 
-The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next node in the Linked list.
+The type you will be working with is `ListNode`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next node in the Linked list.
 
 Your will write your answer as a lambda and assign it to `AddLast`. The lambda should have type `Func<ListNode, int, ListNode>`.
 
@@ -334,7 +334,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for adding a node at the beginning of LinkedList. 
 
-The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
+The type you will be working with is `ListNode`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
 
 Your will write your answer as a lambda and assign it to `AddFirst`. The lambda should have type `Func<ListNode, int, ListNode>`.
 
@@ -449,7 +449,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for reversing LinkedList. 
 
-The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
+The type you will be working with is `ListNode`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
 
 Your will write your answer as a lambda and assign it to `Reverse`. The lambda should have type `Func<ListNode, ListNode>`.
 
@@ -570,7 +570,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for finding middle point of LinkedList. 
 
-The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
+The type you will be working with is `ListNode`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
 
 Your will write your answer as a lambda and assign it to `MidPoint`. The lambda should have type `Func<ListNode, ListNode>`.
 
@@ -696,7 +696,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for finding K-th node from end of LinkedList. 
 
-The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
+The type you will be working with is `ListNode`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
 
 Your will write your answer as a lambda and assign it to `KnodeFromEnd`. The lambda should have type `Func<ListNode, int, ListNode>`.
 
@@ -817,7 +817,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for deleting N-th node from LinkedList. 
 
-The type you will be working with is `LinkedList`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
+The type you will be working with is `ListNode`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next adjacent node in the Linked list.
 
 Your will write your answer as a lambda and assign it to `DeleteNode`. The lambda should have type `Func<ListNode, int, ListNode>`.
 

@@ -1,0 +1,359 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+#r "nuget: Interactive.Extension.ImageSharp, *-*"
+
+#!csharp
+
+using Microsoft.DotNet.Interactive.Journey;
+using Microsoft.DotNet.Interactive;
+using Microsoft.DotNet.Interactive.Commands;
+using Microsoft.DotNet.Interactive.CSharp;
+using Microsoft.DotNet.Interactive.Events;
+using SixLabors.ImageSharp;
+using System.IO;
+
+#!csharp
+
+class TreeNode{
+    public int data;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode(int data, TreeNode left, TreeNode right){
+        this.data = data;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+#!markdown
+
+# [Challenge] Traverse Binary Tree (Preorder)
+
+#!csharp
+
+Func<TreeNode, IEnumerable<int>> Preorder = root => Enumerable.Empty<int>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Pre-Order traversal of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //     / \   / \
+    //    4   5  6  7
+
+
+    var LeftSubTree = new TreeNode(2, new TreeNode(4, null, null), new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = new int[] {1, 2, 4, 5, 3, 6, 7};
+
+    var ans = Preorder(sample);
+    
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Preorder Traversal correct");
+    }
+    else
+    {
+        context.Fail("Remember preorder traversal ==> Preorder = (Root, left, right)");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 1 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 1 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 1 : Preorder Traversal of a Binary Tree 
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for traversing the nodes of a binary tree in preorder fashion. 
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `Preorder`. The lambda should have type `Func<TreeNode, IEnumerable<int>>`.
+
+It should output the list of values for each node in the tree in preorder.
+
+(Note : Recursive as well Iterative both solutions are accepted).
+
+#!csharp
+
+Preorder = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Preorder = root => 
+{
+    var ans = new List<int>();
+    if (root is null)
+    {
+        return ans;
+    }
+    ans.Add(root.data);
+    ans.AddRange(Preorder(root.left));
+    ans.AddRange(Preorder(root.right));
+    return ans;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Traverse Binary Tree(Inorder)
+
+#!csharp
+
+Func<TreeNode, IEnumerable<int>> Inorder = root => Enumerable.Empty<int>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking In-Order traversal of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //     / \   / \
+    //    4   5  6  7
+
+
+    var LeftSubTree = new TreeNode(2, new TreeNode(4, null, null), new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = new int[] {4, 2, 5, 1, 6, 3, 7};
+
+    var ans = Inorder(sample);
+    
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Inorder Traversal correct");
+    }
+    else
+    {
+        context.Fail("Remember inorder traversal ==> Preorder = (left, Root, right)");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 2 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 2 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 2 : Inorder Traversal of a Binary Tree 
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for traversing the nodes of a binary tree in inorder fashion. 
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `Inorder`. The lambda should have type `Func<TreeNode, IEnumerable<int>>`.
+
+It should output the list of values for each node in the tree in inorder.
+
+(Note : Recursive as well Iterative both solutions are accepted).
+
+#!csharp
+
+Inorder = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Inorder = root => 
+{
+    var ans = new List<int>();
+    if (root is null)
+    {
+        return ans;
+    }
+   
+    ans.AddRange(Inorder(root.left));
+    ans.Add(root.data);
+    ans.AddRange(Inorder(root.right));
+    return ans;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Traverse Binary Tree(Postorder)
+
+#!csharp
+
+Func<TreeNode, IEnumerable<int>> Postorder = root => Enumerable.Empty<int>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Post-Order traversal of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //     / \   / \
+    //    4   5  6  7
+
+
+    var LeftSubTree = new TreeNode(2, new TreeNode(4, null, null), new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = new int[] {4, 5, 2, 6, 7, 3, 1};
+
+    var ans = Postorder(sample);
+    
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Postrder Traversal correct");
+    }
+    else
+    {
+        context.Fail("Remember Postrder traversal ==> Preorder = (left, right, Root)");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 3 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 3 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 3 : Postorder Traversal of a Binary Tree 
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for traversing the nodes of a binary tree in postorder fashion. 
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `Postorder`. The lambda should have type `Func<TreeNode, IEnumerable<int>>`.
+
+It should output the list of values for each node in the tree in postorder.
+
+(Note : Recursive as well Iterative both solutions are accepted).
+
+#!csharp
+
+Postorder = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Postorder = root => 
+{
+    var ans = new List<int>();
+    if (root is null)
+    {
+        return ans;
+    }
+   
+    ans.AddRange(Postorder(root.left));
+    ans.AddRange(Postorder(root.right));
+    ans.Add(root.data);
+    return ans;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
