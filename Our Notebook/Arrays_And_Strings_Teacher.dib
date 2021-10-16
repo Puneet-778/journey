@@ -891,7 +891,7 @@ Func<int[],int,List<int[]>> ThreeSum = (inputArray,targetSum) => new List<int[]>
 
 #!csharp
 
-Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
+Lesson.CurrentChallenge.AddRule("Checking for Three Sum", context =>
 {
     var correctAns = new List<int[]>(){new int[]{-8,3,5},new int[]{-8,2,6},new int[]{-6,1,5}};
     var array = new int[]{12,3,1,2,-6,5,-8,6};
@@ -992,6 +992,119 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Four Sum
+
+#!csharp
+
+Func<int[],int,List<int[]>> FourSum = (inputArray,targetSum) => new List<int[]>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Four Sum", context =>
+{
+    var correctAns = new List<int[]>(){new int[]{7,6,4,-1}, new int[]{7,6,1,2}};
+    var array = new int[]{7,6,4,-1,1,2};
+    var targetSum = 16;
+    var ans = FourSum(array,targetSum);
+    bool flag = true;
+    foreach(int[] arr in ans){
+        if(!correctAns.Any(a => a.SequenceEqual(arr)))
+        {
+            flag = false;
+        }
+    }
+    if (flag)
+    {
+        context.Pass("Correct Answer, Jumping to the String section");
+    }
+    else
+    {
+        context.Fail("Wrong answer",      
+        "Two kinds of solutions are possible, either you can extend the approach of Three sum question, or what we can do is: Calculate the sums of pair of numbers in the array. Then assuming that you've stored all of these sums in a hashtable, you can fairly easily find which two sums can be paired to add up to the target sum: the numbers summing up to these two sums constitute for valid quadruplets; you just have to make sure that no number was used to generate both of the two sums.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 11 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 11 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 11: Four Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+FourSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+FourSum = (array,targetSum) => 
+{   
+	Dictionary<int,List<int[]>> allPairSums = new Dictionary<int,List<int[]>>();
+	List<int[]> quadruplets = new List<int[]>();
+	for(int i=1;i<array.Length-1;i++){
+		for(int j = i+1;j<array.Length;j++){
+			int currentSum = array[i]+array[j];
+			int difference = targetSum - currentSum;
+			if(allPairSums.ContainsKey(difference)){
+				foreach(int[] pair in allPairSums[difference]){
+					int[] newQuadruplet = {pair[0], pair[1],array[i],array[j]};
+					quadruplets.Add(newQuadruplet);
+				}
+			}
+		}
+		for(int k = 0;k<i;k++){
+			int currentSum = array[k] + array[i];
+			int[] pair = {array[k], array[i]};
+			if(!allPairSums.ContainsKey(currentSum)){
+				List<int[]> pairGroup = new List<int[]>();
+				pairGroup.Add(pair);
+				allPairSums.Add(currentSum,pairGroup);
+			}
+			else allPairSums[currentSum].Add(pair);
+		}
+	}
+	return quadruplets;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp
@@ -1026,12 +1139,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 1 completed!");
+        context.SetMessage("Challenge 12 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 1 not complete");
+        context.SetMessage("Challenge 12 not complete");
     }
 });
 
@@ -1041,7 +1154,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 1:  Count the total number of Vowels and Consonants present in the string
+# Challenge 12:  Count the total number of Vowels and Consonants present in the string
 
 #!markdown
 
@@ -1115,12 +1228,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 2 completed!");
+        context.SetMessage("Challenge 13 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 2 not complete");
+        context.SetMessage("Challenge 13 not complete");
     }
 });
 
@@ -1130,7 +1243,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 2: Check of the given string is Palindrome
+# Challenge 13: Check of the given string is Palindrome
 
 #!markdown
 
@@ -1202,12 +1315,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 3 completed!");
+        context.SetMessage("Challenge 14 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 3 not complete");
+        context.SetMessage("Challenge 14 not complete");
     }
 });
 
@@ -1217,7 +1330,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 3: Caesar Cipher Encryption
+# Challenge 14: Caesar Cipher Encryption
 
 #!markdown
 
