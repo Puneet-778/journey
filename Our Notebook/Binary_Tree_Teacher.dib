@@ -475,3 +475,233 @@ LevelOrder = root =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Size of Binary Tree
+
+#!csharp
+
+Func<TreeNode, int> Size = root => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking size of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //     / \   / \
+    //    4   5  6  7
+
+
+    var LeftSubTree = new TreeNode(2, new TreeNode(4, null, null), new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = 7;
+
+    var ans = Size(sample);
+    
+    if (correctans ==  ans)
+    {
+        context.Pass("Size of binary tree is correct");
+    }
+    else
+    {
+        context.Fail("Size of binary tree is incorrect!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 5 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 5 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 5 : Size of a Binary Tree
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for calculating the size of a binary tree. 
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `Size`. The lambda should have type `Func<TreeNode, int>`.
+
+It should output the size of binary tree which is total number of nodes present in binary tree.
+
+             1        --> Level 1
+           /   \      
+          2     3     --> Level 2
+         / \   / \
+        4   5  6  7   --> Level 3
+        Output : 7
+
+#!csharp
+
+Size = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## Scratchpad
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Size = root => 
+{
+    if(root is null){
+        return 0;
+    }
+    int x = Size(root.left);
+    int y = Size(root.right);
+
+    return x + y + 1;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Height of Binary Tree
+
+#!csharp
+
+Func<TreeNode, int> Height = root => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking height of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //     / \   / \
+    //    4   5  6  7
+
+
+    var LeftSubTree = new TreeNode(2, new TreeNode(4, null, null), new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = 3;
+
+    var ans = Height(sample);
+    
+    if (correctans ==  ans)
+    {
+        context.Pass("Height of binary tree is correct");
+    }
+    else
+    {
+        context.Fail("Height of binary tree is incorrect!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 6 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 6 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 6 : Height of a Binary Tree
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for calculating the Height of a binary tree. 
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `Height`. The lambda should have type `Func<TreeNode, int>`.
+
+It should output the height of binary tree.
+
+             1        --> Level 1
+           /   \      
+          2     3     --> Level 2
+         / \   / \
+        4   5  6  7   --> Level 3
+
+        Height of empty tree is 0
+        
+        Height of above tree  : 3
+
+#!csharp
+
+Height = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## Scratchpad
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Height = root => 
+{
+    if(root is null){
+        return 0;
+    }
+    
+    int x = Height(root.left);
+    int y = Height(root.right);
+
+    return Math.Max(x,y) + 1;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
