@@ -613,7 +613,7 @@ Lesson.CurrentChallenge.AddRule("Checking for Move element to the end", context 
     var ans = MoveElementToEnd(inputArray,toMove);
     bool flag = false;
     for(int i = 0; i<correctAns.Count;i++){
-        if(correctAns[i].Length == ans.Length && ans.All(correctAns[i].Contains)){
+        if(correctAns[i].Length == ans.Length && ans.SequenceEqual(correctAns[i])){
             flag = true;
             break;
         }
