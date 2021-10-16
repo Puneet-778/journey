@@ -19,6 +19,95 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Count Even and Odd numbers
+
+#!csharp
+
+Func<int[],IEnumerable<int>> EvenOdd = str => new int[2];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for number of vowels and consonents", context =>
+{
+    var correctAns = new int[]{5,4};
+    var inputArray = new int[]{1,2,6,1,3,11,90,13,18};
+    var ans = CountVowelsNConsonants(inputArray);
+
+    if (correctAns.All(ans.Contains) && correctAns.Count() == ans.Count())
+    {
+        context.Pass("Correct count of Even and odd ");
+    }
+    else
+    {
+        context.Fail("Incorrect count of Even and Odd", 
+        "Use If-else statements");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 1 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 1 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 1: Count of Even and Odd numbers in the array
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+EvenOdd = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+EvenOdd = inputArray => 
+{   
+    var even = 0;
+    var odd = 0; 
+    foreach( var c in inputArray){
+        if(c % 2 == 0)
+        even++;
+        else odd++;
+    }
+    return new int[]{odd, even};
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp
