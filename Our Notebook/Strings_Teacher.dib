@@ -699,6 +699,98 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Array of products
+
+#!csharp
+
+Func<int[],int[]> ArrayOfProducts = array => new int[array.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Array of Products", context =>
+{
+    var correctAns = new int[]{8,40,10,20};
+    var inputArray = new int[]{5,1,4,2};
+    var ans = ArrayOfProducts(inputArray);
+    if (correctAns.Length == ans.Length && correctAns.SequenceEqual(ans))
+    {
+        context.Pass("Correct Array of products");
+    }
+    else
+    {
+        context.Fail("Incorrect Array of products", 
+        "For each index in the array, try calculating the product of every element to the left and the product of every element to the right. You can do this with two loops through the array: One from left to right and one from right to left. How can these products help us??");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 8 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 8 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 8: Array of products
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ArrayOfProducts = array =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ArrayOfProducts = array => 
+{   
+   int[] products = new int[array.Length];
+   int leftRunningProduct = 1;
+   for(int i=0; i<array.Length; i++){
+       products[i] = leftRunningProduct;
+       leftRunningProduct*=array[i];
+   }
+   int rightRunningProduct = 1;
+   for(int i=array.Length-1;i>=0;i--){
+       products[i] *= rightRunningProduct;
+       rightRunningProduct*=array[i];
+   }
+   return products;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp

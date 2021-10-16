@@ -1,7 +1,3 @@
 #!csharp
 
 #r "nuget: Interactive.Journey"
-
-#!csharp
-
-#!start-lesson --from-file "LinkedList_Teacher.dib"
