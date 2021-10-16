@@ -791,6 +791,207 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Two Number Sum
+
+#!csharp
+
+Func<int[],int,IEnumerable<int>> TwoSum = (inputArray,targetSum) => new int[2];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
+{
+    var correctAns = new int[]{-1,11};
+    var array = new int[]{3,5,-4,8,11,1,-1,6};
+    var targetSum = 10;
+    var ans = TwoSum(array,targetSum);
+
+    if (ans.Count() == correctAns.Count() && ans.All(correctAns.Contains))
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Think of using Hashtables!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 9 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 9 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 9: Two number Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+TwoSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+TwoSum = (array,targetSum) => 
+{   
+	List<int> answer = new List<int>();
+	Dictionary < int, int > hashmap = new Dictionary < int, int > ();
+	
+	foreach(int x in array){
+		int reqSum = targetSum-x;
+		if(hashmap.ContainsKey(reqSum))
+			return new int[]{x,reqSum};
+		hashmap[x]=1;
+	}
+		return new int[2];
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] 3 Sum
+
+#!csharp
+
+Func<int[],int,List<int[]>> ThreeSum = (inputArray,targetSum) => new List<int[]>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
+{
+    var correctAns = new List<int[]>(){new int[]{-8,3,5},new int[]{-8,2,6},new int[]{-6,1,5}};
+    var array = new int[]{12,3,1,2,-6,5,-8,6};
+    var targetSum = 0;
+    var ans = ThreeSum(array,targetSum);
+    bool flag = true;
+    foreach(int[] arr in ans){
+        if(!correctAns.Any(a => a.SequenceEqual(arr)))
+        {
+            flag = false;
+        }
+    }
+    if (flag)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer",      
+        "Try sorting and traversing it once.At each number,place a left pointer on the number immediately to the right of your current number and a right pointer on the final number in the array. Check if the current Number, the left number, and the right number sum up to the target sum. Remember and keep in mind, that the array is sorted!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 10 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 10 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 10: Three Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ThreeSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ThreeSum = (array,targetSum) => 
+{   
+	Array.Sort(array);
+	List<int[]> triplets = new List<int[]>();
+	for(int i = 0; i <array.Length - 2;i++){
+		int left = i+1;
+		int right = array.Length - 1;
+		while(left < right){
+			int currentSum = array[i]+array[left]+array[right];
+			if(currentSum == targetSum){
+				int[] newTriplet = {array[i], array[left], array[right]};
+				triplets.Add(newTriplet);
+				left++;
+				right--;
+			} else if(currentSum < targetSum){
+				left++;
+			}
+			else if(currentSum > targetSum){
+				right--;
+			}
+		}
+	}
+	return triplets;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp
@@ -1048,207 +1249,6 @@ CaesorCipher = (str,key) =>
         output.Append(c);
     }
     return output.ToString();
-};
-
-#!csharp
-
-Lesson.ResetChallenge();
-
-#!markdown
-
-# [Challenge] Two Number Sum
-
-#!csharp
-
-Func<int[],int,IEnumerable<int>> TwoSum = (inputArray,targetSum) => new int[2];
-
-#!csharp
-
-Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
-{
-    var correctAns = new int[]{-1,11};
-    var array = new int[]{3,5,-4,8,11,1,-1,6};
-    var targetSum = 10;
-    var ans = TwoSum(array,targetSum);
-
-    if (ans.Count() == correctAns.Count() && ans.All(correctAns.Contains))
-    {
-        context.Pass("Correct Answer");
-    }
-    else
-    {
-        context.Fail("Wrong answer", 
-        "Think of using Hashtables!!");
-    }
-});
-
-#!csharp
-
-Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
-{
-    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
-    var total = context.RuleEvaluations.Count();
-    
-    if (total == numPassed)
-    {
-        context.SetMessage("Challenge 4 completed!");
-        await context.StartNextChallengeAsync();
-    }
-    else
-    {
-        context.SetMessage("Challenge 4 not complete");
-    }
-});
-
-#!markdown
-
-# [Question]
-
-#!markdown
-
-# Challenge 4: Two number Sum
-
-#!markdown
-
-XYZ
-
-#!csharp
-
-TwoSum = (array,targetSum) =>
-{
-    throw new NotImplementedException(); // write your answer here
-};
-
-#!markdown
-
-# [Scratchpad]
-
-#!csharp
-
-#!model-answer
-// this should pass
-
-TwoSum = (array,targetSum) => 
-{   
-	List<int> answer = new List<int>();
-	Dictionary < int, int > hashmap = new Dictionary < int, int > ();
-	
-	foreach(int x in array){
-		int reqSum = targetSum-x;
-		if(hashmap.ContainsKey(reqSum))
-			return new int[]{x,reqSum};
-		hashmap[x]=1;
-	}
-		return new int[2];
-};
-
-#!csharp
-
-Lesson.ResetChallenge();
-
-#!markdown
-
-# [Challenge] 3 Sum
-
-#!csharp
-
-Func<int[],int,List<int[]>> ThreeSum = (inputArray,targetSum) => new List<int[]>();
-
-#!csharp
-
-Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
-{
-    var correctAns = new List<int[]>(){new int[]{-8,3,5},new int[]{-8,2,6},new int[]{-6,1,5}};
-    var array = new int[]{12,3,1,2,-6,5,-8,6};
-    var targetSum = 0;
-    var ans = ThreeSum(array,targetSum);
-    bool flag = true;
-    foreach(int[] arr in ans){
-        if(!correctAns.Any(a => a.SequenceEqual(arr)))
-        {
-            flag = false;
-        }
-    }
-    if (flag)
-    {
-        context.Pass("Correct Answer");
-    }
-    else
-    {
-        context.Fail("Wrong answer",      
-        "Try sorting and traversing it once.At each number,place a left pointer on the number immediately to the right of your current number and a right pointer on the final number in the array. Check if the current Number, the left number, and the right number sum up to the target sum. Remember and keep in mind, that the array is sorted!!");
-    }
-});
-
-#!csharp
-
-Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
-{
-    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
-    var total = context.RuleEvaluations.Count();
-    
-    if (total == numPassed)
-    {
-        context.SetMessage("Challenge 5 completed!");
-        await context.StartNextChallengeAsync();
-    }
-    else
-    {
-        context.SetMessage("Challenge 5 not complete");
-    }
-});
-
-#!markdown
-
-# [Question]
-
-#!markdown
-
-# Challenge 5: Three Sum
-
-#!markdown
-
-XYZ
-
-#!csharp
-
-ThreeSum = (array,targetSum) =>
-{
-    throw new NotImplementedException(); // write your answer here
-};
-
-#!markdown
-
-# [Scratchpad]
-
-#!csharp
-
-#!model-answer
-// this should pass
-
-ThreeSum = (array,targetSum) => 
-{   
-	Array.Sort(array);
-	List<int[]> triplets = new List<int[]>();
-	for(int i = 0; i <array.Length - 2;i++){
-		int left = i+1;
-		int right = array.Length - 1;
-		while(left < right){
-			int currentSum = array[i]+array[left]+array[right];
-			if(currentSum == targetSum){
-				int[] newTriplet = {array[i], array[left], array[right]};
-				triplets.Add(newTriplet);
-				left++;
-				right--;
-			} else if(currentSum < targetSum){
-				left++;
-			}
-			else if(currentSum > targetSum){
-				right--;
-			}
-		}
-	}
-	return triplets;
 };
 
 #!csharp
