@@ -1169,7 +1169,7 @@ Lesson.CurrentChallenge.AddRule("Checking Top View of binary Tree", context =>
     
     if (correctans.SequenceEqual(ans))
     {
-        context.Pass("Correct left view");
+        context.Pass("Correct top view");
     }
     else
     {
