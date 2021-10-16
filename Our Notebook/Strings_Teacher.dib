@@ -500,6 +500,103 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Sorted Squared Array
+
+#!csharp
+
+Func<int[],int[]> SortedSquared = inputArray => new int[inputArray.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Sorted Squared array", context =>
+{
+    var correctAns = new int[]{0,1,9,9,16,25,64,81,121};
+    var inputArray = new int[]{-9,-3,-1,0,3,4,5,8,11};
+    var ans = SortedSquared(inputArray);
+
+    if (correctAns.Length == ans.Length && ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Correct Sorted Squared array");
+    }
+    else
+    {
+        context.Fail("Incorrect Sorted Squared array", 
+        "Use two pointers to keep track of the smallest and the largest values in the input array. Compare the absolute value of these smallest and largest values, square the larger absolute value, and place the square at the end of the output array, filling it up from right to left. Move the pointers accordingly,and repeat this process until the output array is filled.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 6 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 6 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 6: Sorted Squared array
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+SortedSquared = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+SortedSquared = array=> 
+{   
+    int[] sortedSquares = new int[array.Length];
+    int smallerValueIdx = 0;
+    int largerValueIdx = array.Length - 1;
+    for(int idx = array.Length-1;idx>=0;idx--){
+        int smallerValue = array[smallerValueIdx];
+        int largerValue = array[largerValueIdx];
+        if(Math.Abs(smallerValue) > Math.Abs(largerValue)){
+            sortedSquares[idx] = smallerValue*smallerValue;
+            smallerValueIdx++;
+        }
+        else {
+            sortedSquares[idx] = largerValue*largerValue;
+            largerValueIdx--;
+        }
+    }
+    return sortedSquares;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp
