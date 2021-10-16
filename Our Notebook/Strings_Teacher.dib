@@ -324,7 +324,7 @@ Lesson.CurrentChallenge.AddRule("Checking for Reversing  the array", context =>
     var inputArray = new int[]{1,2,3,4,5,6,7,8};
     var ans = ReverseArray(inputArray);
 
-    if (correctAns.Length == ans.Length && ans.All(correctAns.Contains))
+    if (correctAns.Length == ans.Length && ans.SequenceEqual(correctAns))
     {
         context.Pass("Correct Reversed array");
     }
@@ -402,6 +402,101 @@ Lesson.ResetChallenge();
 #!markdown
 
 # [Challenge] Rotate the array
+
+#!csharp
+
+Func<int[],int,int[]> RotateArray = (inputArray,k) => new int[inputArray.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Rotating  the array", context =>
+{
+    var correctAns = new int[]{5,6,7,8,9,1,2,3,4};
+    var inputArray = new int[]{1,2,3,4,5,6,7,8,9};
+    var k = 4;
+    var ans = RotateArray(inputArray,k);
+
+    if (correctAns.Length == ans.Length && ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Correct Rotated array");
+    }
+    else
+    {
+        context.Fail("Incorrect Rotated array", 
+        "Reversing (Partial/Full) might be helpful!!, think about it!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 5 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 5 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 5: Rotate the array (in Place)
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+RotateArray = (inputArray,k) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+int[] reverse(int[] inputArray, int x, int y)
+{   
+    int low = x;
+    int high = y;
+    while(low <= high){
+        int temp = inputArray[low];
+        inputArray[low] = inputArray[high];
+        inputArray[high] = temp;
+        low++; 
+        high--; 
+    }
+    return inputArray;
+}
+
+RotateArray = (inputArray,k) => 
+{   
+    reverse(inputArray,0,inputArray.Length-1);
+    reverse(inputArray,0,inputArray.Length - k -1);
+    reverse(inputArray,inputArray.Length-k,inputArray.Length-1);
+    return inputArray;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
 
 #!markdown
 
