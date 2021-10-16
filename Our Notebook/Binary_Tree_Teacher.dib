@@ -15,7 +15,7 @@ using System.IO;
 
 #!csharp
 
-class TreeNode{
+public class TreeNode{
     public int data;
     public TreeNode left;
     public TreeNode right;
@@ -1129,6 +1129,372 @@ RightView = root =>
                 q.Enqueue(temp.right);
             }
         }
+    }
+
+    return ans;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Top View of Binary Tree
+
+#!csharp
+
+Func<TreeNode, IEnumerable<int>> TopView = root => Enumerable.Empty<int>(); 
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Top View of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //       \   / \
+    //        5  6  7
+
+
+    var LeftSubTree = new TreeNode(2, null, new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = new int[] {2, 1, 3, 7};
+
+    var ans = TopView(sample);
+    
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Correct left view");
+    }
+    else
+    {
+        context.Fail("Wrong answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 10 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 10 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 10 : Top View of a Binary Tree
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for printing top view of binary tree.
+
+Top view of a Binary Tree is set of nodes visible when tree is visited from top.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `TopView`. The lambda should have type `Func<TreeNode, IEnumerable<int>>`.
+
+It should output the top view of Binary Tree.
+
+Note : Return nodes from leftmost node to rightmost node. 
+
+Eg 1.
+
+               1        
+            /     \      
+          2        3     
+         / \      / \           
+        4   5    6   7  
+       /     \  /     \
+      8      9  10    11
+        
+      Top View of above tree  : [8, 4, 2, 1, 3, 7, 11]
+ 
+
+Eg 2.
+
+               1        
+             /   \      
+            2      3     
+            \     / \           
+             5   6   7  
+                /     \
+                10    11
+        
+      Top View of above tree  : [2, 1, 3, 7, 11]
+
+#!csharp
+
+TopView = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!csharp
+
+#!model-answer
+// this should pass
+public class Pair{
+    public TreeNode node;
+    public int level;
+    public Pair(TreeNode node, int level){
+        this.node = node;
+        this.level = level;
+    }
+}
+
+TopView = root => 
+{
+    var q = new Queue<Pair>();
+
+    var ans = new List<int>();
+
+    q.Enqueue(new Pair(root, 0));
+
+    Dictionary<int, int> map = new Dictionary<int, int>();
+
+    int min = 0;
+    int max = 0;
+
+    while (q.Count > 0)
+    {
+        int size = q.Count;
+        
+        while(size-- > 0){
+            Pair p = q.Dequeue();
+
+            int level = p.level;
+            
+            TreeNode temp = p.node;
+
+            if(!map.ContainsKey(level)){
+                map.Add(level,temp.data);
+            }
+
+            min = Math.Min(min, level);
+            max = Math.Max(max, level);
+
+            if(! (temp.left is null)){
+                q.Enqueue(new Pair(temp.left, level-1));
+            }
+
+            if(!(temp.right is null)){
+                q.Enqueue(new Pair(temp.right, level+1));
+            }
+        }
+    }
+
+    for(int i = min; i <= max;i++){
+        ans.Add(map[i]);
+    }
+
+    return ans;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Bottom View of Binary Tree
+
+#!csharp
+
+Func<TreeNode, IEnumerable<int>> BottomView = root => Enumerable.Empty<int>(); 
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Bottom View of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //       \   / \
+    //        5  6  7
+
+
+    // var LeftSubTree = new TreeNode(2, null, new TreeNode(5, null, null));
+    // var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), new TreeNode(7, null, null));
+    // var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+
+   //          1        
+   //       /     \      
+   //      2        3     
+   //     / \      / \           
+   //    4   5    6   7  
+   //   /     \  /     \
+   //   8      9  10    11
+
+   // Bottom View of above tree  : [8, 4, 10, 6, 9, 7, 11]
+
+    var LeftSubTree = new TreeNode(2, new TreeNode(4, new TreeNode(8, null, null), null), new TreeNode(5, null, new TreeNode(9, null, null)));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, new TreeNode(10, null, null), null), new TreeNode(7, null, new TreeNode(11, null, null)));
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = new int[] {8, 4, 10, 6, 9, 7, 11};
+
+    var ans = BottomView(sample);
+    
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Correct bottom view");
+    }
+    else
+    {
+        context.Fail("Wrong answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 11 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 11 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 11 : Bottom View of a Binary Tree
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for printing bottom view of binary tree.
+
+Bottom view of a Binary Tree is set of nodes visible when tree is visited from bottom.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `BottomView`. The lambda should have type `Func<TreeNode, IEnumerable<int>>`.
+
+It should output the bottom view of Binary Tree.
+
+Note : Return nodes from leftmost node to rightmost node. 
+If there are multiple bottom-most nodes for a horizontal distance from root, then print the later one in level traversal.
+
+Eg 1.
+
+               1        
+            /     \      
+          2        3     
+         / \      / \           
+        4   5    6   7  
+       /     \  /     \
+      8      9  10    11
+        
+      Bottom View of above tree  : [8, 4, 10, 6, 9, 7, 11]
+ 
+
+Eg 2.
+
+               1        
+             /   \      
+            2      3     
+            \     / \           
+             5   6   7  
+                /     \
+                10    11
+        
+      Bottom View of above tree  : [10, 6, 3, 7, 11]
+
+#!csharp
+
+BottomView = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!csharp
+
+#!model-answer
+// this should pass
+public class Pair{
+    public TreeNode node;
+    public int level;
+    public Pair(TreeNode node, int level){
+        this.node = node;
+        this.level = level;
+    }
+}
+
+BottomView = root => 
+{
+    var q = new Queue<Pair>();
+
+    var ans = new List<int>();
+
+    q.Enqueue(new Pair(root, 0));
+
+    Dictionary<int, int> map = new Dictionary<int, int>();
+
+    int min = 0;
+    int max = 0;
+
+    while (q.Count > 0)
+    {
+        int size = q.Count;
+        
+        while(size-- > 0){
+            Pair p = q.Dequeue();
+
+            int level = p.level;
+            
+            TreeNode temp = p.node;
+
+            map[level]= temp.data;
+
+            min = Math.Min(min, level);
+            max = Math.Max(max, level);
+
+            if(! (temp.left is null)){
+                q.Enqueue(new Pair(temp.left, level-1));
+            }
+
+            if(!(temp.right is null)){
+                q.Enqueue(new Pair(temp.right, level+1));
+            }
+        }
+    }
+
+    for(int i = min; i <= max;i++){
+        ans.Add(map[i]);
     }
 
     return ans;
