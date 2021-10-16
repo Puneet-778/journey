@@ -840,7 +840,7 @@ Func<TreeNode, IEnumerable<int>> LeftView = root => Enumerable.Empty<int>();
 
 #!csharp
 
-Lesson.CurrentChallenge.AddRule("Checking Left of binary Tree", context =>
+Lesson.CurrentChallenge.AddRule("Checking Left View of binary Tree", context =>
 {   
     // constructing Sample binary Tree
     //         1
@@ -960,6 +960,163 @@ LeftView = root =>
     {
         int size = q.Count;
         ans.Add(q.Peek().data);
+        
+        while(size-- > 0){
+            TreeNode temp = q.Dequeue();
+
+            if(! (temp.left is null)){
+                q.Enqueue(temp.left);
+            }
+
+            if(!(temp.right is null)){
+                q.Enqueue(temp.right);
+            }
+        }
+    }
+
+    return ans;
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Right View of Binary Tree
+
+#!csharp
+
+Func<TreeNode, IEnumerable<int>> RightView = root => Enumerable.Empty<int>(); 
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Right view of binary Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         1
+    //       /   \
+    //      2     3
+    //     / \   / 
+    //    4   5  6  
+
+
+    var LeftSubTree = new TreeNode(2, new TreeNode(4, null, null), new TreeNode(5, null, null));
+    var RightSubTree = new TreeNode(3, new TreeNode(6, null, null), null);
+    var sample = new TreeNode(1, LeftSubTree, RightSubTree);
+
+    var correctans = new int[] {1, 3, 6};
+
+    var ans = RightView(sample);
+    
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Correct right view");
+    }
+    else
+    {
+        context.Fail("Wrong answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 9 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 9 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 9 : Right View of a Binary Tree
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for printing right view of binary tree.
+
+Right view of a Binary Tree is set of nodes visible when tree is visited from right side.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `RightView`. The lambda should have type `Func<TreeNode, IEnumerable<int>>`.
+
+It should output the right view of Binary Tree.
+
+Eg 1.
+
+               1        
+            /     \      
+          2        3     
+         / \      / \           
+        4   5    6   7  
+       /     \  /     \
+      8      9  10    11
+        
+      Right View of above tree  : [1,3,7,11]
+
+Eg 2.
+
+               1        
+            /     \      
+          2        3     
+         / \      /            
+        4   5    6     
+       /     \       
+      8      9      
+        
+      Right View of above tree  : [1,3,6,9]
+
+#!csharp
+
+RightView = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+RightView = root => 
+{
+    var q = new Queue<TreeNode>();
+    var ans = new List<int>();
+    q.Enqueue(root);
+    // ans.Add(root.data);
+
+    while (q.Count > 0)
+    {
+        int size = q.Count;
+        TreeNode x = null;
+        // for(int i = 0;i < size;i++){
+        //     x = q.Dequeue();
+        //     q.Enqueue(x);
+        // }
+
+        IEnumerator<TreeNode> enumerator = q.GetEnumerator();
+
+        while (enumerator.MoveNext()) {
+           x = (enumerator.Current);
+        }
+
+        ans.Add(x.data);
         
         while(size-- > 0){
             TreeNode temp = q.Dequeue();
