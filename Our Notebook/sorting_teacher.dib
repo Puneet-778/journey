@@ -1,0 +1,859 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+#r "nuget: Interactive.Extension.ImageSharp, *-*"
+
+#!csharp
+
+using Microsoft.DotNet.Interactive.Journey;
+using Microsoft.DotNet.Interactive;
+using Microsoft.DotNet.Interactive.Commands;
+using Microsoft.DotNet.Interactive.CSharp;
+using Microsoft.DotNet.Interactive.Events;
+using SixLabors.ImageSharp;
+using System.IO;
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Bubble Sort
+
+#!csharp
+
+Func<int[], int[]> Sorting = inputArray => new int[inputArray.Count()];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Sorting code", context =>
+{
+    
+   var correctAns = new int[] { 2,33,45,61,78,100 };
+    
+    var ans = Sorting(new int[] {61,100,78,2,33,45});
+    if (ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Bubble Sort correct");
+    }
+    else
+    
+    { context.Fail("Bubble Sort incorrect. ",
+        "Think about using nested for-loops");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 1 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 1 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Bubble Sort
+
+#!markdown
+
+### **What is bubble sort?**  
+
+Bubble sort is a sorting algorithm that works on the principle of the lighter (smaller) elements “bubbling up” or “floating up” to one end of the array,  
+depending on the sorting order.  
+This algorithm is not very efficient (quadratic time complexity) but it is still considered a fundamental sorting algorithm due to its methodical nature. 
+
+#!markdown
+
+### **How does it work?**  
+
+For the purpose of these challenges, we shall assume that our goal is to sort arrays in ascending order. To that end, the bubble sort algorithm works in the following manner:  
+
+1. **First Iteration: Compare and Swap**  
+Starting from the first index, compare the first and the second elements.  
+If the first element is greater than the second element, they are swapped.  
+Now, compare the second and the third elements. Swap them if they are not in order.
+The above process goes on until the last element.  
+
+2. **Remaining Iteration**   
+The same process goes on for the remaining iterations.  
+After each iteration, the largest element among the unsorted elements is placed at the end.  
+In each iteration, the comparison takes place up to the last unsorted element.  
+The array is sorted when all the unsorted elements are placed at their correct positions.
+
+#!markdown
+
+# Challenge 1: Bubble Sort 
+In this exercise, you’ll implement the bubble sort algorithm in ascending order.  
+The type you will be working with is 'int[]' representing an integer array.  
+
+The answer is to be written as a lambda and assigned to **'Sorting'**.  
+The lambda has the type 'Func<int[],int[]>'.  
+### Sample Output:  
+Input Array :
+[5,15,2,6,9,17,20]  
+Output Array (to be returned) :  
+[2,5,6,9,15,17,20]  
+
+#!csharp
+
+Sorting = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+Sorting = inputArray =>
+{
+    for(int i = 0;i<inputArray.Count()-1;i++){
+       for (int j = 0; j < inputArray.Count()-i-1; j++)
+        {
+           if(inputArray[j]>inputArray[j+1])
+             {
+                 int temp=inputArray[j];
+                 inputArray[j]=inputArray[j+1];
+                 inputArray[j+1]=temp;
+             }
+        }
+    }
+     
+
+    return inputArray;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Selection Sort
+
+#!csharp
+
+Func<int[], int[]> Sorting = inputArray => new int[inputArray.Count()];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Sorting code", context =>
+{
+    
+   var correctAns = new int[] {100,78,61,45,33,2};
+    
+    var ans = Sorting(new int[] {61,100,78,2,33,45});
+    if (ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Selection Sort correct");
+    }
+    else
+    
+    { context.Fail("Selection Sort incorrect. ",
+        "Think about using nested for-loops also note that the array is to be sorted in descending order.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 2 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 2 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Selection Sort
+
+#!markdown
+
+### **What is selection sort?**  
+
+Selection sort is a sorting algorithm that works by repeatedly finding the minimum element (to sort in ascending order) from the unsorted part of the array.  
+While this algorithm also doesn’t have a computationally efficient time complexity, it is also an important sorting algorithm. 
+
+#!markdown
+
+### **How does it work?**  
+
+For the purpose of explaining, we’ll assume that we are using selection sort to sort arrays in ascending order.  
+To that end, the selection sort algorithm works as follows:  
+1. Select the first element of the array.  
+2. Compare the selected element with all the other elements in the list.  
+3. In every comparison, if any element is found smaller than the selected element, then swap both elements.  
+4. Repeat the same procedure with the element in the next position in the list till the entire list is sorted.  
+
+#!markdown
+
+# Challenge 2: Selection Sort  
+In this exercise, you’ll implement the selection sort algorithm in descending order.  
+The type you will be working with is 'int[]' representing an integer array.  
+
+The answer is to be written as a lambda and assigned to **'Sorting'**.  
+The lambda has the type 'Func<int[],int[]>'.  
+### Sample Output:  
+Input Array :
+[5,15,2,6,9,17,20]  
+Output Array (to be returned) :  
+[20,17,15,9,6,5,2]  
+
+#!csharp
+
+Sorting = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+Sorting = inputArray =>
+{
+     for(int i = 0;i<inputArray.Count()-1;i++){
+        int min_index=i;
+       for (int j = i+1; j < inputArray.Count(); j++)
+        {
+           if(inputArray[j]>inputArray[min_index])
+             {
+                 min_index=j;
+             }
+        }
+        int temp=inputArray[i];
+        inputArray[i]=inputArray[min_index];
+        inputArray[min_index]=temp;
+             
+       
+    }
+     
+
+    return inputArray;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Quick Sort
+
+#!csharp
+
+Func<int[],int[]> Sorting = inputArray => new int[inputArray.Count()];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Sorting code", context =>
+{
+    
+   var correctAns = new int[] {1,2,33,45,61,78,88,100};
+    
+    var ans = Sorting(new int[] {61,1,100,78,2,33,45,88});
+    if (ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Quick Sort correct");
+    }
+    else
+    
+    { context.Fail("Quick Sort incorrect. ",
+        "Think about recursion also note that the array is to be sorted in ascending order.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 3 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 3 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Quick Sort
+
+#!markdown
+
+### **What is quick sort?**  
+Quick sort is another computationally efficient algorithm that uses the divide and conquer strategy.  
+However, this algorithm is also an in-place sorting algorithm, making it usually faster than merge sort and thus a popular choice for sorting even today.
+
+#!markdown
+
+### **How does it work?**  
+Quick sort is based on the partitioning of an array into smaller arrays. A large array is partitioned into two arrays one of which holds values smaller than the specified value, the pivot, based on which the partition is made and another array holds values greater than the pivot value. The partitioning aforementioned requires a separate algorithm in itself and the following steps can be used to understand and implement the partitioning algorithm required to implement quick sort.  
+
+**Partition Algorithm:**  
+1. Choose the highest index value has pivot
+2. Take two variables to point to the  left and right of the array excluding pivot
+3. Make sure the left pointer points to the low index
+4. The right pointer points to the high index
+5. While the value at left is less than pivot move right
+6. While the value at right is greater than pivot move left
+if both step 5 and step 6 do not match,swap left and right elements  
+If left ≥ right, the point where they met is new pivot.  
+Using the pivot algorithm recursively, we end up with smaller possible partitions.Each partition is then processed in the recursive quick sort algorithm, which is explained below:  
+
+**Sorting algorithm:**  
+1. If the right pointer is lesser (to the left of) than the left one, return. This is our base case. 
+2. Set the rightmost element as the pivot. 
+3. Partition the array using the new pivot value
+4. Quick sort the left partition recursively 
+5. Quick sort the right partition recursively. 
+
+#!markdown
+
+# Challenge 3: Quick Sort  
+In this exercise, you’ll implement the quick sort algorithm in ascending order.  
+The type you will be working with is 'int[]' representing an integer array.  
+
+The answer is to be written as a lambda and assigned to **'Sorting'**.  
+The lambda has the type 'Func<int[],int[]>'.  
+### Sample Output:  
+Input Array :
+[54,115,200,6,90,17,20]  
+Output Array (to be returned) :  
+[6,17,20,54,90,115,200]  
+
+#!csharp
+
+Sorting = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+int partition(int[] inputArray,int low,int high)
+{
+    int piv=inputArray[high];
+    int i=low-1;
+    for(int j=low;j<=high-1;j++)
+    {
+        if(inputArray[j]<piv)
+        {
+            i++;
+            int temp=inputArray[i];
+            inputArray[i]=inputArray[j];
+            inputArray[j]=temp;
+            
+        }
+    }
+    int t=inputArray[i+1];
+    inputArray[i+1]= inputArray[high];
+    inputArray[high]=t;
+    return (i+1);
+}
+void quicksort(int[] inputArray,int low,int high)
+{
+    if(low<high)
+    {
+        int piv=partition(inputArray,low,high);
+        quicksort(inputArray,low,piv-1);
+        quicksort(inputArray,piv+1,high);
+
+    }
+}
+Sorting = inputArray =>
+{
+ quicksort(inputArray,0,inputArray.Count()-1);
+ return inputArray;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Merge Sort
+
+#!csharp
+
+Func<int[],int[]> Sorting = inputArray => new int[inputArray.Count()];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Sorting code", context =>
+{
+    
+   var correctAns = new int[] {100,88,78,61,45,33,2,1};
+    
+    var ans = Sorting(new int[] {61,1,100,78,2,33,45,88});
+    if (ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Merge Sort correct");
+    }
+    else
+    
+    { context.Fail("Merge Sort incorrect. ",
+        "Think about recursion and using additional functions, also note that the array is to be sorted in descending order.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 4 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 4 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Merge Sort
+
+#!markdown
+
+**What is merge sort?**  
+
+Merge sort is a computationally efficient sorting algorithm that works on the principle of divide and conquer.  
+As the name suggests, it repeatedly breaks   down an array into several subarrays until each subarray consists of a single element and merges those subarrays in a manner that results in a sorted array. 
+
+#!markdown
+
+**How does it work?**   
+
+Merge sort keeps on dividing the array into equal halves until it cannot be divided. By definition, if there is only one element in the array, it is sorted.  
+1. If the array contains just a single element, return. (This is our base case)
+2. Divide the array recursively into two halves until it can no longer be divided.
+3. Merge all the subarrays into one new, sorted array by comparing values until all subarrays have been merged. 
+
+#!markdown
+
+# Challenge 4: Merge Sort  
+In this exercise, you’ll implement the merge sort algorithm in descending order.  
+The type you will be working with is 'int[]' representing an integer array.  
+
+The answer is to be written as a lambda and assigned to **'Sorting'**.  
+The lambda has the type 'Func<int[],int[]>'.  
+### Sample Output:  
+Input Array :
+[20,23,66,1,25,59]  
+Output Array (to be returned) :  
+[66,59,25,23,20,1]  
+
+#!csharp
+
+Sorting = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+void merge(int[] inputArray,int left,int mid,int right)
+{
+
+    int n1=mid-left+1;
+    int n2=right-mid;
+    
+    int[] Left=new int[n1];
+    int[] Right=new int[n2];
+    int i,j;
+    for(i=0;i<n1;i++)
+    { Left[i]= inputArray[left+i];}
+    for(j=0;j<n2;j++)
+    {
+      Right[j]= inputArray[mid+1+j];
+    }
+    i=0;
+    j=0;
+    int k=left;
+    
+    while(i<n1&&j<n2)
+    {
+        if(Left[i]>=Right[j])
+        {
+         inputArray[k]=Left[i];
+         i++;   
+        }
+        else{
+            inputArray[k]= Right[j];
+            j++;
+        }
+        k++;
+    }
+   
+    while(i<n1)
+    {
+        inputArray[k]=Left[i];
+        i++;
+        k++;
+    }  
+    while(j<n2)
+    {
+        inputArray[k]=Right[j];
+        j++;
+        k++;
+    }  
+
+
+}
+void merge_sort(int[] inputArray,int left,int right)
+{
+    if(left<right)
+    {
+        int mid=left+(right-left)/2;
+        merge_sort(inputArray,left,mid);
+        merge_sort(inputArray,mid+1,right);
+
+    
+        merge(inputArray,left,mid,right);
+    }
+}
+Sorting = inputArray =>
+{
+ merge_sort(inputArray,0,inputArray.Count()-1);
+ return inputArray;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Insertion Sort
+
+#!csharp
+
+Func<int[],int[]> Sorting = inputArray => new int[inputArray.Count()];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Sorting code", context =>
+{
+    
+   var correctAns = new int[] {20,31,44,66,79,81,100};
+    
+    var ans = Sorting(new int[] {79,100,44,66,81,20,31});
+    if (ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Insertion Sort correct");
+    }
+    else
+    
+    { context.Fail("Insertion Sort incorrect. ",
+        "Think about nesting loops, also note that the array is to be sorted in ascending order.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 5 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 5 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Insertion Sort
+
+#!markdown
+
+**What is insertion sort?**   
+
+Insertion sort is a simple sorting algorithm that builds the final sorted array one item at a time. It is much less efficient on large arrays. 
+
+#!markdown
+
+**How does it work?**  
+
+To sort an array of size n in ascending order:  
+1. Iterate from arr[1] to arr[n] over the array. 
+2. Compare the current element (key) to its predecessor. 
+3. If the key element is smaller than its predecessor, compare it to the elements before.
+4. Move the greater elements one position up to make space for the swapped element.
+
+#!markdown
+
+# Challenge 5: Insertion Sort  
+In this exercise, you’ll implement the insertion sort algorithm in ascending order.  
+The type you will be working with is 'int[]' representing an integer array.  
+
+The answer is to be written as a lambda and assigned to **'Sorting'**.  
+The lambda has the type 'Func<int[],int[]>'.  
+### Sample Output:  
+Input Array :
+[20,15,4,33,19]  
+Output Array (to be returned) :  
+[4,15,19,20,33]  
+
+#!csharp
+
+Sorting = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+Sorting= inputArray =>
+{
+    int len= inputArray.Count();
+    for(int i=1;i<len;i++)
+    {
+        int key= inputArray[i];
+        int j=i-1;
+
+        while(j>=0 && inputArray[j]>key)
+        {
+            inputArray[j+1]= inputArray[j];
+            j=j-1;
+        } 
+        inputArray[j+1]=key;
+
+    }
+
+   return inputArray; 
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Test your skills.
+
+#!csharp
+
+Func<int,int[],int> kthSearching = (int k, int[] array) =>-1;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking submitted answer", context =>
+{
+    int correctAns=25;
+    int k=4;
+    int ans= kthSearching(k,new int[] {80,1,21,44,25,30,23,190,100,55});
+    if(ans==correctAns)
+    {
+        context.Pass("Correct! You found the kth smallest element in the array.");
+
+    }
+
+    else
+    {
+        context.Fail("Incorrect answer! Hint: Think about modifying quick sort.");
+    }
+       
+}
+);
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 7 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 7 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 7: Find the kth smallest element present in an array.  
+In this challenge, you will apply the concepts learned so far to find the kth smallest element in a given array in linear time complexity and return it.  
+[Hint: The worst case complexity may be O(n^2) ]  
+The type you will be working with is 'int[]' representing an integer array and the data type of k is also 'int'.   
+ 
+The answer is to be written as a lambda and assigned to **'kthSearching'**.    
+The lambda has the type 'Func<int,int[],int>' and return value is of the datatype 'int'.  
+
+**Sample output:** 
+
+
+#### Input: k= 3, array=[5,3,2,10,17]  
+#### Output (to be returned): 5.  
+#### Explanation: The 3rd smallest element in the array is 5 (indexing starts from 1).
+
+#### Input: k= 5, array=[2,4,6,8,10]  
+#### Output (to be returned): 10.  
+
+#### Input: k= 6, array=[2,4,6,8,10]  
+#### Output (to be returned): -1.
+#### Explanation: The size of the array is less than k hence output must be -1 representing element not found.
+
+  
+
+#!csharp
+
+kthSearching = (k,array) =>
+{
+    throw new NotImplementedException(); //write code here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+int partitioning(int[] array,int low ,int high)
+{
+    int pivot=array[high];
+    int index=low;
+    int temporary;
+    for(int i=low;i<=high;i++)
+    {
+        if(array[i]<pivot)
+        {
+            temporary=array[i];
+            array[i]=array[index];
+            array[index]=temporary;
+            index++;
+        }
+    }
+    temporary=array[high];
+    array[high]=array[index];
+    array[index]=temporary;
+
+    return index;
+
+} 
+
+int kthElement(int[] array,int low,int high,int kth)
+{
+  int part=partitioning(array,low,high);
+  if(part==kth)
+     return array[part];
+  else if(part<kth)
+  {
+      return kthElement(array,part+1,high,kth);
+  }
+  else
+      return kthElement(array,low,part-1,kth);
+
+}
+
+kthSearching = (k,array) =>
+{
+   int len= array.Count();
+   if(k>len)
+   return -1; 
+   int ans= kthElement(array,0,len-1,k-1);
+  // Console.WriteLine(ans);
+   return ans;
+
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
