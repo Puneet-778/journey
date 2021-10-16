@@ -1,0 +1,105 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+#r "nuget: Interactive.Extension.ImageSharp, *-*"
+
+#!csharp
+
+using Microsoft.DotNet.Interactive.Journey;
+using Microsoft.DotNet.Interactive;
+using Microsoft.DotNet.Interactive.Commands;
+using Microsoft.DotNet.Interactive.CSharp;
+using Microsoft.DotNet.Interactive.Events;
+using SixLabors.ImageSharp;
+using System.IO;
+
+#!markdown
+
+# [Challenge] Print numbers from 1 to N 
+
+#!csharp
+
+Func<int, IEnumerable<int>> Printing = num => Enumerable.Empty<int>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking traversal", context =>
+{    
+    var correctans = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+
+    var input = 10;
+
+    var ans = Printing(input);
+    
+    if (ans.SequenceEqual(correctans) && correctans.Count() == ans.Count())
+    {
+        context.Pass("Correct Print");
+    }
+    else
+    {
+        context.Fail("Incorrect print");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 1 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 1 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 1: Print Numbers from 1 to N
+
+#!markdown
+
+xyz
+
+#!csharp
+
+Printing = num =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+List<int> arr = new List<int>(); 
+void printUptoN(int n){
+
+    if(n>1)
+        printUptoN(n-1);
+    // Console.Write(n+" ");
+    arr.Add(n);
+}
+Printing = num => 
+{
+    printUptoN(num);
+    return arr;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
