@@ -108,7 +108,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Maximum frequency element(Unsorted array)
+# [Challenge] Most frequent element(Unsorted array)
 
 #!csharp
 
@@ -1105,7 +1105,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Count vowels and consonants
+# [Challenge] Counting vowels and consonants
 
 #!csharp
 
