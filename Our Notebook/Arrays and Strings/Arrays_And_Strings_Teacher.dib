@@ -1787,3 +1787,94 @@ GroupAnagrams = words =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Pattern Matcher
+
+#!csharp
+
+Func<string,string,bool> PatternMatcher = (str1,str2) => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Pattern Matcher", context =>
+{
+    var correctAns = true;
+    var str1 = "cat cat dog cat cat dog";
+    var str2 = "aabaab";
+    var ans = PatternMatcher(str1,str2);
+    if (correctAns == ans) 
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Incorrect Answer", 
+        "Think about using Hashmaps, space separate the given first string into multiple strings, then interate between them and the other given string, keep storing the mapping as you iterate through them, if you encounter conflicting mapping, then pattern will not be matching in such cases.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 19 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 19 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 19: Pattern Matcher
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+PatternMatcher = (str1,str2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+PatternMatcher = (str1,str2) =>
+{   
+     string[] words = str1.Split(" ");
+     int len1 = words.Length;
+     int len2 = str2.Length;
+     if(len1!=len2)return false;
+     Dictionary<string,char> hashMap = new Dictionary<string,char>();
+     for(int i = 0;i<len1;i++){
+         if(hashMap.ContainsKey(words[i]) && hashMap[words[i]]!=str2[i])return false;
+         else hashMap[words[i]] = str2[i];
+     }
+     return true;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
