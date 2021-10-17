@@ -60,7 +60,7 @@ Lesson.CurrentChallenge.AddRule("Checking Pre-Order traversal of binary Tree", c
     }
     else
     {
-        context.Fail("Remember preorder traversal ==> Preorder = (Root, left, right)");
+        context.Fail("Incorrect answer","Remember preorder traversal ==> Preorder = (Root, left, right)");
     }
 });
 
@@ -170,7 +170,7 @@ Lesson.CurrentChallenge.AddRule("Checking In-Order traversal of binary Tree", co
     }
     else
     {
-        context.Fail("Remember inorder traversal ==> Preorder = (left, Root, right)");
+        context.Fail("Incorrect answer","Remember inorder traversal ==> Preorder = (left, Root, right)");
     }
 });
 
@@ -281,7 +281,7 @@ Lesson.CurrentChallenge.AddRule("Checking Post-Order traversal of binary Tree", 
     }
     else
     {
-        context.Fail("Remember Postrder traversal ==> Preorder = (left, right, Root)");
+        context.Fail("Incorrect answer","Remember Postrder traversal ==> Preorder = (left, right, Root)");
     }
 });
 
@@ -392,7 +392,7 @@ Lesson.CurrentChallenge.AddRule("Checking Level-Order traversal of binary Tree",
     }
     else
     {
-        context.Fail("Use queue data structure");
+        context.Fail("Incorrect answer","Use queue data structure");
     }
 });
 
@@ -510,7 +510,7 @@ Lesson.CurrentChallenge.AddRule("Checking size of binary Tree", context =>
     }
     else
     {
-        context.Fail("Size of binary tree is incorrect!");
+        context.Fail("Incorrect answer","Try to use recursion");
     }
 });
 
@@ -623,7 +623,7 @@ Lesson.CurrentChallenge.AddRule("Checking height of binary Tree", context =>
     }
     else
     {
-        context.Fail("Height of binary tree is incorrect!");
+        context.Fail("Incorrect answer","Try to use recursion!");
     }
 });
 
@@ -740,7 +740,7 @@ Lesson.CurrentChallenge.AddRule("Checking Diameter of binary Tree", context =>
     }
     else
     {
-        context.Fail("Diameter of binary tree is incorrect!");
+        context.Fail("Incorrect answer","The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root");
     }
 });
 
@@ -774,7 +774,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for calculating the Diameter of a binary tree. 
 
-The diameter of a tree (sometimes called the width) is the number of nodes on the longest path between two end nodes.
+The diameter of a tree (sometimes called the width) is the number of nodes on the longest path between two end nodes. This path may or may not pass through the root.
 
 The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
 
@@ -864,7 +864,7 @@ Lesson.CurrentChallenge.AddRule("Checking Left View of binary Tree", context =>
     }
     else
     {
-        context.Fail("Wrong answer");
+        context.Fail("Incorrect answer","Try to use queue data structure");
     }
 });
 
@@ -1016,7 +1016,7 @@ Lesson.CurrentChallenge.AddRule("Checking Right view of binary Tree", context =>
     }
     else
     {
-        context.Fail("Wrong answer");
+        context.Fail("Incorrect answer","Use queue data structure");
     }
 });
 
@@ -1173,7 +1173,7 @@ Lesson.CurrentChallenge.AddRule("Checking Top View of binary Tree", context =>
     }
     else
     {
-        context.Fail("Wrong answer");
+        context.Fail("Incorrect answer","Use queue and try to maintain verticle levels");
     }
 });
 
@@ -1364,7 +1364,7 @@ Lesson.CurrentChallenge.AddRule("Checking Bottom View of binary Tree", context =
     }
     else
     {
-        context.Fail("Wrong answer");
+        context.Fail("Incorrect answer","Use queue and try to maintain verticle levels");
     }
 });
 
