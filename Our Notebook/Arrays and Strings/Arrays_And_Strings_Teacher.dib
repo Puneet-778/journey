@@ -1588,3 +1588,98 @@ MinCharForWords = words =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Anagrams
+
+#!csharp
+
+Func<string,string,bool> ValidAnagram = (str1,str2) => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Anagrams", context =>
+{
+    var correctAns = true;
+    var str1 = "anagram";
+    var str2 = "nagaram";
+    var ans = ValidAnagram(str1,str2);
+
+    if (ans == correctAns) 
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer", 
+        "The idea is to use a hash table to record the times of appearances of each letter in the two strings. For each letter in first string, counter decreses by 1. Think, how can you leverage this information at the end!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 17 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 17 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 17: Check if two strings are Anagrams of each other
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ValidAnagram = (str1,str2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ValidAnagram = (str1,str2) =>
+{   
+    if(str1.Length != str2.Length) return false;
+        var dict = new Dictionary<char, int>();
+        foreach(var i in str1)
+            dict[i] = dict.ContainsKey(i) ? (dict[i] + 1) : 1;
+        foreach(var i in str2)
+            if(dict.ContainsKey(i)){
+                dict[i] -= 1;
+                if(dict[i] < 0) return false;
+            }
+        else
+            return false;        
+        
+        return dict.All(d => d.Value == 0);  
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
