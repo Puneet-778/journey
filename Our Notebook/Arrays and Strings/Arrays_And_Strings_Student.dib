@@ -1,0 +1,22 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+
+#!csharp
+
+#!start-lesson --from-file "Arrays_And_Strings_Teacher.dib"
+
+#!markdown
+
+# Challenge 1: Count of Even and Odd numbers in the array
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+EvenOdd = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};

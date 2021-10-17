@@ -1,0 +1,563 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+#r "nuget: Interactive.Extension.ImageSharp"
+
+#!csharp
+
+using Microsoft.DotNet.Interactive.Journey;
+using Microsoft.DotNet.Interactive;
+using Microsoft.DotNet.Interactive.Commands;
+using Microsoft.DotNet.Interactive.CSharp;
+using Microsoft.DotNet.Interactive.Events;
+using SixLabors.ImageSharp;
+using System.IO;
+
+#!markdown
+
+# [Challenge] Reverse a Number
+
+#!csharp
+
+Func<int,int> ReverseNum = num => 321;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Reverse the Number", context =>
+{
+    var correctAns = 321;
+    var num = 123;
+    var ans = ReverseNum(num);
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Try using two pointers to solve this problem: one at the beginning of the string and other at the end. What can you do from here?");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 1 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 1 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 1: Reverse the given number
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ReverseNum = num =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ReverseNum = num => 
+{   
+    int  reverse=0, rem;       
+       while(num!=0)      
+       {      
+        rem=num%10;        
+        reverse=reverse*10+rem;      
+        num/=10;      
+       }      
+       return reverse;        	
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Palindrome
+
+#!csharp
+
+Func<int,bool> CheckIfPalindrome = num => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Palindrome", context =>
+{
+    var correctAns = true;
+    var num = 76367;
+    var ans = CheckIfPalindrome(num);
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Try using two pointers to solve this problem: one at the beginning of the string and other at the end. What can you do from here?");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 2 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 2 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 2: Check if the given number is Palindrome or not
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+CheckIfPalindrome = num =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+CheckIfPalindrome = num => 
+{   
+    int r,sum=0,t;
+    for(t=num;num!=0;num=num/10){
+         r=num % 10;
+         sum=sum*10+r;
+    }
+	if(t==sum)
+         return true;
+    else
+         return false;	
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Armstrong
+
+#!csharp
+
+Func<int,bool> CheckIfArmStrong = num => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Armstrong", context =>
+{
+    var correctAns = true;
+    var num = 371;
+    var ans = CheckIfArmStrong(num);
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Try using two pointers to solve this problem: one at the beginning of the string and other at the end. What can you do from here?");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 3 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 3 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 3: Check if the given number is Armstrong number or not
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+CheckIfArmStrong = num =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+CheckIfArmStrong = num => 
+{   
+    int r,sum=0,temp;
+    temp=num;      
+       while(num>0)      
+       {      
+        r=num%10;      
+        sum=sum+(r*r*r);      
+        num=num/10;
+       }      
+       if(temp==sum)      
+        return true;      
+       else      
+        return false;	
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Least common multiple
+
+#!csharp
+
+Func<int,int,int> LCM = (num1,num2) => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Least Common Multiple", context =>
+{
+    var correctAns = 24;
+    var num1 = 8;
+    var num2= 12;
+    var ans = LCM(num1,num2);
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Try using two pointers to solve this problem: one at the beginning of the string and other at the end. What can you do from here?");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 4 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 4 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 4: Find the LCM of the 2 numbers
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+LCM = (num1,num2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+LCM = (num1,num2) => 
+{   
+    int i,max, lcm=1;      
+    max = (num1>num2) ? num1 : num2;  
+    for(i=max;  ; i+=max)  
+    {  
+        if(i%num1==0 && i%num2==0)  
+        {  
+            lcm = i;  
+            break;  
+        }  
+    } 
+    return lcm;	
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Greatest Common Divisor
+
+#!csharp
+
+Func<int,int,int> GCD= (num1,num2) => 2;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Highest Common Factor", context =>
+{
+    var correctAns = 24;
+    var num1 = 48;
+    var num2= 72;
+    var ans = GCD(num1,num2);
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Try using two pointers to solve this problem: one at the beginning of the string and other at the end. What can you do from here?");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 5 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 5 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 5: Find the GCD of the 2 numbers
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+GCD = (num1,num2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+GCD = (num1,num2) => 
+{   
+    int i,j, gcd=1;      
+    j = (num1<num2) ? num1 : num2;  
+    for(i=1; i<=j; i++)  
+    {  
+        if(num1%i==0 && num2%i==0)  
+        {  
+            gcd = i;  
+        }  
+    }  
+    return gcd;  	
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Prime Number
+
+#!csharp
+
+Func<int,bool> CheckIfPrime = num => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Primality", context =>
+{
+    var correctAns = true;
+    var num = 17;
+    var ans = CheckIfPrime(num);
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Try using two pointers to solve this problem: one at the beginning of the string and other at the end. What can you do from here?");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 6 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 6 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 6: Check if the given number is Prime number or not
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+CheckIfPrime = num =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+CheckIfPrime = num => 
+{   
+    int i,ctr=0;
+    for(i=2;i<=Math.Sqrt(num);i++){
+        if(num % i==0){
+         ctr++;
+            break;
+        }
+    }
+    if(ctr==0 && num!= 1)
+        return true;
+   else
+      return false;     	
+};
+
+#!csharp
+
+Lesson.ResetChallenge();

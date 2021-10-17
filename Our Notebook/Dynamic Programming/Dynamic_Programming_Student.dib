@@ -1,0 +1,7 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+
+#!csharp
+
+#!start-lesson --from-file "Dynamic_Programming_Teacher.dib"

@@ -108,7 +108,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Maximum frequency element(Unsorted array)
+# [Challenge] Most frequent element(Unsorted array)
 
 #!csharp
 
@@ -699,7 +699,413 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Count vowels and consonants
+# [Challenge] Array of products
+
+#!csharp
+
+Func<int[],int[]> ArrayOfProducts = array => new int[array.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Array of Products", context =>
+{
+    var correctAns = new int[]{8,40,10,20};
+    var inputArray = new int[]{5,1,4,2};
+    var ans = ArrayOfProducts(inputArray);
+    if (correctAns.Length == ans.Length && correctAns.SequenceEqual(ans))
+    {
+        context.Pass("Correct Array of products");
+    }
+    else
+    {
+        context.Fail("Incorrect Array of products", 
+        "For each index in the array, try calculating the product of every element to the left and the product of every element to the right. You can do this with two loops through the array: One from left to right and one from right to left. How can these products help us??");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 8 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 8 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 8: Array of products
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ArrayOfProducts = array =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ArrayOfProducts = array => 
+{   
+   int[] products = new int[array.Length];
+   int leftRunningProduct = 1;
+   for(int i=0; i<array.Length; i++){
+       products[i] = leftRunningProduct;
+       leftRunningProduct*=array[i];
+   }
+   int rightRunningProduct = 1;
+   for(int i=array.Length-1;i>=0;i--){
+       products[i] *= rightRunningProduct;
+       rightRunningProduct*=array[i];
+   }
+   return products;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Two Number Sum
+
+#!csharp
+
+Func<int[],int,IEnumerable<int>> TwoSum = (inputArray,targetSum) => new int[2];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
+{
+    var correctAns = new int[]{-1,11};
+    var array = new int[]{3,5,-4,8,11,1,-1,6};
+    var targetSum = 10;
+    var ans = TwoSum(array,targetSum);
+
+    if (ans.Count() == correctAns.Count() && ans.All(correctAns.Contains))
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Think of using Hashtables!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 9 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 9 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 9: Two number Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+TwoSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+TwoSum = (array,targetSum) => 
+{   
+	List<int> answer = new List<int>();
+	Dictionary < int, int > hashmap = new Dictionary < int, int > ();
+	
+	foreach(int x in array){
+		int reqSum = targetSum-x;
+		if(hashmap.ContainsKey(reqSum))
+			return new int[]{x,reqSum};
+		hashmap[x]=1;
+	}
+		return new int[2];
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] 3 Sum
+
+#!csharp
+
+Func<int[],int,List<int[]>> ThreeSum = (inputArray,targetSum) => new List<int[]>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Three Sum", context =>
+{
+    var correctAns = new List<int[]>(){new int[]{-8,3,5},new int[]{-8,2,6},new int[]{-6,1,5}};
+    var array = new int[]{12,3,1,2,-6,5,-8,6};
+    var targetSum = 0;
+    var ans = ThreeSum(array,targetSum);
+    bool flag = true;
+    foreach(int[] arr in ans){
+        if(!correctAns.Any(a => a.SequenceEqual(arr)))
+        {
+            flag = false;
+        }
+    }
+    if (flag)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer",      
+        "Try sorting and traversing it once.At each number,place a left pointer on the number immediately to the right of your current number and a right pointer on the final number in the array. Check if the current Number, the left number, and the right number sum up to the target sum. Remember and keep in mind, that the array is sorted!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 10 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 10 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 10: Three Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ThreeSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ThreeSum = (array,targetSum) => 
+{   
+	Array.Sort(array);
+	List<int[]> triplets = new List<int[]>();
+	for(int i = 0; i <array.Length - 2;i++){
+		int left = i+1;
+		int right = array.Length - 1;
+		while(left < right){
+			int currentSum = array[i]+array[left]+array[right];
+			if(currentSum == targetSum){
+				int[] newTriplet = {array[i], array[left], array[right]};
+				triplets.Add(newTriplet);
+				left++;
+				right--;
+			} else if(currentSum < targetSum){
+				left++;
+			}
+			else if(currentSum > targetSum){
+				right--;
+			}
+		}
+	}
+	return triplets;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Four Sum
+
+#!csharp
+
+Func<int[],int,List<int[]>> FourSum = (inputArray,targetSum) => new List<int[]>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Four Sum", context =>
+{
+    var correctAns = new List<int[]>(){new int[]{7,6,4,-1}, new int[]{7,6,1,2}};
+    var array = new int[]{7,6,4,-1,1,2};
+    var targetSum = 16;
+    var ans = FourSum(array,targetSum);
+    bool flag = true;
+    foreach(int[] arr in ans){
+        if(!correctAns.Any(a => a.SequenceEqual(arr)))
+        {
+            flag = false;
+        }
+    }
+    if (flag)
+    {
+        context.Pass("Correct Answer, Jumping to the String section");
+    }
+    else
+    {
+        context.Fail("Wrong answer",      
+        "Two kinds of solutions are possible, either you can extend the approach of Three sum question, or what we can do is: Calculate the sums of pair of numbers in the array. Then assuming that you've stored all of these sums in a hashtable, you can fairly easily find which two sums can be paired to add up to the target sum: the numbers summing up to these two sums constitute for valid quadruplets; you just have to make sure that no number was used to generate both of the two sums.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 11 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 11 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 11: Four Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+FourSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+FourSum = (array,targetSum) => 
+{   
+	Dictionary<int,List<int[]>> allPairSums = new Dictionary<int,List<int[]>>();
+	List<int[]> quadruplets = new List<int[]>();
+	for(int i=1;i<array.Length-1;i++){
+		for(int j = i+1;j<array.Length;j++){
+			int currentSum = array[i]+array[j];
+			int difference = targetSum - currentSum;
+			if(allPairSums.ContainsKey(difference)){
+				foreach(int[] pair in allPairSums[difference]){
+					int[] newQuadruplet = {pair[0], pair[1],array[i],array[j]};
+					quadruplets.Add(newQuadruplet);
+				}
+			}
+		}
+		for(int k = 0;k<i;k++){
+			int currentSum = array[k] + array[i];
+			int[] pair = {array[k], array[i]};
+			if(!allPairSums.ContainsKey(currentSum)){
+				List<int[]> pairGroup = new List<int[]>();
+				pairGroup.Add(pair);
+				allPairSums.Add(currentSum,pairGroup);
+			}
+			else allPairSums[currentSum].Add(pair);
+		}
+	}
+	return quadruplets;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Counting vowels and consonants
 
 #!csharp
 
@@ -733,12 +1139,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 1 completed!");
+        context.SetMessage("Challenge 12 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 1 not complete");
+        context.SetMessage("Challenge 12 not complete");
     }
 });
 
@@ -748,7 +1154,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 1:  Count the total number of Vowels and Consonants present in the string
+# Challenge 12:  Count the total number of Vowels and Consonants present in the string
 
 #!markdown
 
@@ -822,12 +1228,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 2 completed!");
+        context.SetMessage("Challenge 13 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 2 not complete");
+        context.SetMessage("Challenge 13 not complete");
     }
 });
 
@@ -837,7 +1243,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 2: Check of the given string is Palindrome
+# Challenge 13: Check of the given string is Palindrome
 
 #!markdown
 
@@ -909,12 +1315,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 3 completed!");
+        context.SetMessage("Challenge 14 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 3 not complete");
+        context.SetMessage("Challenge 14 not complete");
     }
 });
 
@@ -924,7 +1330,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 3: Caesar Cipher Encryption
+# Challenge 14: Caesar Cipher Encryption
 
 #!markdown
 
@@ -964,29 +1370,28 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Two Number Sum
+#  [Challenge] Longest Palindromic Substring
 
 #!csharp
 
-Func<int[],int,IEnumerable<int>> TwoSum = (inputArray,targetSum) => new int[2];
+Func<string,string> LPS = str => "";
 
 #!csharp
 
-Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
+Lesson.CurrentChallenge.AddRule("Checking for Longest Palindromic Substring", context =>
 {
-    var correctAns = new int[]{-1,11};
-    var array = new int[]{3,5,-4,8,11,1,-1,6};
-    var targetSum = 10;
-    var ans = TwoSum(array,targetSum);
+    var correctAns = "xyzzyx";
+    var str = "abaxyzzyxf";
+    var ans = LPS(str);
 
-    if (ans.Count() == correctAns.Count() && ans.All(correctAns.Contains))
+    if (ans == correctAns)
     {
         context.Pass("Correct Answer");
     }
     else
     {
         context.Fail("Wrong answer", 
-        "Think of using Hashtables!!");
+        "Recognize that a palindrome is a string that is symmetrical with respect to its center, which can either be a character(in the case of odd-length palindromes) or an empty string(in the case of even-length palindromes). Thus, you can check the palindromicity of a string by simply expanding from its center and making sure that characters on both sides are indeed mirrored.Traverse the input string, and at each index, apply the logic mentioned.");
     }
 });
 
@@ -999,12 +1404,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 4 completed!");
+        context.SetMessage("Challenge 15 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 4 not complete");
+        context.SetMessage("Challenge 15 not complete");
     }
 });
 
@@ -1014,7 +1419,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 4: Two number Sum
+# Challenge 15: Longest Palindromic Substring
 
 #!markdown
 
@@ -1022,7 +1427,7 @@ XYZ
 
 #!csharp
 
-TwoSum = (array,targetSum) =>
+LPS = str =>
 {
     throw new NotImplementedException(); // write your answer here
 };
@@ -1035,19 +1440,38 @@ TwoSum = (array,targetSum) =>
 
 #!model-answer
 // this should pass
+int GetPalidromeLength(string s, int left, int right)
+{        
+    while(left >=0 && right < s.Length && s[left] == s[right])
+    {
+        left--;
+        right++;
+    }
+    
+    return right - left - 1;
+}
 
-TwoSum = (array,targetSum) => 
+LPS = str => 
 {   
-	List<int> answer = new List<int>();
-	Dictionary < int, int > hashmap = new Dictionary < int, int > ();
-	
-	foreach(int x in array){
-		int reqSum = targetSum-x;
-		if(hashmap.ContainsKey(reqSum))
-			return new int[]{x,reqSum};
-		hashmap[x]=1;
-	}
-		return new int[2];
+    if(str == null || str.Length == 0)
+            return "";
+        
+    int length = 0, start = 0;
+    
+    for(int i = 0; i < str.Length; i++)
+    {
+        int oddLength = GetPalidromeLength(str, i, i);
+        int evenLength = GetPalidromeLength(str, i , i + 1);
+        int currLength = Math.Max(oddLength, evenLength);
+    
+        if(currLength > length)
+        {
+            length = currLength;
+            start = i - (length - 1) / 2;
+        }
+    }
+    
+        return str.Substring(start, length);       
 };
 
 #!csharp
@@ -1056,35 +1480,28 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] 3 Sum
+# [Challenge] Minimum Characters for words
 
 #!csharp
 
-Func<int[],int,List<int[]>> ThreeSum = (inputArray,targetSum) => new List<int[]>();
+Func<string[],char[]> MinCharForWords = words => new char[10];
 
 #!csharp
 
-Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
+Lesson.CurrentChallenge.AddRule("Checking for Minimum characters for words", context =>
 {
-    var correctAns = new List<int[]>(){new int[]{-8,3,5},new int[]{-8,2,6},new int[]{-6,1,5}};
-    var array = new int[]{12,3,1,2,-6,5,-8,6};
-    var targetSum = 0;
-    var ans = ThreeSum(array,targetSum);
-    bool flag = true;
-    foreach(int[] arr in ans){
-        if(!correctAns.Any(a => a.SequenceEqual(arr)))
-        {
-            flag = false;
-        }
-    }
-    if (flag)
+    var correctAns = new char[]{'t','t','h','i','s','a','d','d','e','e','m','!'};
+    var words = new string[]{"this","that","did","deed","them!","a"};
+    var ans = MinCharForWords(words);
+
+    if (ans.Length == correctAns.Length && ans.All(correctAns.Contains)) 
     {
-        context.Pass("Correct Answer");
+        context.Pass("Correct Minimum characters");
     }
     else
     {
-        context.Fail("Wrong answer",      
-        "Try sorting and traversing it once.At each number,place a left pointer on the number immediately to the right of your current number and a right pointer on the final number in the array. Check if the current Number, the left number, and the right number sum up to the target sum. Remember and keep in mind, that the array is sorted!!");
+        context.Fail("Incorrect Minimum characters", 
+        "Use a hash table to keep track of the maximum frequencies of all unique characters that occur across all words. Count the frequency of each character in each word, and use those per-word frequencies to update your maximum-character-frequency hash table. Once you've determined the maximum frequency of each character across all words, you can use the built-up hash table to generate your output array.");
     }
 });
 
@@ -1097,12 +1514,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 5 completed!");
+        context.SetMessage("Challenge 16 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 5 not complete");
+        context.SetMessage("Challenge 16 not complete");
     }
 });
 
@@ -1112,7 +1529,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 5: Three Sum
+# Challenge 16: Minimum Characters for words
 
 #!markdown
 
@@ -1120,7 +1537,7 @@ XYZ
 
 #!csharp
 
-ThreeSum = (array,targetSum) =>
+MinCharForWords = words =>
 {
     throw new NotImplementedException(); // write your answer here
 };
@@ -1134,29 +1551,133 @@ ThreeSum = (array,targetSum) =>
 #!model-answer
 // this should pass
 
-ThreeSum = (array,targetSum) => 
+MinCharForWords = words =>
 {   
-	Array.Sort(array);
-	List<int[]> triplets = new List<int[]>();
-	for(int i = 0; i <array.Length - 2;i++){
-		int left = i+1;
-		int right = array.Length - 1;
-		while(left < right){
-			int currentSum = array[i]+array[left]+array[right];
-			if(currentSum == targetSum){
-				int[] newTriplet = {array[i], array[left], array[right]};
-				triplets.Add(newTriplet);
-				left++;
-				right--;
-			} else if(currentSum < targetSum){
-				left++;
-			}
-			else if(currentSum > targetSum){
-				right--;
+    Dictionary<char,int> globalHash = new Dictionary<char,int>();
+	
+	foreach(string s in words){
+		Dictionary<char,int> localHash = new Dictionary<char,int>();
+		foreach(char c in  s){
+            if(localHash.ContainsKey(c)){
+                int freq = localHash[c];
+                freq++;
+                localHash[c] = freq;
+            }
+            else localHash[c] = 1;  
+        }
+		
+// 		comparision between local and global hash
+		foreach(var pair in localHash){
+            char key = pair.Key;
+			if(!globalHash.ContainsKey(key))globalHash[key] = localHash[key];
+			else{
+				if(globalHash[key] >= localHash[key])continue;
+				globalHash[key] = localHash[key];
 			}
 		}
 	}
-	return triplets;
+	List<char> result = new List<char>();
+	foreach(var it in globalHash){
+		for(int i = 0;i<it.Value;i++){
+			result.Add(it.Key);
+		}
+	}
+	return result.ToArray();      
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Anagrams
+
+#!csharp
+
+Func<string,string,bool> ValidAnagram = (str1,str2) => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Anagrams", context =>
+{
+    var correctAns = true;
+    var str1 = "anagram";
+    var str2 = "nagaram";
+    var ans = ValidAnagram(str1,str2);
+
+    if (ans == correctAns) 
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer", 
+        "The idea is to use a hash table to record the times of appearances of each letter in the two strings. For each letter in first string, counter decreses by 1. Think, how can you leverage this information at the end!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 17 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 17 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 17: Check if two strings are Anagrams of each other
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ValidAnagram = (str1,str2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ValidAnagram = (str1,str2) =>
+{   
+    if(str1.Length != str2.Length) return false;
+        var dict = new Dictionary<char, int>();
+        foreach(var i in str1)
+            dict[i] = dict.ContainsKey(i) ? (dict[i] + 1) : 1;
+        foreach(var i in str2)
+            if(dict.ContainsKey(i)){
+                dict[i] -= 1;
+                if(dict[i] < 0) return false;
+            }
+        else
+            return false;        
+        
+        return dict.All(d => d.Value == 0);  
 };
 
 #!csharp
