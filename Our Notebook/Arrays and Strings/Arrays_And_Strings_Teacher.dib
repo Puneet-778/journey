@@ -1683,3 +1683,107 @@ ValidAnagram = (str1,str2) =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Group Anagrams
+
+#!csharp
+
+Func<string[],List<List<string>>> GroupAnagrams = words => new List<List<string>>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Group Anagrams", context =>
+{
+    var correctAns = new List<List<string>>{new List<string>{"yo","oy"},new List<string>{"flop","olfp"},new List<string>{"act","tac","cat"},new List<string>{"foo"}};
+    var words = new string[]{"yo","act","flop","tac","foo","cat","oy","olfp"};
+
+    
+    var ans = GroupAnagrams(words);
+    bool flag = true;
+    foreach(List<string> arr in ans){
+        if(!correctAns.Any(a => a.All(arr.Contains) && a.Count()==arr.Count()))
+        {
+            flag = false;
+        }
+    }
+    if(correctAns.Count != ans.Count)flag = false;
+    if (flag) 
+    {
+        context.Pass("Correct groupings");
+    }
+    else
+    {
+        context.Fail("Incorrect groupings", 
+        "Try rearraning every input string such that each string's letters are ordered in alphabetical order. Any two resultant strings that are equal to each other, their original strings(with their letters in normal order) must be anagrams. Think how you can Bucket strings using this idea!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 18 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 18 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 18: Group Anagrams
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+GroupAnagrams = words =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+GroupAnagrams = words =>
+{   
+     Dictionary<string,List<string>> anagrams = new Dictionary<string,List<string>>();
+     foreach(string word in words){
+         char[] charArray = word.ToCharArray();
+         Array.Sort(charArray);
+         string sortedWord = new String(charArray);
+
+         if(anagrams.ContainsKey(sortedWord)){
+             anagrams[sortedWord].Add(word);
+         }
+         else {
+             anagrams[sortedWord] = new List<string>(){word};
+         }
+     }
+     return anagrams.Values.ToList();
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
