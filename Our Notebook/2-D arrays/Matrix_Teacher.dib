@@ -19,7 +19,7 @@ using System.IO;
 
 #!csharp
 
-Func<int[,], int[,], int[,]> Multiply = (mat1, mat2) => new int[3,3];
+Func<int[,], int[,], int[,]> Multiply = (mat1, mat2) => new int[0,0];
 
 #!csharp
 
@@ -106,7 +106,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for multiplying two given matrices. 
 
-Your will write your answer as a lambda and assign it to `Multiply`. The lambda should have type `Func<int[][], int[][], int[][]>`.
+Your will write your answer as a lambda and assign it to `Multiply`. The lambda should have type `Func<int[,], int[,], int[,]>`.
 
 It should return a 2-D matrix which is the result of multiplication of two given matrices.
 
@@ -141,6 +141,138 @@ Multiply = (mat1, mat2) =>
                 ans[i,j] += mat1[i,k] * mat2[k,j];
             }
         }
+    }
+
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge]Spiral Matrix
+
+#!csharp
+
+Func<int[,], IEnumerable<int>> Spiral = (mat1) => Enumerable.Empty<int>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Spiral of Matrix", context =>
+{   
+    int[,] mat1 = new int[,]{
+        {1, 1, 1, 1},
+        {2, 2, 2, 2},
+        {3, 3, 3, 3},
+        {4, 4, 4, 4}
+    };
+
+    var correctans = new int[]{1, 1, 1, 1, 2, 3, 4, 4, 4, 4, 3, 2, 2, 2, 3, 3};
+    var ans = Spiral(mat1);
+
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer");
+    }
+
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 2 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 2 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 2 : Spiral of Matrix
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for displaying elements of an array in spiral way. 
+
+Your will write your answer as a lambda and assign it to `Spiral`. The lambda should have type `Func<int[,], IEnumerable<int>>`.
+
+It should return a list of elements of matrix in spiral way.
+
+#!csharp
+
+Spiral = (mat1) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Spiral = (mat1) => 
+{
+    int n = mat1.GetLength(0);
+    int m = mat1.GetLength(1);
+
+    int total = n*m;
+    int count = 0;
+
+    var ans = new List<int>();
+
+    int minr = 0;
+    int minc = 0;
+    int maxr = n-1;
+    int maxc = m-1;
+
+    while(count < total){
+        for(int i = minc; i <= maxc && count < total; i++){
+            ans.Add(mat1[minr, i]);
+            count++;
+        }
+        minr++;
+
+        for(int i = minr; i <= maxr && count < total;i++){
+            ans.Add(mat1[i,maxc]);
+            count++;
+        }
+        maxc--;
+
+        for(int i = maxc; i >= minc && count < total; i--){
+            ans.Add(mat1[maxr, i]);
+            count++;
+        }
+        maxr--;
+
+        for(int i = maxr; i >= minr && count < total; i--){
+            ans.Add(mat1[i, minc]);
+            count++;
+        }
+        minc++;
+
     }
 
     return ans;
