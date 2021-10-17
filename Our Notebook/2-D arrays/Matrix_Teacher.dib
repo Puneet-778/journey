@@ -281,3 +281,115 @@ Spiral = (mat1) =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Rotate Matrix
+
+#!csharp
+
+Func<int[,], int[,]> Rotate = (mat1) => new int[1,1];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Rotate given Matrix", context =>
+{   
+    int[,] mat1 = new int[,]{{1, 2, 3, 4},
+                             {5, 6, 7, 8},
+                             {9, 10, 11, 12},
+                             {13, 14, 15, 16}};
+
+    int[,] correctans = new int[,]{ {13, 9, 5, 1},
+                                    {14, 10, 6, 2},
+                                    {15, 11, 7, 3},
+                                    {16, 12, 8, 4}};
+
+//     13 9 5 1 
+//     14 10 6 2 
+//     15 11 7 3 
+//     16 12 8 4 
+
+    // int[,] correctans = new int[,]{{4,3,2,1},{4,3,2,1},{4,3,2,1},{4,3,2,1}};
+    int[,] ans = Rotate(mat1);
+
+    for(int i = 0;i < correctans.GetLength(0); i++){
+        for(int j = 0;j < correctans.GetLength(1); j++){
+            if(correctans[i,j] != ans[i,j]){
+                context.Fail("Incorrect answer");
+            }
+        }
+    }
+
+    context.Pass("Correct answer");
+
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 3 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 3 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 3 : Rotation of Matrix by 90 degree clockwise.
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for rotating matrix by 90 degree clockwise. 
+
+Your will write your answer as a lambda and assign it to `Roatate`. The lambda should have type `Func<int[,], int[,]> `.
+
+It should return a 90 degree clockwise rotated matrix.
+
+#!csharp
+
+Rotate = (mat1) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Rotate = (mat1) => 
+{
+    int n = mat1.GetLength(0);
+    int m = mat1.GetLength(1);
+
+    int[,] ans = new int[n,m];
+
+    for (int j = 0; j < n; j++)
+    {
+        for (int i = n - 1; i >= 0; i--)
+            ans[i,j] = mat1[i, j];
+    }
+
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
