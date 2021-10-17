@@ -1391,7 +1391,7 @@ Lesson.CurrentChallenge.AddRule("Checking for Longest Palindromic Substring", co
     else
     {
         context.Fail("Wrong answer", 
-        "");
+        "Recognize that a palindrome is a string that is symmetrical with respect to its center, which can either be a character(in the case of odd-length palindromes) or an empty string(in the case of even-length palindromes). Thus, you can check the palindromicity of a string by simply expanding from its center and making sure that characters on both sides are indeed mirrored.Traverse the input string, and at each index, apply the logic mentioned.");
     }
 });
 
@@ -1472,6 +1472,117 @@ LPS = str =>
     }
     
         return str.Substring(start, length);       
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Minimum Characters for words
+
+#!csharp
+
+Func<string[],char[]> MinCharForWords = words => new char[10];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Minimum characters for words", context =>
+{
+    var correctAns = new char[]{'t','t','h','i','s','a','d','d','e','e','m','!'};
+    var words = new string[]{"this","that","did","deed","them!","a"};
+    var ans = MinCharForWords(words);
+
+    if (ans.Length == correctAns.Length && ans.All(correctAns.Contains)) 
+    {
+        context.Pass("Correct Minimum characters");
+    }
+    else
+    {
+        context.Fail("Incorrect Minimum characters", 
+        "Use a hash table to keep track of the maximum frequencies of all unique characters that occur across all words. Count the frequency of each character in each word, and use those per-word frequencies to update your maximum-character-frequency hash table. Once you've determined the maximum frequency of each character across all words, you can use the built-up hash table to generate your output array.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 16 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 16 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 16: Minimum Characters for words
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MinCharForWords = words =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+MinCharForWords = words =>
+{   
+    Dictionary<char,int> globalHash = new Dictionary<char,int>();
+	
+	foreach(string s in words){
+		Dictionary<char,int> localHash = new Dictionary<char,int>();
+		foreach(char c in  s){
+            if(localHash.ContainsKey(c)){
+                int freq = localHash[c];
+                freq++;
+                localHash[c] = freq;
+            }
+            else localHash[c] = 1;  
+        }
+		
+// 		comparision between local and global hash
+		foreach(var pair in localHash){
+            char key = pair.Key;
+			if(!globalHash.ContainsKey(key))globalHash[key] = localHash[key];
+			else{
+				if(globalHash[key] >= localHash[key])continue;
+				globalHash[key] = localHash[key];
+			}
+		}
+	}
+	List<char> result = new List<char>();
+	foreach(var it in globalHash){
+		for(int i = 0;i<it.Value;i++){
+			result.Add(it.Key);
+		}
+	}
+	return result.ToArray();      
 };
 
 #!csharp

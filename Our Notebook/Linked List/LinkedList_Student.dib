@@ -1,3 +1,28 @@
 #!csharp
 
 #r "nuget: Interactive.Journey"
+
+#!csharp
+
+#!start-lesson --from-file "LinkedList_Teacher.dib"
+
+#!markdown
+
+# Challenge 1 : Traverse a LinkedList
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for traversing the nodes of a Linked List. 
+
+The type you will be working with is `ListNode`. It represents the node of the Linked List. It has an integer property `value` representing the node's value. It also has the property `next` that represents the next node in the Linked list.
+
+Your will write your answer as a lambda and assign it to `Traverse`. The lambda should have type `Func<ListNode, IEnumerable<int>>`.
+
+It should output the list of values for each node in the Linked list.
+
+#!csharp
+
+Traverse = root =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
