@@ -109,7 +109,7 @@ The type you will be working with is `TreeNode`. It represents the root node of 
 
 Your will write your answer as a lambda and assign it to `ValidateBST`. The lambda should have type `Func<TreeNode, Boolean>`.
 
-It should output true or false based on whether given binary tree is BST or not.
+It should return true or false based on whether given binary tree is BST or not.
 
 #!csharp
 
@@ -236,7 +236,7 @@ The type you will be working with is `TreeNode`. It represents the root node of 
 
 Your will write your answer as a lambda and assign it to `SearchBST`. The lambda should have type `Func<TreeNode, int, Boolean>`.
 
-It should output true or false based on whether given key is present in BST or not.
+It should return true or false based on whether given key is present in BST or not.
 
 Note: Use property of BST.
 
@@ -273,6 +273,272 @@ SearchBST = (root, key) =>
 
    return SearchBST(root.right, key);
     
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Lowest Common Ancestor
+
+#!csharp
+
+Func<TreeNode, int, int, TreeNode> LCA = (root, key1, key2) => null;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("LCA of two nodes in BST", context =>
+{   
+    // constructing Sample binary Tree
+    //         50
+    //       /    \
+    //      25     75
+    //     / \     / \
+    //    13  37  63  87
+    //            /\
+    //          55  70
+
+
+    var LeftSubTree = new TreeNode(25, new TreeNode(13, null, null), new TreeNode(37, null, null));
+    var RightSubTree = new TreeNode(75, new TreeNode(63, new TreeNode(55, null, null), new TreeNode(70, null, null)), new TreeNode(87, null, null));
+    var sample = new TreeNode(50, LeftSubTree, RightSubTree);
+
+    int key1 = 55;
+    int key2 = 87;
+
+    var correctans = 75;
+
+    var ans = LCA(sample, key1, key2);
+    
+    if (correctans ==  ans.data)
+    {
+        context.Pass("Correct answer!");
+    }
+    else
+    {
+        context.Fail("Use property of BST");
+        
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 3 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 3 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 3 : Lowest common ancestor (LCA) of two given nodes in the BST.
+
+#!markdown
+
+In this challenge, you will be writing an algorithm to find Lower Common Ancestor (LCA) of two given nodes in the BST. 
+
+“The lowest common ancestor is defined between two nodes p and q as the lowest node in Tree that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+A binary search tree (BST) is a node based binary tree data structure which has the following properties : 
+
+=> The left subtree of a node contains only nodes with keys less than the node’s key. 
+
+=> The right subtree of a node contains only nodes with keys greater than the node’s key.
+
+=> Both the left and right subtrees must also be binary search trees.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `LCA`. The lambda should have type `Func<TreeNode, int, int, TreeNode>`.
+
+It should return LCA of two given nodes.
+
+Note: Use property of BST.
+
+All nodes in BST are unique.
+
+key1 != key2
+
+key1 and key2 will exist in the BST.
+
+#!csharp
+
+LCA = (root, key1, key2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+
+LCA = (root, key1, key2) => 
+{
+   if(key1 > root.data && key2 > root.data){
+       return LCA(root.right, key1, key2);
+   }else if(key1 < root.data && key2 < root.data){
+       return LCA(root.left, key1, key2);
+   }
+   
+   return root;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Inorder Successor in BST
+
+#!csharp
+
+Func<TreeNode, int, TreeNode> Successor = (root, key) => null;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Inorder Successor of given node in BST", context =>
+{   
+    // constructing Sample binary Tree
+    //         50
+    //       /    \
+    //      25     75
+    //     / \     / \
+    //    13  37  63  87
+    //            /\
+    //          55  70
+
+
+    var LeftSubTree = new TreeNode(25, new TreeNode(13, null, null), new TreeNode(37, null, null));
+    var RightSubTree = new TreeNode(75, new TreeNode(63, new TreeNode(55, null, null), new TreeNode(70, null, null)), new TreeNode(87, null, null));
+    var sample = new TreeNode(50, LeftSubTree, RightSubTree);
+
+    int key = 55;
+
+    var correctans = 63;
+
+    var ans = Successor(sample, key);
+    
+    if (correctans ==  ans.data)
+    {
+        context.Pass("Correct answer!");
+    }
+    else
+    {
+        context.Fail("Inorder of BST is in ascending order!");
+        
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 4 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 4 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 4 : Inorder Successor in BST
+
+#!markdown
+
+In this challenge, you will be given a binary search tree and the value of node in it, find the in-order successor of that node in the BST.
+
+If the given node has no in-order successor in the tree, return null.
+
+A binary search tree (BST) is a node based binary tree data structure which has the following properties : 
+
+=> The left subtree of a node contains only nodes with keys less than the node’s key. 
+
+=> The right subtree of a node contains only nodes with keys greater than the node’s key.
+
+=> Both the left and right subtrees must also be binary search trees.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `Successor`. The lambda should have type `Func<TreeNode, int, TreeNode>`.
+
+It should return inorder successor of the given node.
+
+Note: Use property of BST.
+
+All nodes in BST are unique.
+
+#!csharp
+
+Successor = (root, key) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+TreeNode prev = null;
+void traverse(TreeNode root, int key){
+    if(root == null){
+        return;
+    }
+    
+    traverse(root.left, key);
+
+    if(root.data > key){
+        if(prev == null)
+           prev = root;
+        
+        return;
+    }
+
+    traverse(root.right, key);
+}
+Successor = (root, key) => 
+{
+    traverse(root, key);
+    return prev;
 };
 
 #!csharp
