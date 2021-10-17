@@ -396,28 +396,28 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Finding Square Root using Binary Search
+# [Challenge] Finding Nth Root using Binary Search
 
 #!csharp
 
-Func<int,int,float> SquareRoot = (int precision, int number) =>0.0f;
+Func<int,double,double> nthRoot = (int n, double number) =>0.0;
 
 #!csharp
 
 Lesson.CurrentChallenge.AddRule("Checking submitted answer", context =>
 {
-    var correctAns=3.1622;
+    var correctAns=3.6840;
   
-    var ans= SquareRoot(4,10);
+    var ans= nthRoot(3,50.0);
     if(ans==correctAns)
     {
-        context.Pass("Correct! You found the square root with required precision .");
+        context.Pass("Correct! You found the nth root with required precision .");
 
     }
 
     else
     {
-        context.Fail("Incorrect answer!","The square root lies between zro and the number hence think about initializing low as 0 and high as the number");
+        context.Fail("Incorrect answer!","The nth root lies between zero and the number hence think about initializing low as 0 and high as the number");
     }
        
 }
@@ -447,28 +447,28 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 4: Find square root of number upto given precision.  
+# Challenge 4: Find nth root of number upto 4 decimal places.  
 
 #!markdown
 
-### In this exercise, you will be given a number of the type 'int' and a precision, find the square root of the number upto the given precision .  
+### In this exercise, you will be given a number of the type 'double' and another number, n, find the nth root of the given number upto the 4 places .  
 
-### The type you will be working with is 'int' representing an integer number and precision also of the type 'int'.  
+### The type you will be working with is 'double' representing a number and the n is of the type 'int'.  
   
-### The answer is to be written as a lambda and assigned to 'SquareRoot'.  
-### The lambda has the type 'Func<int,int,float>' and return value is of the datatype 'float'.   
-Note: You can use Binary Search for this problem.  
+### The answer is to be written as a lambda and assigned to 'nthRoot'.  
+### The lambda has the type 'Func<int,double,double>' and return value is of the datatype 'double'.   
+Note: You must use Binary Search for this problem.  
 
 **Sample output:** 
 
 #### Input:
-#### precision=2, number=20  
-#### Output (to be returned): 4.47
-#### Explanation: Return the square root of the given number upto the specified precision. Here square root of 20 is 4.47213.., but square root upto two decimal places is 4.47
+#### n=2, number=20.0  
+#### Output (to be returned): 4.4721
+#### Explanation: Return the square root of the given number upto the specified precision. Here square root of 20 is 4.47213.., but square root upto four decimal places is 4.4721
 
 #!csharp
 
-SquareRoot = (precision, number) =>
+nthRoot = (n,number) =>
 {
     throw new NotImplementedException(); //write code here
 };
@@ -481,44 +481,36 @@ SquareRoot = (precision, number) =>
 
 #!model-answer
 //this should pass
-SquareRoot = (precision, number) =>
+double multiply(double mid,int n)
 {
-    int low=0;
-    int high=number;
-    int mid=0;
-    double root=0.0;
-    while(low<=high)
+    double result=1.0;
+    for(int i=1;i<=n;i++)
     {
-        mid=(low+high)/2;
-        if(mid*mid==number)
-        {
-            root=mid;
-            break;
-        }
-        if(mid*mid<number)
-        {
-            low=mid+1;
-            root=mid;
-        }
-        else{
-            high=mid-1;
-        }
+        result= result*mid;
     }
-    double deci=0.1;
-    for(int i=0;i<precision;i++)
+    return result;
+}
+nthRoot= (n, number) =>
+{
+    double low=1;
+    double high=number;
+    double ex=1e-5;
+    while((high-low)>ex)
     {
-        while(root*root<=number)
-              root +=deci;
-        root=root-deci;
-        deci=deci/10;
+      double mid=(low+high)/2.0;
+      if(multiply(mid,n)<number)
+      {
+          low=mid;
+      }
+      else{
+          high=mid;
+      }
     }
-    Console.WriteLine(root);
-    return (float)root;
-    
-    
-
-
-
+   
+   
+   low=Math.Round(low,4);
+   
+   return low;
 };
 
 #!csharp
