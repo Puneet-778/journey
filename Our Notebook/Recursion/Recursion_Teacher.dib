@@ -1,7 +1,7 @@
 #!csharp
 
 #r "nuget: Interactive.Journey"
-#r "nuget: Interactive.Extension.ImageSharp, *-*"
+// #r "nuget: Interactive.Extension.ImageSharp, *-*"
 
 #!csharp
 
@@ -99,6 +99,645 @@ Printing = num =>
     printUptoN(num);
     return arr;
 };
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Palindrome Check Using Recursion
+
+#!csharp
+
+Func<string, bool> IsPalin = ans => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Palindromicity", context =>
+{    
+    // var String = new String("kook");
+
+    var str = "kook";
+
+    var ans = IsPalin(str);
+    
+    var correctAns = true;
+
+    if (correctAns == ans)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Incorrect Answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 2 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 2 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 2: Check if the string is Palindrome or Not
+
+#!markdown
+
+A string is said to be palindrome if reverse of the string is same as string. For example, “abba” is palindrome, but “abbc” is not palindrome.
+Given a string, write a recursive function that checks if the given string is a palindrome, else, not a palindrome.
+
+For Example:
+
+Input : malayalam
+
+Output : Yes
+
+Reverse of malayalam is also malayalam.
+
+Input : max
+
+Output : No
+
+Reverse of max is not max. 
+
+#!csharp
+
+IsPalin = ans =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+bool IsPalindrome(string text){
+    if(text.Length <=1) return true;
+    else{
+        if(text[0] != text[text.Length - 1]) return false;
+        else return IsPalindrome(text.Substring(1, text.Length-2));
+    }
+}
+IsPalin = ans => 
+{
+    
+    return IsPalindrome(ans);
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Sum of Digits Using Recursion
+
+#!csharp
+
+Func<int, int> SumOfDigits = ans => 10;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking traversal", context =>
+{    
+    // var correctans = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+
+    var input = 15116;
+
+    var ans = SumOfDigits(input);
+    
+    var correctAns = 14;
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Incorrect Answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 3 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 3 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 3: Print the Sum of The Digits using Recursion
+
+#!markdown
+
+Given a number, we need to find sum of its digits using recursion.
+For Example:
+
+Input : 12345
+
+Output : 15
+
+
+Input : 45632
+
+Output :20
+
+#!csharp
+
+SumOfDigits = ans =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+//this should pass
+int sum(int num)
+    {
+        if (num != 0)
+        {
+            return (num % 10 + sum(num / 10));
+        }
+        else
+        {
+            return 0;
+        }
+    }
+SumOfDigits = ans =>
+{
+    return sum(ans);
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Rope Cutting Problem
+
+#!csharp
+
+Func<int, int, int, int, int> RopeCut = (n,a,b,c) => 10;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Rope Cutting", context =>
+{    
+    // var correctans = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+
+    var n = 5;
+    var a = 2;
+    var b = 5;
+    var c = 1;
+
+    var ans = RopeCut(n, a, b, c);
+    var correctans = 5;
+    
+    if (ans == correctans)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Incorrect Answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 4 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 4 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 4: Rope Cutting Problem
+
+#!markdown
+
+We are given a rope of length N and our task is to cut this rope into maximum number of pieces such that every piece has length either as a, b, or c.
+For Example:
+Input: n = 23, a = 12, b = 9, c = 11
+Output: 2
+We can make 2 pieces of length 11 and 12.
+
+#!csharp
+
+RopeCut = (n,a,b,c) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+int maxCuts(int n, int a, int b, int c)
+        {
+            if(n == 0)
+                return 0;
+            if(n <= -1)
+                return -1;
+
+            int res = Math.Max(maxCuts(n-a, a, b, c), 
+                    Math.Max(maxCuts(n-b, a, b, c), 
+                    maxCuts(n-c, a, b, c)));
+
+            if(res == -1)
+                return -1;
+
+            return res + 1;
+        }
+        RopeCut = (n,a,b,c) =>
+        {
+            return maxCuts(n,a,b,c);
+        };
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Generate Subsets
+
+#!csharp
+
+Func<string, string, int, List<string>> Subset = (str, curr, index) => new List<string>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Printing Subsets", context =>
+{    
+    var correctans = new string[] {"","a","b","c","ab","ac","bc","abc"};
+
+    string a = "abc";
+    string b = "";
+    var c = 0;
+
+    var ans = Subset(a,b,c);
+    
+    if (ans.All(correctans.Contains) && correctans.Count() == ans.Count())
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Incorrect Answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 5 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 5 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 5: Generate all the subsets of a given string
+
+#!markdown
+
+Given a set represented as a string, write a recursive code to print all subsets of it. The subsets can be printed in any order. 
+
+Example: 
+
+Input : set = "abcd"
+
+Output : "" "a" "ab" "abc" "abcd" "abd" "ac" "acd"
+         "ad" "b" "bc" "bcd" "bd" "c" "cd" "d" 
+
+#!csharp
+
+Subset = (str, curr, index) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+List<string> arr = new List<string>(); 
+void printSub(string str, string curr, int index)
+        {
+            if(index == str.Length)
+	        {
+		        // Console.WriteLine(curr+" ");
+                arr.Add(curr);
+		        return;
+	        }
+
+	        printSub(str, curr, index + 1);
+	        printSub(str, curr+str[index], index + 1);
+        }
+        Subset = (str,curr,index) =>
+        {
+            printSub(str, curr, index);
+            return arr;
+        };
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Tower Of Hanoi
+
+#!csharp
+
+Func<int, string, string, string, List<string>> TowerOfHanoi = (N, A, B, C) => new List<string>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Tower of Hanoi Solution", context =>
+{    
+    var correctans = new string[] {"Move 1 from a to c",
+                                    "Move 2 from a to b",
+                                    "Move 1 from c to b",
+                                    "Move 3 from a to c",
+                                    "Move 1 from b to a",
+                                    "Move 2 from b to c",
+                                    "Move 1 from a to c"};
+
+    int n = 3;
+    string c1 = "a", c2 = "b", c3 = "c"; 
+    
+
+    var ans = TowerOfHanoi(n,c1,c2,c3);
+    
+    if (ans.SequenceEqual(correctans) && correctans.Count() == ans.Count())
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Incorrect Answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 6 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 6 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 6: Tower of Hanoi
+
+#!markdown
+
+Tower of Hanoi is a mathematical puzzle where we have three rods and n disks. The objective of the puzzle is to move the entire stack to another rod, obeying the following simple rules: 
+
+
+1. Only one disk can be moved at a time.
+
+2. Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack i.e. a disk can only be moved if it is the uppermost disk on a stack.
+
+3. No disk may be placed on top of a smaller disk.
+
+Example: 
+Input : 2
+
+Output : 
+Disk 1 moved from A to B
+
+Disk 2 moved from A to C
+
+Disk 1 moved from B to C
+         
+
+#!csharp
+
+TowerOfHanoi = (N,A,B,C) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+List<string> arr = new List<string>(); 
+void TOH(int N, string A, string B, string C)
+        {
+            if (N == 1) 
+        { 
+        
+        arr.Add("Move 1 from " + A + " to " + C);
+        return; 
+        } 
+        TOH(N-1, A, C, B); 
+        arr.Add("Move " + N + " from " + A + " to " + C);
+        TOH(N-1, B, A, C);
+        }
+        TowerOfHanoi = (N,A,B,C) =>
+        {
+            TOH(N,A,B,C);
+            return arr;
+        }
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Josephus Problem
+
+#!csharp
+
+Func<int,int,int> Josephus = (n,k) => 10;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Answer", context =>
+{    
+    // var correctans = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
+
+    int n=14,k=2;
+
+
+    var ans = Josephus(n,k);
+    
+    var correctAns = 13;
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Incorrect Answer");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 7 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 7 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 7: Josephus Problem
+
+#!markdown
+
+There are n people standing in a circle waiting to be executed. The counting out begins at some point in the circle and proceeds around the circle in a fixed direction. In each step, a certain number of people are skipped and the next person is executed. The elimination proceeds around the circle (which is becoming smaller and smaller as the executed people are removed), until only the last person remains, who is given freedom. Given the total number of persons n and a number k which indicates that k-1 persons are skipped and kth person is killed in circle. The task is to choose the place in the initial circle so that you are the last one remaining and so survive.
+For example, if n = 5 and k = 2, then the safe position is 3. Firstly, the person at position 2 is killed, then person at position 4 is killed, then person at position 1 is killed. Finally, the person at position 5 is killed. So the person at position 3 survives. 
+If n = 7 and k = 3, then the safe position is 4. The persons at positions 3, 6, 2, 7, 5, 1 are killed in order, and person at position 4 survives.
+
+#!csharp
+
+Josephus = (n,k) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+//this should pass
+int jos(int n, int k)
+        {
+            if (n == 1)
+                return 1;
+            else            
+               return (jos(n - 1, k) + k - 1) % n + 1;
+        }
+        Josephus = (n,k) =>
+        {
+            return jos(n,k);
+        };
 
 #!csharp
 
