@@ -103,3 +103,33 @@ Printing = num =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Palindrome Check Using Recursion
+
+#!csharp
+
+Func<string[], bool> IsPalin = ans => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Palindromicity", context =>
+{    
+    // var String = new String("kook");
+
+    var str = "kook";
+
+    var ans = Printing(str);
+    
+    var correctAns = true;
+
+    if (correctAns == ans)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Incorrect Answer");
+    }
+});
