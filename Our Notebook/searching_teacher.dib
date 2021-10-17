@@ -273,7 +273,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Test your knowledge
+# [Challenge] Finding key in a sorted and rotated array
 
 #!csharp
 
@@ -324,11 +324,15 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
+# Test Your Knowledge 
+
+#!markdown
+
 # Challenge 3: Find an element in a sorted (in ascending order) and rotated array.
 
 #!markdown
 
-### In this exercise, you will search algorithm a key in a given sorted and rotated array and return its position.  
+### In this exercise, you will search a key in a given sorted and rotated array and return its position.  
 ### (Indexing here begins with 1.)  
 ### The type you will be working with is 'int[]' representing an integer array and a key which is to be found in the array,also of the type 'int'.  
   
@@ -384,6 +388,137 @@ Searching = (key,array) =>
     int len=array.Count();
     int position=searchRotated(array,0,len-1,key);
     return position+1;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Finding Square Root using Binary Search
+
+#!csharp
+
+Func<int,int,float> SquareRoot = (int precision, int number) =>0.0f;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking submitted answer", context =>
+{
+    var correctAns=3.1622;
+  
+    var ans= SquareRoot(4,10);
+    if(ans==correctAns)
+    {
+        context.Pass("Correct! You found the square root with required precision .");
+
+    }
+
+    else
+    {
+        context.Fail("Incorrect answer!","The square root lies between zro and the number hence think about initializing low as 0 and high as the number");
+    }
+       
+}
+);
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 4 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 4 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 4: Find square root of number upto given precision.  
+
+#!markdown
+
+### In this exercise, you will be given a number of the type 'int' and a precision, find the square root of the number upto the given precision .  
+
+### The type you will be working with is 'int' representing an integer number and precision also of the type 'int'.  
+  
+### The answer is to be written as a lambda and assigned to 'SquareRoot'.  
+### The lambda has the type 'Func<int,int,float>' and return value is of the datatype 'float'.   
+Note: You can use Binary Search for this problem.  
+
+**Sample output:** 
+
+#### Input:
+#### precision=2, number=20  
+#### Output (to be returned): 4.47
+#### Explanation: Return the square root of the given number upto the specified precision. Here square root of 20 is 4.47213.., but square root upto two decimal places is 4.47
+
+#!csharp
+
+SquareRoot = (precision, number) =>
+{
+    throw new NotImplementedException(); //write code here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+//this should pass
+SquareRoot = (precision, number) =>
+{
+    int low=0;
+    int high=number;
+    int mid=0;
+    double root=0.0;
+    while(low<=high)
+    {
+        mid=(low+high)/2;
+        if(mid*mid==number)
+        {
+            root=mid;
+            break;
+        }
+        if(mid*mid<number)
+        {
+            low=mid+1;
+            root=mid;
+        }
+        else{
+            high=mid-1;
+        }
+    }
+    double deci=0.1;
+    for(int i=0;i<precision;i++)
+    {
+        while(root*root<=number)
+              root +=deci;
+        root=root-deci;
+        deci=deci/10;
+    }
+    Console.WriteLine(root);
+    return (float)root;
+    
+    
+
+
+
 };
 
 #!csharp
