@@ -28,7 +28,7 @@ public class TreeNode{
 
 #!markdown
 
-# [Challenge] Traverse Binary Tree (Preorder)
+# [Challenge]Preorder
 
 #!csharp
 
@@ -138,7 +138,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Traverse Binary Tree(Inorder)
+# [Challenge]Inorder
 
 #!csharp
 
@@ -249,7 +249,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Traverse Binary Tree(Postorder)
+# [Challenge]Postorder
 
 #!csharp
 
@@ -360,7 +360,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Traverse Binary Tree Level Order
+# [Challenge] Level Order
 
 #!csharp
 
