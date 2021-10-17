@@ -1367,3 +1367,423 @@ CaesorCipher = (str,key) =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+#  [Challenge] Longest Palindromic Substring
+
+#!csharp
+
+Func<string,string> LPS = str => "";
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Longest Palindromic Substring", context =>
+{
+    var correctAns = "xyzzyx";
+    var str = "abaxyzzyxf";
+    var ans = LPS(str);
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Recognize that a palindrome is a string that is symmetrical with respect to its center, which can either be a character(in the case of odd-length palindromes) or an empty string(in the case of even-length palindromes). Thus, you can check the palindromicity of a string by simply expanding from its center and making sure that characters on both sides are indeed mirrored.Traverse the input string, and at each index, apply the logic mentioned.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 15 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 15 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 15: Longest Palindromic Substring
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+LPS = str =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+int GetPalidromeLength(string s, int left, int right)
+{        
+    while(left >=0 && right < s.Length && s[left] == s[right])
+    {
+        left--;
+        right++;
+    }
+    
+    return right - left - 1;
+}
+
+LPS = str => 
+{   
+    if(str == null || str.Length == 0)
+            return "";
+        
+    int length = 0, start = 0;
+    
+    for(int i = 0; i < str.Length; i++)
+    {
+        int oddLength = GetPalidromeLength(str, i, i);
+        int evenLength = GetPalidromeLength(str, i , i + 1);
+        int currLength = Math.Max(oddLength, evenLength);
+    
+        if(currLength > length)
+        {
+            length = currLength;
+            start = i - (length - 1) / 2;
+        }
+    }
+    
+        return str.Substring(start, length);       
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Minimum Characters for words
+
+#!csharp
+
+Func<string[],char[]> MinCharForWords = words => new char[10];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Minimum characters for words", context =>
+{
+    var correctAns = new char[]{'t','t','h','i','s','a','d','d','e','e','m','!'};
+    var words = new string[]{"this","that","did","deed","them!","a"};
+    var ans = MinCharForWords(words);
+
+    if (ans.Length == correctAns.Length && ans.All(correctAns.Contains)) 
+    {
+        context.Pass("Correct Minimum characters");
+    }
+    else
+    {
+        context.Fail("Incorrect Minimum characters", 
+        "Use a hash table to keep track of the maximum frequencies of all unique characters that occur across all words. Count the frequency of each character in each word, and use those per-word frequencies to update your maximum-character-frequency hash table. Once you've determined the maximum frequency of each character across all words, you can use the built-up hash table to generate your output array.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 16 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 16 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 16: Minimum Characters for words
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MinCharForWords = words =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+MinCharForWords = words =>
+{   
+    Dictionary<char,int> globalHash = new Dictionary<char,int>();
+	
+	foreach(string s in words){
+		Dictionary<char,int> localHash = new Dictionary<char,int>();
+		foreach(char c in  s){
+            if(localHash.ContainsKey(c)){
+                int freq = localHash[c];
+                freq++;
+                localHash[c] = freq;
+            }
+            else localHash[c] = 1;  
+        }
+		
+// 		comparision between local and global hash
+		foreach(var pair in localHash){
+            char key = pair.Key;
+			if(!globalHash.ContainsKey(key))globalHash[key] = localHash[key];
+			else{
+				if(globalHash[key] >= localHash[key])continue;
+				globalHash[key] = localHash[key];
+			}
+		}
+	}
+	List<char> result = new List<char>();
+	foreach(var it in globalHash){
+		for(int i = 0;i<it.Value;i++){
+			result.Add(it.Key);
+		}
+	}
+	return result.ToArray();      
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Anagrams
+
+#!csharp
+
+Func<string,string,bool> ValidAnagram = (str1,str2) => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Anagrams", context =>
+{
+    var correctAns = true;
+    var str1 = "anagram";
+    var str2 = "nagaram";
+    var ans = ValidAnagram(str1,str2);
+
+    if (ans == correctAns) 
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer", 
+        "The idea is to use a hash table to record the times of appearances of each letter in the two strings. For each letter in first string, counter decreses by 1. Think, how can you leverage this information at the end!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 17 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 17 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 17: Check if two strings are Anagrams of each other
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ValidAnagram = (str1,str2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ValidAnagram = (str1,str2) =>
+{   
+    if(str1.Length != str2.Length) return false;
+        var dict = new Dictionary<char, int>();
+        foreach(var i in str1)
+            dict[i] = dict.ContainsKey(i) ? (dict[i] + 1) : 1;
+        foreach(var i in str2)
+            if(dict.ContainsKey(i)){
+                dict[i] -= 1;
+                if(dict[i] < 0) return false;
+            }
+        else
+            return false;        
+        
+        return dict.All(d => d.Value == 0);  
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Group Anagrams
+
+#!csharp
+
+Func<string[],List<List<string>>> GroupAnagrams = words => new List<List<string>>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Group Anagrams", context =>
+{
+    var correctAns = new List<List<string>>{new List<string>{"yo","oy"},new List<string>{"flop","olfp"},new List<string>{"act","tac","cat"},new List<string>{"foo"}};
+    var words = new string[]{"yo","act","flop","tac","foo","cat","oy","olfp"};
+
+    
+    var ans = GroupAnagrams(words);
+    bool flag = true;
+    foreach(List<string> arr in ans){
+        if(!correctAns.Any(a => a.All(arr.Contains) && a.Count()==arr.Count()))
+        {
+            flag = false;
+        }
+    }
+    if(correctAns.Count != ans.Count)flag = false;
+    if (flag) 
+    {
+        context.Pass("Correct groupings");
+    }
+    else
+    {
+        context.Fail("Incorrect groupings", 
+        "Try rearraning every input string such that each string's letters are ordered in alphabetical order. Any two resultant strings that are equal to each other, their original strings(with their letters in normal order) must be anagrams. Think how you can Bucket strings using this idea!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 18 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 18 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 18: Group Anagrams
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+GroupAnagrams = words =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+GroupAnagrams = words =>
+{   
+     Dictionary<string,List<string>> anagrams = new Dictionary<string,List<string>>();
+     foreach(string word in words){
+         char[] charArray = word.ToCharArray();
+         Array.Sort(charArray);
+         string sortedWord = new String(charArray);
+
+         if(anagrams.ContainsKey(sortedWord)){
+             anagrams[sortedWord].Add(word);
+         }
+         else {
+             anagrams[sortedWord] = new List<string>(){word};
+         }
+     }
+     return anagrams.Values.ToList();
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
