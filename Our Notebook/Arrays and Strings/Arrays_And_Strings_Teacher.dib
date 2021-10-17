@@ -1367,3 +1367,113 @@ CaesorCipher = (str,key) =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+#  [Challenge] Longest Palindromic Substring
+
+#!csharp
+
+Func<string,string> LPS = str => "";
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Longest Palindromic Substring", context =>
+{
+    var correctAns = "xyzzyx";
+    var str = "abaxyzzyxf";
+    var ans = LPS(str);
+
+    if (ans == correctAns)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 15 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 15 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 15: Longest Palindromic Substring
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+LPS = str =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+int GetPalidromeLength(string s, int left, int right)
+{        
+    while(left >=0 && right < s.Length && s[left] == s[right])
+    {
+        left--;
+        right++;
+    }
+    
+    return right - left - 1;
+}
+
+LPS = str => 
+{   
+    if(str == null || str.Length == 0)
+            return "";
+        
+    int length = 0, start = 0;
+    
+    for(int i = 0; i < str.Length; i++)
+    {
+        int oddLength = GetPalidromeLength(str, i, i);
+        int evenLength = GetPalidromeLength(str, i , i + 1);
+        int currLength = Math.Max(oddLength, evenLength);
+    
+        if(currLength > length)
+        {
+            length = currLength;
+            start = i - (length - 1) / 2;
+        }
+    }
+    
+        return str.Substring(start, length);       
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
