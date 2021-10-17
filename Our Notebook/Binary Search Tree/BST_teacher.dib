@@ -435,9 +435,9 @@ Lesson.CurrentChallenge.AddRule("Inorder Successor of given node in BST", contex
     var RightSubTree = new TreeNode(75, new TreeNode(63, new TreeNode(55, null, null), new TreeNode(70, null, null)), new TreeNode(87, null, null));
     var sample = new TreeNode(50, LeftSubTree, RightSubTree);
 
-    int key = 55;
+    int key = 70;
 
-    var correctans = 63;
+    var correctans = 75;
 
     var ans = Successor(sample, key);
     
@@ -502,6 +502,20 @@ Note: Use property of BST.
 
 All nodes in BST are unique.
 
+Eg.
+
+         50
+       /    \
+      25     75
+     / \     / \
+    13  37  63  87
+            /\
+          55  70
+
+          inorder successor of node 55 is 63.
+
+          inorder successor of node 70 is 75.
+
 #!csharp
 
 Successor = (root, key) =>
@@ -536,6 +550,157 @@ void traverse(TreeNode root, int key){
     traverse(root.right, key);
 }
 Successor = (root, key) => 
+{
+    traverse(root, key);
+    return prev;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Predecessor(Inoredr) in BST
+
+#!csharp
+
+Func<TreeNode, int, TreeNode> Predecessor = (root, key) => null;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Inorder Predecessor of given node in BST", context =>
+{   
+    // constructing Sample binary Tree
+    //         50
+    //       /    \
+    //      25     75
+    //     / \     / \
+    //    13  37  63  87
+    //            /\
+    //          55  70
+
+
+    var LeftSubTree = new TreeNode(25, new TreeNode(13, null, null), new TreeNode(37, null, null));
+    var RightSubTree = new TreeNode(75, new TreeNode(63, new TreeNode(55, null, null), new TreeNode(70, null, null)), new TreeNode(87, null, null));
+    var sample = new TreeNode(50, LeftSubTree, RightSubTree);
+
+    int key = 55;
+
+    var correctans = 50;
+
+    var ans = Predecessor(sample, key);
+    
+    if (correctans ==  ans.data)
+    {
+        context.Pass("Correct answer!");
+    }
+    else
+    {
+        context.Fail("Inorder of BST is in ascending order!");
+        
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 5 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 5 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 5 : Inorder Predecessor in BST
+
+#!markdown
+
+In this challenge, you will be given a binary search tree and the value of node in it, find the in-order predecessor of that node in the BST.
+
+If the given node has no in-order predecessor in the tree, return null.
+
+A binary search tree (BST) is a node based binary tree data structure which has the following properties : 
+
+=> The left subtree of a node contains only nodes with keys less than the node’s key. 
+
+=> The right subtree of a node contains only nodes with keys greater than the node’s key.
+
+=> Both the left and right subtrees must also be binary search trees.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `Predecessor`. The lambda should have type `Func<TreeNode, int, TreeNode>`.
+
+It should return inorder predecessor of the given node.
+
+Note: Use property of BST.
+
+All nodes in BST are unique.
+
+Eg.
+
+         50
+       /    \
+      25     75
+     / \     / \
+    13  37  63  87
+            /\
+          55  70
+
+          inorder predecessor of node 55 is 50.
+
+          inorder predecessor of node 70 is 63.
+          
+
+#!csharp
+
+Predecessor = (root, key) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+TreeNode prev = null;
+
+void traverse(TreeNode root, int key){
+    if(root == null){
+        return;
+    }
+    
+    traverse(root.left, key);
+
+    if(root.data < key){
+        prev = root;
+    }else{
+        return;
+    }
+
+    traverse(root.right, key);
+}
+Predecessor = (root, key) => 
 {
     traverse(root, key);
     return prev;
