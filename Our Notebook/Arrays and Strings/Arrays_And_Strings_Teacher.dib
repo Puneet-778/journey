@@ -500,6 +500,611 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Sorted Squared Array
+
+#!csharp
+
+Func<int[],int[]> SortedSquared = inputArray => new int[inputArray.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Sorted Squared array", context =>
+{
+    var correctAns = new int[]{0,1,9,9,16,25,64,81,121};
+    var inputArray = new int[]{-9,-3,-1,0,3,4,5,8,11};
+    var ans = SortedSquared(inputArray);
+
+    if (correctAns.Length == ans.Length && ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Correct Sorted Squared array");
+    }
+    else
+    {
+        context.Fail("Incorrect Sorted Squared array", 
+        "Use two pointers to keep track of the smallest and the largest values in the input array. Compare the absolute value of these smallest and largest values, square the larger absolute value, and place the square at the end of the output array, filling it up from right to left. Move the pointers accordingly,and repeat this process until the output array is filled.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 6 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 6 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 6: Sorted Squared array
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+SortedSquared = inputArray =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+SortedSquared = array=> 
+{   
+    int[] sortedSquares = new int[array.Length];
+    int smallerValueIdx = 0;
+    int largerValueIdx = array.Length - 1;
+    for(int idx = array.Length-1;idx>=0;idx--){
+        int smallerValue = array[smallerValueIdx];
+        int largerValue = array[largerValueIdx];
+        if(Math.Abs(smallerValue) > Math.Abs(largerValue)){
+            sortedSquares[idx] = smallerValue*smallerValue;
+            smallerValueIdx++;
+        }
+        else {
+            sortedSquares[idx] = largerValue*largerValue;
+            largerValueIdx--;
+        }
+    }
+    return sortedSquares;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Move Element to the end
+
+#!csharp
+
+Func<int[],int,int[]> MoveElementToEnd = (inputArray,toMove) => new int[inputArray.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Move element to the end", context =>
+{
+    var correctAns = new List<int[]>{new int[]{3,1,4,2,2,2,2,2},new int[]{4,3,1,2,2,2,2,2},new int[]{1,3,4,2,2,2,2,2},new int[]{1,4,3,2,2,2,2,2},new int[]{3,4,1,2,2,2,2,2},new int[]{4,1,3,2,2,2,2,2}};
+    var inputArray = new int[]{2,1,2,2,2,3,4,2};
+    var toMove = 2;
+    var ans = MoveElementToEnd(inputArray,toMove);
+    bool flag = false;
+    for(int i = 0; i<correctAns.Count;i++){
+        if(correctAns[i].Length == ans.Length && ans.SequenceEqual(correctAns[i])){
+            flag = true;
+            break;
+        }
+    }
+    if (flag)
+    {
+        context.Pass("Correctly moved element to the end");
+    }
+    else
+    {
+        context.Fail("Incorrectly moved element to the end", 
+        "Set two pointers at the start and the end of the array respectively. Move the right pointer inwards so long as it points to the integer to move, and move the left pointer inwards so long as it doesn't point to the integer to move. When both pointers aren't moving, swap their values in place. Repeat this process until the pointers pass each other.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 7 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 7 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 7: Move element to the end of the array
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+MoveElementToEnd = (inputArray,toMove) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+void swap(int i,int j,int[] array){
+    int temp = array[j];
+    array[j] = array[i];
+    array[i] = temp;
+}
+
+MoveElementToEnd = (array,toMove)=> 
+{   
+    int i = 0; 
+    int j = array.Length - 1;
+    while(i < j){
+        while(i<j && array[j] == toMove) j--;
+        if(array[i] == toMove)swap(i,j,array);
+        i++;
+    }
+    return array;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Array of products
+
+#!csharp
+
+Func<int[],int[]> ArrayOfProducts = array => new int[array.Length];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Array of Products", context =>
+{
+    var correctAns = new int[]{8,40,10,20};
+    var inputArray = new int[]{5,1,4,2};
+    var ans = ArrayOfProducts(inputArray);
+    if (correctAns.Length == ans.Length && correctAns.SequenceEqual(ans))
+    {
+        context.Pass("Correct Array of products");
+    }
+    else
+    {
+        context.Fail("Incorrect Array of products", 
+        "For each index in the array, try calculating the product of every element to the left and the product of every element to the right. You can do this with two loops through the array: One from left to right and one from right to left. How can these products help us??");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 8 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 8 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 8: Array of products
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ArrayOfProducts = array =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ArrayOfProducts = array => 
+{   
+   int[] products = new int[array.Length];
+   int leftRunningProduct = 1;
+   for(int i=0; i<array.Length; i++){
+       products[i] = leftRunningProduct;
+       leftRunningProduct*=array[i];
+   }
+   int rightRunningProduct = 1;
+   for(int i=array.Length-1;i>=0;i--){
+       products[i] *= rightRunningProduct;
+       rightRunningProduct*=array[i];
+   }
+   return products;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Two Number Sum
+
+#!csharp
+
+Func<int[],int,IEnumerable<int>> TwoSum = (inputArray,targetSum) => new int[2];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
+{
+    var correctAns = new int[]{-1,11};
+    var array = new int[]{3,5,-4,8,11,1,-1,6};
+    var targetSum = 10;
+    var ans = TwoSum(array,targetSum);
+
+    if (ans.Count() == correctAns.Count() && ans.All(correctAns.Contains))
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Think of using Hashtables!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 9 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 9 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 9: Two number Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+TwoSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+TwoSum = (array,targetSum) => 
+{   
+	List<int> answer = new List<int>();
+	Dictionary < int, int > hashmap = new Dictionary < int, int > ();
+	
+	foreach(int x in array){
+		int reqSum = targetSum-x;
+		if(hashmap.ContainsKey(reqSum))
+			return new int[]{x,reqSum};
+		hashmap[x]=1;
+	}
+		return new int[2];
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] 3 Sum
+
+#!csharp
+
+Func<int[],int,List<int[]>> ThreeSum = (inputArray,targetSum) => new List<int[]>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Three Sum", context =>
+{
+    var correctAns = new List<int[]>(){new int[]{-8,3,5},new int[]{-8,2,6},new int[]{-6,1,5}};
+    var array = new int[]{12,3,1,2,-6,5,-8,6};
+    var targetSum = 0;
+    var ans = ThreeSum(array,targetSum);
+    bool flag = true;
+    foreach(int[] arr in ans){
+        if(!correctAns.Any(a => a.SequenceEqual(arr)))
+        {
+            flag = false;
+        }
+    }
+    if (flag)
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer",      
+        "Try sorting and traversing it once.At each number,place a left pointer on the number immediately to the right of your current number and a right pointer on the final number in the array. Check if the current Number, the left number, and the right number sum up to the target sum. Remember and keep in mind, that the array is sorted!!");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 10 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 10 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 10: Three Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+ThreeSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+ThreeSum = (array,targetSum) => 
+{   
+	Array.Sort(array);
+	List<int[]> triplets = new List<int[]>();
+	for(int i = 0; i <array.Length - 2;i++){
+		int left = i+1;
+		int right = array.Length - 1;
+		while(left < right){
+			int currentSum = array[i]+array[left]+array[right];
+			if(currentSum == targetSum){
+				int[] newTriplet = {array[i], array[left], array[right]};
+				triplets.Add(newTriplet);
+				left++;
+				right--;
+			} else if(currentSum < targetSum){
+				left++;
+			}
+			else if(currentSum > targetSum){
+				right--;
+			}
+		}
+	}
+	return triplets;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Four Sum
+
+#!csharp
+
+Func<int[],int,List<int[]>> FourSum = (inputArray,targetSum) => new List<int[]>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for Four Sum", context =>
+{
+    var correctAns = new List<int[]>(){new int[]{7,6,4,-1}, new int[]{7,6,1,2}};
+    var array = new int[]{7,6,4,-1,1,2};
+    var targetSum = 16;
+    var ans = FourSum(array,targetSum);
+    bool flag = true;
+    foreach(int[] arr in ans){
+        if(!correctAns.Any(a => a.SequenceEqual(arr)))
+        {
+            flag = false;
+        }
+    }
+    if (flag)
+    {
+        context.Pass("Correct Answer, Jumping to the String section");
+    }
+    else
+    {
+        context.Fail("Wrong answer",      
+        "Two kinds of solutions are possible, either you can extend the approach of Three sum question, or what we can do is: Calculate the sums of pair of numbers in the array. Then assuming that you've stored all of these sums in a hashtable, you can fairly easily find which two sums can be paired to add up to the target sum: the numbers summing up to these two sums constitute for valid quadruplets; you just have to make sure that no number was used to generate both of the two sums.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 11 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 11 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 11: Four Sum
+
+#!markdown
+
+XYZ
+
+#!csharp
+
+FourSum = (array,targetSum) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+FourSum = (array,targetSum) => 
+{   
+	Dictionary<int,List<int[]>> allPairSums = new Dictionary<int,List<int[]>>();
+	List<int[]> quadruplets = new List<int[]>();
+	for(int i=1;i<array.Length-1;i++){
+		for(int j = i+1;j<array.Length;j++){
+			int currentSum = array[i]+array[j];
+			int difference = targetSum - currentSum;
+			if(allPairSums.ContainsKey(difference)){
+				foreach(int[] pair in allPairSums[difference]){
+					int[] newQuadruplet = {pair[0], pair[1],array[i],array[j]};
+					quadruplets.Add(newQuadruplet);
+				}
+			}
+		}
+		for(int k = 0;k<i;k++){
+			int currentSum = array[k] + array[i];
+			int[] pair = {array[k], array[i]};
+			if(!allPairSums.ContainsKey(currentSum)){
+				List<int[]> pairGroup = new List<int[]>();
+				pairGroup.Add(pair);
+				allPairSums.Add(currentSum,pairGroup);
+			}
+			else allPairSums[currentSum].Add(pair);
+		}
+	}
+	return quadruplets;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Count vowels and consonants
 
 #!csharp
@@ -534,12 +1139,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 1 completed!");
+        context.SetMessage("Challenge 12 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 1 not complete");
+        context.SetMessage("Challenge 12 not complete");
     }
 });
 
@@ -549,7 +1154,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 1:  Count the total number of Vowels and Consonants present in the string
+# Challenge 12:  Count the total number of Vowels and Consonants present in the string
 
 #!markdown
 
@@ -623,12 +1228,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 2 completed!");
+        context.SetMessage("Challenge 13 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 2 not complete");
+        context.SetMessage("Challenge 13 not complete");
     }
 });
 
@@ -638,7 +1243,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 2: Check of the given string is Palindrome
+# Challenge 13: Check of the given string is Palindrome
 
 #!markdown
 
@@ -710,12 +1315,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
     
     if (total == numPassed)
     {
-        context.SetMessage("Challenge 3 completed!");
+        context.SetMessage("Challenge 14 completed!");
         await context.StartNextChallengeAsync();
     }
     else
     {
-        context.SetMessage("Challenge 3 not complete");
+        context.SetMessage("Challenge 14 not complete");
     }
 });
 
@@ -725,7 +1330,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 3: Caesar Cipher Encryption
+# Challenge 14: Caesar Cipher Encryption
 
 #!markdown
 
@@ -757,207 +1362,6 @@ CaesorCipher = (str,key) =>
         output.Append(c);
     }
     return output.ToString();
-};
-
-#!csharp
-
-Lesson.ResetChallenge();
-
-#!markdown
-
-# [Challenge] Two Number Sum
-
-#!csharp
-
-Func<int[],int,IEnumerable<int>> TwoSum = (inputArray,targetSum) => new int[2];
-
-#!csharp
-
-Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
-{
-    var correctAns = new int[]{-1,11};
-    var array = new int[]{3,5,-4,8,11,1,-1,6};
-    var targetSum = 10;
-    var ans = TwoSum(array,targetSum);
-
-    if (ans.Count() == correctAns.Count() && ans.All(correctAns.Contains))
-    {
-        context.Pass("Correct Answer");
-    }
-    else
-    {
-        context.Fail("Wrong answer", 
-        "Think of using Hashtables!!");
-    }
-});
-
-#!csharp
-
-Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
-{
-    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
-    var total = context.RuleEvaluations.Count();
-    
-    if (total == numPassed)
-    {
-        context.SetMessage("Challenge 4 completed!");
-        await context.StartNextChallengeAsync();
-    }
-    else
-    {
-        context.SetMessage("Challenge 4 not complete");
-    }
-});
-
-#!markdown
-
-# [Question]
-
-#!markdown
-
-# Challenge 4: Two number Sum
-
-#!markdown
-
-XYZ
-
-#!csharp
-
-TwoSum = (array,targetSum) =>
-{
-    throw new NotImplementedException(); // write your answer here
-};
-
-#!markdown
-
-# [Scratchpad]
-
-#!csharp
-
-#!model-answer
-// this should pass
-
-TwoSum = (array,targetSum) => 
-{   
-	List<int> answer = new List<int>();
-	Dictionary < int, int > hashmap = new Dictionary < int, int > ();
-	
-	foreach(int x in array){
-		int reqSum = targetSum-x;
-		if(hashmap.ContainsKey(reqSum))
-			return new int[]{x,reqSum};
-		hashmap[x]=1;
-	}
-		return new int[2];
-};
-
-#!csharp
-
-Lesson.ResetChallenge();
-
-#!markdown
-
-# [Challenge] 3 Sum
-
-#!csharp
-
-Func<int[],int,List<int[]>> ThreeSum = (inputArray,targetSum) => new List<int[]>();
-
-#!csharp
-
-Lesson.CurrentChallenge.AddRule("Checking for Two Sum", context =>
-{
-    var correctAns = new List<int[]>(){new int[]{-8,3,5},new int[]{-8,2,6},new int[]{-6,1,5}};
-    var array = new int[]{12,3,1,2,-6,5,-8,6};
-    var targetSum = 0;
-    var ans = ThreeSum(array,targetSum);
-    bool flag = true;
-    foreach(int[] arr in ans){
-        if(!correctAns.Any(a => a.SequenceEqual(arr)))
-        {
-            flag = false;
-        }
-    }
-    if (flag)
-    {
-        context.Pass("Correct Answer");
-    }
-    else
-    {
-        context.Fail("Wrong answer",      
-        "Try sorting and traversing it once.At each number,place a left pointer on the number immediately to the right of your current number and a right pointer on the final number in the array. Check if the current Number, the left number, and the right number sum up to the target sum. Remember and keep in mind, that the array is sorted!!");
-    }
-});
-
-#!csharp
-
-Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
-{
-    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
-    var total = context.RuleEvaluations.Count();
-    
-    if (total == numPassed)
-    {
-        context.SetMessage("Challenge 5 completed!");
-        await context.StartNextChallengeAsync();
-    }
-    else
-    {
-        context.SetMessage("Challenge 5 not complete");
-    }
-});
-
-#!markdown
-
-# [Question]
-
-#!markdown
-
-# Challenge 5: Three Sum
-
-#!markdown
-
-XYZ
-
-#!csharp
-
-ThreeSum = (array,targetSum) =>
-{
-    throw new NotImplementedException(); // write your answer here
-};
-
-#!markdown
-
-# [Scratchpad]
-
-#!csharp
-
-#!model-answer
-// this should pass
-
-ThreeSum = (array,targetSum) => 
-{   
-	Array.Sort(array);
-	List<int[]> triplets = new List<int[]>();
-	for(int i = 0; i <array.Length - 2;i++){
-		int left = i+1;
-		int right = array.Length - 1;
-		while(left < right){
-			int currentSum = array[i]+array[left]+array[right];
-			if(currentSum == targetSum){
-				int[] newTriplet = {array[i], array[left], array[right]};
-				triplets.Add(newTriplet);
-				left++;
-				right--;
-			} else if(currentSum < targetSum){
-				left++;
-			}
-			else if(currentSum > targetSum){
-				right--;
-			}
-		}
-	}
-	return triplets;
 };
 
 #!csharp

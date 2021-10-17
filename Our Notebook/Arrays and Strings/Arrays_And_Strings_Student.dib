@@ -1,0 +1,7 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+
+#!csharp
+
+#!start-lesson --from-file "Arrays_And_Strings_Teacher.dib"
