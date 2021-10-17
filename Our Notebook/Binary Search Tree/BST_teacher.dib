@@ -62,7 +62,7 @@ Lesson.CurrentChallenge.AddRule("Checking whether given Binary tree is BST or no
     }
     else
     {
-        context.Fail("Remember : Both the left and right subtrees must also be binary search trees.");
+        context.Fail("Incorrect answer","Remember : Both the left and right subtrees must also be binary search trees.");
         
     }
 });
@@ -189,7 +189,7 @@ Lesson.CurrentChallenge.AddRule("Searching in Binary Search Tree", context =>
     }
     else
     {
-        context.Fail("Use property of BST");
+        context.Fail("Incorrect answer","Remember : Properties of BST");
         
     }
 });
@@ -318,7 +318,7 @@ Lesson.CurrentChallenge.AddRule("LCA of two nodes in BST", context =>
     }
     else
     {
-        context.Fail("Use property of BST");
+        context.Fail("Incorrect answer","Remember : Properties of BST");
         
     }
 });
@@ -447,7 +447,7 @@ Lesson.CurrentChallenge.AddRule("Inorder Successor of given node in BST", contex
     }
     else
     {
-        context.Fail("Inorder of BST is in ascending order!");
+        context.Fail("Incorrect answer", "Remember : Inorder of BST is in ascending order!");
         
     }
 });
@@ -597,7 +597,7 @@ Lesson.CurrentChallenge.AddRule("Inorder Predecessor of given node in BST", cont
     }
     else
     {
-        context.Fail("Inorder of BST is in ascending order!");
+        context.Fail("Incorrect answer", "Remember : Inorder of BST is in ascending order!");
         
     }
 });

@@ -561,3 +561,115 @@ CheckIfPrime = num =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Prime Numbers upto N
+
+#!csharp
+
+Func<int, IEnumerable<int>> AllPrimes = num => Enumerable.Empty<int>();
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Finding all prime numbers upto N", context =>
+{
+    int N = 100;
+
+    var correctAns = new int[]{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
+
+    var ans = AllPrimes(N);
+
+    if (correctAns.SequenceEqual(ans))
+    {
+        context.Pass("Correct Answer");
+    }
+    else
+    {
+        context.Fail("Wrong answer", 
+        "Remember : Prime number is a positive natural number that has only two positive natural number divisors - one and the number itself.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+{
+    var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+    var total = context.RuleEvaluations.Count();
+    
+    if (total == numPassed)
+    {
+        context.SetMessage("Challenge 7 completed!");
+        await context.StartNextChallengeAsync();
+    }
+    else
+    {
+        context.SetMessage("Challenge 7 not complete");
+    }
+});
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 7 : Print all prime numbers less than or equal to N.
+
+#!markdown
+
+In this challenge, you will be given a number N and your task is to print all prime numbers less than or equal to N.
+
+Prime number is a positive natural number that has only two positive natural number divisors - one and the number itself.
+
+Your will write your answer as a lambda and assign it to `AllPrimes`. The lambda should have type `Func<int, IEnumerable<int>>`.
+
+It should return list of values containing all prime numbers upto N.
+
+Note: Can you solve it in complexity less than N*N ?          
+
+#!csharp
+
+AllPrimes = N =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+AllPrimes = N => 
+{   
+    var ans = new List<int>();
+
+    Boolean[] vis = new Boolean[N + 1];
+
+    for(int i = 2;i <= N; i++){
+        if(vis[i] == false){
+            for(int j = i*i; j <= N; j++){
+                if(j % i == 0){
+                    vis[j] = true;
+                }
+            }
+        }
+    }
+
+    for(int i = 2;i <= N;i++){
+        if(vis[i] == false){
+            ans.Add(i);
+        }
+    }
+
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
