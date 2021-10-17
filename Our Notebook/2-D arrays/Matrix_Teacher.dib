@@ -354,7 +354,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 In this challenge, you will be writing an algorithm for rotating matrix by 90 degree clockwise. 
 
-Your will write your answer as a lambda and assign it to `Roatate`. The lambda should have type `Func<int[,], int[,]> `.
+Your will write your answer as a lambda and assign it to `Rotate`. The lambda should have type `Func<int[,], int[,]> `.
 
 It should return a 90 degree clockwise rotated matrix.
 
@@ -387,6 +387,145 @@ Rotate = (mat1) =>
             ans[i,j] = mat1[i, j];
     }
 
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Saddle point of Matrix
+
+#!csharp
+
+Func<int[,], int> Saddle = (mat1) => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Saddle point of Matrix", context =>
+{   
+    int[,] mat1 = new int[,]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+    // int[,] mat1 = new int[,]{{1, 2, 3},
+    //                          {4, 5, 6},
+    //                         {10, 18, 4}};
+
+    int correctans = 7;
+    
+    int ans = Saddle(mat1);
+
+    if(ans == correctans){
+        context.Pass("Correct answer");
+    }else{
+        context.Fail("Wrong answer","Check definition of saddle point");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 4 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 4 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 4 : Find Saddle point of Matrix.
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for finding saddle point of a N*N matrix. 
+
+A saddle point is an element of the matrix such that it is the minimum element in its row and maximum in its column. 
+
+Your will write your answer as a lambda and assign it to `Saddle`. The lambda should have type `Func<int[,], int> `.
+
+It should return saddle point of matrix.
+
+Eg.
+
+Input: 
+
+Mat[3][3] = { {1, 2, 3},
+                  {4, 5, 6},
+                  {7, 8, 9}}
+
+Output: 7
+
+7 is minimum in its row and maximum in its column.
+
+Input: Mat[3][3] = {{1, 2, 3},
+                    {4, 5, 6},
+                    {10, 18, 4}}
+                    
+Output: -1 (No saddle point)
+
+#!csharp
+
+Saddle = (mat1) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Saddle = (mat) => 
+{
+    int n = mat.GetLength(0);
+
+    int ans = -1;
+
+    for (int i = 0; i < n; i++)
+        {
+
+            int minr = mat[i,0], colidx = 0;
+
+            for (int j = 1; j < n; j++)
+            {
+                if (minr > mat[i, j])
+                {
+                    minr = mat[i, j];
+                    colidx = j;
+                }
+            }
+            int k;
+            for (k = 0; k < n; k++){
+                if (minr < mat[k, colidx])
+                    break;
+            }
+                
+            if (k == n)
+            {
+               ans = minr;
+               return ans;
+            }
+        }
+      
+    // If Saddle Point not found
     return ans;
 };
 
