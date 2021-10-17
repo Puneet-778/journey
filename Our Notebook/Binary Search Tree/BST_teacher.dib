@@ -150,3 +150,131 @@ ValidateBST = root =>
 #!csharp
 
 Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Search in Binary Search Tree
+
+#!csharp
+
+Func<TreeNode,int, Boolean> SearchBST = (root, key) => false;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Searching in Binary Search Tree", context =>
+{   
+    // constructing Sample binary Tree
+    //         50
+    //       /    \
+    //      25     75
+    //     / \     / \
+    //    13  37  63  87
+    //            /\
+    //          55  70
+
+
+    var LeftSubTree = new TreeNode(25, new TreeNode(13, null, null), new TreeNode(37, null, null));
+    var RightSubTree = new TreeNode(75, new TreeNode(63, new TreeNode(55, null, null), new TreeNode(70, null, null)), new TreeNode(87, null, null));
+    var sample = new TreeNode(50, LeftSubTree, RightSubTree);
+
+    int key = 63;
+
+    var correctans = true;
+
+    var ans = SearchBST(sample, key);
+    
+    if (correctans ==  ans)
+    {
+        context.Pass("Correct answer!");
+    }
+    else
+    {
+        context.Fail("Use property of BST");
+        
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 2 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 2 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 2 : Search a given key in BST
+
+#!markdown
+
+In this challenge, you will be writing an algorithm to check whether a given key is present in binary search tree or not. 
+
+A binary search tree (BST) is a node based binary tree data structure which has the following properties : 
+
+=> The left subtree of a node contains only nodes with keys less than the node’s key. 
+
+=> The right subtree of a node contains only nodes with keys greater than the node’s key.
+
+=> Both the left and right subtrees must also be binary search trees.
+
+The type you will be working with is `TreeNode`. It represents the root node of the binary tree rooted at that node. It has an integer property `data` representing the node's value. It also has the properties `left` and `right` that represents the left and right subtrees.
+
+Your will write your answer as a lambda and assign it to `SearchBST`. The lambda should have type `Func<TreeNode, int, Boolean>`.
+
+It should output true or false based on whether given key is present in BST or not.
+
+Note: Use property of BST.
+
+#!csharp
+
+SearchBST = (root, key) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+
+SearchBST = (root, key) => 
+{
+   if(root == null){
+        return false;
+   }
+
+   if(root.data == key){
+       return true;
+   }
+
+   if(key < root.data){
+       return SearchBST(root.left, key);
+   }
+
+   return SearchBST(root.right, key);
+    
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
