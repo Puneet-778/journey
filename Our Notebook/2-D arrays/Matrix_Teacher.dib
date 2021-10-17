@@ -1,0 +1,151 @@
+#!csharp
+
+#r "nuget: Interactive.Journey"
+#r "nuget: Interactive.Extension.ImageSharp, *-*"
+
+#!csharp
+
+using Microsoft.DotNet.Interactive.Journey;
+using Microsoft.DotNet.Interactive;
+using Microsoft.DotNet.Interactive.Commands;
+using Microsoft.DotNet.Interactive.CSharp;
+using Microsoft.DotNet.Interactive.Events;
+using SixLabors.ImageSharp;
+using System.IO;
+
+#!markdown
+
+# [Challenge]Matrix Multiplication
+
+#!csharp
+
+Func<int[,], int[,], int[,]> Multiply = (mat1, mat2) => new int[3,3];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Matrix Multiplication", context =>
+{   
+    // int[,] mat1 = new int[,]{
+    //     {1, 1, 1, 1},
+    //     {2, 2, 2, 2},
+    //     {3, 3, 3, 3},
+    //     {4, 4, 4, 4}
+    // };
+
+    // int[,] mat2 = new int[,]{
+    //     {1, 1, 1, 1},
+    //     {2, 2, 2, 2},
+    //     {3, 3, 3, 3},
+    //     {4, 4, 4, 4}
+    // };
+
+    int[,] mat1 = new int[,]{
+        {1, 1},
+        {2, 2},
+        {3, 3}
+    };
+
+    int[,] mat2 = new int[,]{
+        {1, 1, 1},
+        {2, 2, 2}
+    };
+
+    int[,] correctans = new int[,]{
+       {3, 3, 3},
+       {6, 6, 6},
+       {9, 9, 9}
+    };
+    
+    // 10    10    10    10    
+    // 20    20    20    20    
+    // 30    30    30    30    
+    // 40    40    40    40 
+
+    // int[,] correctans = new int[,]{{10, 10, 10, 10},{20, 20, 20, 20},{30, 30, 30, 30},{40, 40, 40, 40}};
+
+    int[,] ans = Multiply(mat1, mat2);
+
+    for(int i = 0;i < correctans.GetLength(0); i++){
+        for(int j = 0;j < correctans.GetLength(1); j++){
+            if(correctans[i,j] != ans[i,j]){
+                context.Fail("Incorrect answer");
+            }
+        }
+    }
+
+    context.Pass("Correct answer");
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 1 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 1 not complete");
+        }
+    });
+
+#!markdown
+
+## [Question]
+
+#!markdown
+
+# Challenge 1 : Matrix Multiplication
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for multiplying two given matrices. 
+
+Your will write your answer as a lambda and assign it to `Multiply`. The lambda should have type `Func<int[][], int[][], int[][]>`.
+
+It should return a 2-D matrix which is the result of multiplication of two given matrices.
+
+(Note : It is always possible to multiply two matrices i.e, columns of first matrix is equal to number of rows of second matrix).
+
+#!csharp
+
+Multiply = (mat1, mat2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+## [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Multiply = (mat1, mat2) => 
+{
+    int n = mat1.GetLength(0);
+    int m = mat2.GetLength(1);
+
+    int[,] ans = new int[n,m];
+
+    for(int i = 0;i < n; i++){
+        for(int j = 0; j < m;j++){
+            for(int k = 0;k < mat1.GetLength(1); k++){
+                ans[i,j] += mat1[i,k] * mat2[k,j];
+            }
+        }
+    }
+
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
