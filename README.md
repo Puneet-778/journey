@@ -1,4 +1,4 @@
-![Athena](https://user-images.githubusercontent.com/63799563/137751992-2513d686-a294-461f-846f-97a396dec20c.gif)
+![athena](https://user-images.githubusercontent.com/63799563/137760590-82114ae2-cca8-488d-ba94-ad8e0a9d00b9.gif)
 
 # Journey
 Journey is a learning experience running on [.NET Interactive notebooks](https://github.com/dotnet/interactive) where teachers can design a challenge-by-challenge path for students. To create a student's journey, a teacher will create a lesson in which they create challenges, provide customized feedback, and define rules to continue.
