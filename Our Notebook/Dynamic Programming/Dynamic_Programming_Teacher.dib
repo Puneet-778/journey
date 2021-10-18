@@ -75,7 +75,7 @@ In this challenge, you will be writing an algorithm for Finding the nth Fibonacc
 
 A Fibonacci series is a series of numbers in which each number (Fibonacci number) is the sum of the two preceding numbers. The simplest is the series 0, 1, 1, 2, 3, 5, 8, etc.
 
-The type you will be working with is `n`. It represents the nth Fibonacci term in the fibonacci series.
+The type you will be working with is `int`. It represents the nth Fibonacci term in the fibonacci series.
 
 Your will write your answer as a lambda and assign it to `Fibonacci`. The lambda should have type `Func<int , int>`.
 
@@ -182,7 +182,7 @@ In this challenge, you will be writing an algorithm for Finding the nth Tribonac
 
 A Tribonacci series is a series of numbers in which each number (Tribonacci number) is the sum of the two preceding numbers. The simplest is the series 0, 1, 1, 2, 4, 7, 13, etc.
 
-The type you will be working with is `n`. It represents the nth Tribonacci term in the Tribonacci series.
+The type you will be working with is `int`. It represents the nth Tribonacci term in the Tribonacci series.
 
 Your will write your answer as a lambda and assign it to `Tribonacci`. The lambda should have type `Func<int , int>`.
 
