@@ -23,7 +23,7 @@ Lesson.ResetChallenge();
 
 #!csharp
 
-Func<int, int> Fibonacci = inputArray => 0;
+Func<int, int> Fibonacci = n => 0;
 
 #!csharp
 
@@ -71,9 +71,27 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-In this challenge, you will be solving the Fibonaaci problem, but this time using the technique of Dynamic Programming. 
-A fibonacci sequence is like : 0  1 1 2 3 5 8 13 ......., where every term except the first two are the sum of the previous two terms. 
-Your answer should return the nth term of the fibonacci sequence.
+In this challenge, you will be writing an algorithm for Finding the nth Fibonacci number in the Fibonacci Series.
+
+A Fibonacci series is a series of numbers in which each number (Fibonacci number) is the sum of the two preceding numbers. The simplest is the series 0, 1, 1, 2, 3, 5, 8, etc.
+
+The type you will be working with is `n`. It represents the nth Fibonacci term in the fibonacci series.
+
+Your will write your answer as a lambda and assign it to `Fibonacci`. The lambda should have type `Func<int , int>`.
+
+It should output the nth Fibonacci number.
+
+Eg 1.
+
+      5
+        
+      Fibonacci term  : 3
+
+Eg 2.
+
+      7
+        
+      Fibonacci term : 8
 
 #!csharp
 
@@ -160,7 +178,27 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the nth Tribonacci number in the Tribonacci Series.
+
+A Tribonacci series is a series of numbers in which each number (Tribonacci number) is the sum of the two preceding numbers. The simplest is the series 0, 1, 1, 2, 4, 7, 13, etc.
+
+The type you will be working with is `n`. It represents the nth Tribonacci term in the Tribonacci series.
+
+Your will write your answer as a lambda and assign it to `Tribonacci`. The lambda should have type `Func<int , int>`.
+
+It should output the nth Tribonacci number.
+
+Eg 1.
+
+      5
+        
+      Tribonacci term  : 4
+
+Eg 2.
+
+      7
+        
+      Tribonacci term : 13
 
 #!csharp
 
@@ -248,7 +286,27 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Maximum subarray sum.
+
+A subarray is a contiguous part of array. You have to find the maximum subarray sum in the given array.
+
+The type you will be working with is `int[]`. It denotes the array that is given to you.
+
+Your will write your answer as a lambda and assign it to `MaxSubarraySum`. The lambda should have type `Func<int[] , int>`.
+
+It should output the Maximum subarray sum.
+
+Eg 1.
+
+      inputArray: [-2, -3, 4, -1, -2, 1, 5, -3]
+        
+      Maximum Subarray Sum  : 7
+
+Eg 2.
+
+      inputArray: [-2, -5, 6, -1, -3, 1, 5, -6] 
+        
+      Maximum Subarray Sum  : 8
 
 #!csharp
 
@@ -336,7 +394,29 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Minimum cost climbing stairs.
+
+You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
+
+You can either start from the step with index 0, or the step with index 1.
+
+The type you will be working with is `int[]`. It denotes the cost array that is given to you.
+
+Your will write your answer as a lambda and assign it to `MinCost`. The lambda should have type `Func<int[] , int>`.
+
+It should output the Minimum cost of climbing stairs.
+
+Eg 1.
+
+      inputArray: [10,15,20]
+        
+      Minimum cost  : 15
+
+Eg 2.
+
+      inputArray: [1,100,1,1,1,100,1,1,100,1] 
+        
+      Maximum Subarray Sum  : 6
 
 #!csharp
 
@@ -380,7 +460,7 @@ Func<int,int, int> FiboGenKSteps = (topFloor,maxSteps) => 0;
 
 Lesson.CurrentChallenge.AddRule("Checking for total ways to reach top floor with K steps", context =>
 {
-    var correctAns = 7;
+    var correctAns = 5;
     var topFloor = 5;
     var maxSteps = 3;
     var ans = FiboGenKSteps(topFloor,maxSteps);
@@ -423,7 +503,29 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Total ways to climb topmost stair with atmost k jumps.
+
+Given N number of stairs. Also given the number of steps that one can cover at most in one leap (K). The task is to find the number of possible ways one (only consider Combinations) can climb to the top of the building in K leaps or less from the ground floor.
+
+The type you will be working with is/are `int`. It denotes the number of stairs and maximum steps that you can take in single jump.
+
+Your will write your answer as a lambda and assign it to `FiboGenKSteps`. The lambda should have type `Func<int, int , int>`.
+
+It should output the Number of ways of reaching the top floor.
+
+Eg 1.
+
+      N = 5, k = 3
+        
+      Total ways  : 7
+      
+      Explanation: 
+
+      Possible ways are: 1 1 1 1 1 
+                         1 1 1 2
+                         2 2 1
+                         3 2
+                         3 1 1
 
 #!csharp
 
@@ -443,17 +545,20 @@ FiboGenKSteps = (inputArray,maxSteps) =>
 
 FiboGenKSteps = (number,maxSteps) => 
 {   
-        var dp = new int[number];
-        dp[0] = 1;
-        for(int i = 1;i<number;i++){
-            dp[i] = 0;
-            for(int j = 1;j<=maxSteps;j++){
-                if(i-j>=0) dp[i]+=dp[i-j];
+    int[] dp;
+    dp = new int[number+1];
+    dp[0] = 1;
+    for (int i = 1; i <= maxSteps; i++)
+    {
+        for (int j = 0; j <= number; j++)
+        {
+            if (j >= i)
+            {
+                dp[j] += dp[j - i];
             }
         }
-        // for(int i = 0;i<number;i++)Console.WriteLine(dp[i]);
-        Console.WriteLine(dp[number-1]);
-        return dp[number-1];
+    }
+    return dp[number];
 };
 
 #!csharp
@@ -515,7 +620,23 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Minimum cost to climb topmost stair with atmost k jumps.
+
+Given that one will start from the 0-the step, the task is to find the minimum cost to reach the top of the floor(N+1) by climbing N stairs with atmost K steps at a time. 
+
+The type you will be working with is/are `int[] and int`. It denotes the cost of each step and maximum step that you can take.
+
+Your will write your answer as a lambda and assign it to `MinCostKSteps`. The lambda should have type `Func<int[], int , int>`.
+
+It should output the Minimum cost of reaching the top floor.
+
+Eg 1.
+
+      cost = [0,3,5,6,7,1,5,4,3,0]
+      maxSteps = 2
+
+      Minimum cost: 14
+      
 
 #!csharp
 
@@ -609,7 +730,23 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Minimum cost path taken to climb topmost stair with atmost k jumps.
+
+Given that one will start from the 0-the step, the task is to find the minimum cost path(indices of the element) take to reach the top of the floor(N+1) by climbing N stairs with atmost K steps at a time. 
+
+The type you will be working with is/are `int[] and int`. It denotes the cost of each step and maximum step that you can take.
+
+Your will write your answer as a lambda and assign it to `MinCostPath`. The lambda should have type `Func<int[], int , int[]>`.
+
+It should output the Minimum cost of reaching the top floor.
+
+Eg 1.
+
+      cost = [0,3,5,6,7,1,5,4,3,0]
+      maxSteps = 2
+
+      Minimum cost path: [0,1,3,5,7,9]
+      
 
 #!csharp
 
@@ -682,7 +819,7 @@ Lesson.CurrentChallenge.AddRule("Checking for fewest number of coins to make tot
     else
     {
         context.Fail("Incorrect Minimum number coins.",
-        "Try Dynamic programming");
+        "Think of Dynamic programming, try building an array of minimum number of coins needed to make change for all amounts between 0 and n inclusive. Note that no coins are needed to ake change for 0: in order to make change for 0, you do not need to use any coins.");
     }
 });
 
@@ -714,7 +851,30 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Minimum number of coins required to make the total amount.
+
+Given a value amount, if we want to make change for `amount` cents, and we have infinite supply of each of C = { C1, C2, .. , Cm} valued coins, what is the minimum number of coins to make the change? If it’s not possible to make change, print -1.
+
+The type you will be working with is/are `int[] and int`. It denotes the different types of coins and total amount that you have to make.
+
+Your will write your answer as a lambda and assign it to `MinCoinChange`. The lambda should have type `Func<int[], int , int[]>`.
+
+It should output the Minimum number of coins.
+
+Eg 1.
+
+      coins[] = [25,10,5]
+      amount = 30
+
+      Minimum number of coins: 2
+
+Eg 2.
+
+      coins[] = [9, 6, 5, 1]
+      amount = 11
+
+      Minimum number of coins: 2
+      
 
 #!csharp
 
@@ -810,7 +970,24 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the maximum total value in the knapsack.
+
+Given weights and values of n items, put these items in a knapsack of capacity W to get the maximum total value in the knapsack. In other words, given two integer arrays val[0..n-1] and wt[0..n-1] which represent values and weights associated with n items respectively. Also given an integer W which represents knapsack capacity, find out the maximum value subset of val[] such that sum of the weights of this subset is smaller than or equal to W. `You cannot break an item, either pick the complete item or don’t pick it (0-1 property)`.
+
+The type you will be working with is/are `int[] and int`. It denotes the weight and value arrays and the maximum capacity of the knapsack.
+
+Your will write your answer as a lambda and assign it to `Knapsack`. The lambda should have type `Func<int[], int[] , int , int>`.
+
+It should output the maximum total value in the knapsack.
+
+Eg 1.
+
+      value[] = [60,100,120]
+      weight[] = [10,20,30]
+      W = 50
+      
+      maximum total value: 220
+      
 
 #!csharp
 
@@ -906,7 +1083,32 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Total number of coin change ways.
+
+Given a value N, if we want to make change for N cents, and we have infinite supply of each of S = { S1, S2, .. , Sm} valued coins, how many ways can we make the change? The order of coins doesn’t matter.
+
+The type you will be working with is/are `int[] and int`. It denotes the different types of coin and total amount to be made.
+
+Your will write your answer as a lambda and assign it to `TotalCoinChange`. The lambda should have type `Func<int[] , int , int>`.
+
+It should output the Total number of coin change ways.
+
+Eg 1.
+
+      coins[] = [1,2,3]
+      amount = 4
+      
+      Total ways to make change: 4
+      Explanation: {1,1,1,1},{1,1,2},{2,2},{1,3}
+
+Eg 2.
+
+      coins[] = [2,5,3,6]
+      amount = 10
+      
+      Total ways to make change: 5
+      Explanation: {2,2,2,2,2}, {2,2,3,3}, {2,2,6}, {2,3,5} and {5,5}
+      
 
 #!csharp
 
@@ -976,7 +1178,7 @@ Lesson.CurrentChallenge.AddRule("Checking for Longest common subsequence", conte
     else
     {
         context.Fail("Incorrect LCS length.",
-        "Use 2D Dynamic programming with both the dimensions as the length of strings");
+        "Try building a 2D array of the longest common subsequences of substrings pair of the input strings. Let the rows of the array represent substrings of the second input string str2. Let the first row represent the empty string. Let each row i thereafter represent the substring of str2 from 0 to i, with i excluded. Let the columns similarly represnt the first input string str1");
     }
 });
 
@@ -1008,7 +1210,33 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Longest common subsequence of two strings.
+
+Given two strings `text1` and `text2`, return the length of their `longest common subsequence`. If there is no common subsequence, return 0.
+
+A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.
+
+For example, `"ace" is a subsequence of "abcde"`.
+A common subsequence of two strings is a subsequence that is common to both strings.
+
+The type you will be working with is/are `string`. It denotes both the given strings.
+
+Your will write your answer as a lambda and assign it to `LCS`. The lambda should have type `Func<string,string,int>`.
+
+It should output the Longest common subsequence of the given two strings.
+
+Eg 1.
+
+      Input: text1 = "abcde", text2 = "ace" 
+      Output: 3  
+      Explanation: The longest common subsequence is "ace" and its length is 3.
+
+Eg 2.
+
+      Input: text1 = "abc", text2 = "abc"
+      Output: 3
+      Explanation: The longest common subsequence is "abc" and its length is 3.
+      
 
 #!csharp
 
@@ -1103,7 +1331,29 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm for Finding the Longest Increasing subsequence.
+
+Given an integer array nums, return the length of the longest strictly increasing subsequence.
+
+A subsequence is a sequence that can be derived from an array by deleting some or no elements without changing the order of the remaining elements. For example, `[3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7]`.
+
+The type you will be working with is/are `int[]`. It denotes the given array.
+
+Your will write your answer as a lambda and assign it to `LIS`. The lambda should have type `Func<string,string,int>`.
+
+It should output the length of the Longest Increasing subsequence.
+
+Eg 1.
+
+      Input: nums = [10,9,2,5,3,7,101,18]
+      Output: 4
+      Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+
+Eg 2.
+
+      Input: nums = [0,1,0,3,2,3]
+      Output: 4
+      
 
 #!csharp
 
@@ -1136,3 +1386,7 @@ LIS = nums =>
         }
         return maxi;
 };
+
+#!csharp
+
+Lesson.ResetChallenge();
