@@ -301,6 +301,127 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Length of longest valid substring
+
+#!csharp
+
+Func<string, int> LongestValidParenthesisLength = str => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Length of longest valid parenthesis", context =>
+{   
+  
+    string input = "()(()))))";
+    
+    var correctAns = 6;
+
+    var ans = LongestValidParenthesisLength(input);
+
+    if (correctAns == ans)
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer","Think of using stacks");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 3 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 3 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 3: Length of longest valid substring
+
+#!markdown
+
+In this challenge, you will be given an array of integers, you have to write an algorithm to return the length of longest valid parenthesis substring.
+
+Given a string consisting of opening and closing parenthesis, find the length of the longest valid parenthesis substring.
+
+Your will write your answer as a lambda and assign it to `LongestValidParenthesisLength`. The lambda should have type `Func<string, int>`.
+
+It should return an integer, representing the length of the longest valid parenthesis string. 
+
+    Eg 1. : 
+
+        Input : ((()
+        Output : 2
+        Explanation : ()
+
+    Eg 2. : 
+
+        Input: )()())
+        Output : 4
+        Explanation: ()() 
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+LongestValidParenthesisLength = str => 
+{   
+        int n = str.Length;
+        Stack<int> stk = new Stack<int>();
+        stk.Push(-1);
+        int result = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (str[i] == '(') {
+                stk.Push(i);
+            }
+ 
+            else 
+            {
+                if (stk.Count > 0)
+                    stk.Pop();
+                if (stk.Count > 0)
+                {
+                    result
+                        = Math.Max(result,
+                                   i - stk.Peek());
+                }
+                else {
+                    stk.Push(i);
+                }
+            }
+        }
+ 
+        return result;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Next Greater Element to the right.
 
 #!csharp
@@ -337,12 +458,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 3 completed! Proceed to next Challenge.");
+            context.SetMessage("Challenge 4 completed! Proceed to next Challenge.");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 3 not complete");
+            context.SetMessage("Challenge 4 not complete");
         }
     });
 
@@ -352,7 +473,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 3 : Next Greater Element on right
+# Challenge 4 : Next Greater Element on right
 
 #!markdown
 
@@ -456,12 +577,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 4 completed! Proceed to next Challenge.");
+            context.SetMessage("Challenge 5 completed! Proceed to next Challenge.");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 4 not complete");
+            context.SetMessage("Challenge 5 not complete");
         }
     });
 
@@ -471,7 +592,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 4: Next greater element to the left
+# Challenge 5: Next greater element to the left
 
 #!markdown
 
@@ -531,132 +652,6 @@ NGL = arr =>
                 Stack.Push(i);
         }
         return ans;
-};
-
-#!csharp
-
-Lesson.ResetChallenge();
-
-#!markdown
-
-# [Challenge] Largest rectangle under Skyline
-
-#!csharp
-
-Func<int[], int> LargestRectangle = arr => 0;
-
-#!csharp
-
-Lesson.CurrentChallenge.AddRule("Checking for largest rectangle under skyline", context =>
-{   
-  
-    int[] input = {2,1,5,6,2,3};
-    
-    int correctAns = 10;
-
-    int ans = LargestRectangle(input);
-
-    if (correctAns == ans)
-    {
-        context.Pass("Correct answer");
-    }
-    else
-    {
-        context.Fail("Incorrect answer","There's a way to solve this problem in linear 0(n) time by using a stack(Use your knowledge of previous two problems). When should you push and pop buildings on and off the stack if you were to loop through the buildings from left to right? Try to think of each building on the stack as a pillar of a potential height.");
-    }
-});
-
-#!csharp
-
-Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
-    {
-        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
-        var total = context.RuleEvaluations.Count();
-        // var history = context.SubmissionHistory ....
-        if (total == numPassed)
-        {
-            context.SetMessage("Challenge 5 completed! Proceed to next Challenge.");
-            await context.StartNextChallengeAsync();
-        }
-        else
-        {
-            context.SetMessage("Challenge 5 not complete");
-        }
-    });
-
-#!markdown
-
-# [Question]
-
-#!markdown
-
-# Challenge 5: Largest Rectangle under Skyline
-
-#!markdown
-
-In this challenge, you will be given an array of integers, you have to write an algorithm to find the maximum area under the skyline.
-
-Given an array of positive integers representing the heights of adjacent buildings, return the area of the largest rectangle that can be created by any number of adjacent buildings, including just one building. `Note that all buildings have the same width of 1 unit.`
-For example, given buildings = [2, 1, 2] , the area of the largest rectangle that can be created is 3,using all three buildings. Since the minimum height of the three buildings is 1 , you can create a rectangle that has a height of 1 and a width of 3 (the number of buildings). You could also create rectangles of area 2 by using only the first building or the last building, but these clearly wouldn't be the largest rectangles. Similarly, you could create rectangles of area 2 by using the first and second building
-or the second and third building.
-
-`To clarify, the width of a created rectangle is the number of buildings used to create the rectangle, and its height is the height of the smallest building used to create it.`
-
-Your will write your answer as a lambda and assign it to `LargestRectangle`. The lambda should have type `Func<int[], int>`
-
-It should return an integer representing the maximum area rectangle.
-
-    Eg 1: 
-
-        Input: heights = [2,1,5,6,2,3]
-        Output: 10
-        Explanation: The above is a histogram where width of each bar is 1.
-        The largest rectangle is by taking 5 and 6 height buildings, which has an area = 10 units.
-
-    Eg 2: 
-
-        Input: heights = [2,4]
-        Output: 4
-     
-
-#!csharp
-
-LargestRectangle = arr =>
-{
-    throw new NotImplementedException(); // write your answer here
-};
-
-#!markdown
-
-# [Scratchpad]
-
-#!csharp
-
-#!model-answer
-// this should pass
-
-LargestRectangle = heights => 
-{   
-        var st = new Stack<int>();
-        st.Push(-1);
-        int maxArea = 0;
-        int i;
-        for (i = 0; i < heights.Length; i++) {
-            while (st.Peek() != -1 && heights[st.Peek()] >= heights[i]) {
-                int h = heights[st.Pop()];
-                int w = i - st.Peek() - 1;
-                maxArea = Math.Max(maxArea, w * h);
-            }
-            st.Push(i);
-        }
-        
-        while (st.Peek() != -1) {
-            int h = heights[st.Pop()];
-            int w = i - st.Peek() - 1;
-            maxArea = Math.Max(maxArea, w * h);
-        }
-        
-        return maxArea;
 };
 
 #!csharp
@@ -781,22 +776,22 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Length of longest valid substring
+# [Challenge] Largest rectangle under Skyline
 
 #!csharp
 
-Func<string, int> LongestValidParenthesisLength = str => 0;
+Func<int[], int> LargestRectangle = arr => 0;
 
 #!csharp
 
-Lesson.CurrentChallenge.AddRule("Checking Length of longest valid parenthesis", context =>
+Lesson.CurrentChallenge.AddRule("Checking for largest rectangle under skyline", context =>
 {   
   
-    string input = "()(()))))";
+    int[] input = {2,1,5,6,2,3};
     
-    var correctAns = 6;
+    int correctAns = 10;
 
-    var ans = LongestValidParenthesisLength(input);
+    int ans = LargestRectangle(input);
 
     if (correctAns == ans)
     {
@@ -804,7 +799,7 @@ Lesson.CurrentChallenge.AddRule("Checking Length of longest valid parenthesis", 
     }
     else
     {
-        context.Fail("Incorrect answer","Think of using stacks");
+        context.Fail("Incorrect answer","There's a way to solve this problem in linear 0(n) time by using a stack(Use your knowledge of previous two problems). When should you push and pop buildings on and off the stack if you were to loop through the buildings from left to right? Try to think of each building on the stack as a pillar of a potential height.");
     }
 });
 
@@ -832,29 +827,41 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 7: Length of longest valid substring
+# Challenge 7: Largest Rectangle under Skyline
 
 #!markdown
 
-In this challenge, you will be given an array of integers, you have to write an algorithm to return the length of longest valid parenthesis substring.
+In this challenge, you will be given an array of integers, you have to write an algorithm to find the maximum area under the skyline.
 
-Given a string consisting of opening and closing parenthesis, find the length of the longest valid parenthesis substring.
+Given an array of positive integers representing the heights of adjacent buildings, return the area of the largest rectangle that can be created by any number of adjacent buildings, including just one building. `Note that all buildings have the same width of 1 unit.`
+For example, given buildings = [2, 1, 2] , the area of the largest rectangle that can be created is 3,using all three buildings. Since the minimum height of the three buildings is 1 , you can create a rectangle that has a height of 1 and a width of 3 (the number of buildings). You could also create rectangles of area 2 by using only the first building or the last building, but these clearly wouldn't be the largest rectangles. Similarly, you could create rectangles of area 2 by using the first and second building
+or the second and third building.
 
-Your will write your answer as a lambda and assign it to `LongestValidParenthesisLength`. The lambda should have type `Func<string, int>`.
+`To clarify, the width of a created rectangle is the number of buildings used to create the rectangle, and its height is the height of the smallest building used to create it.`
 
-It should return an integer, representing the length of the longest valid parenthesis string. 
+Your will write your answer as a lambda and assign it to `LargestRectangle`. The lambda should have type `Func<int[], int>`
 
-    Eg 1. : 
+It should return an integer representing the maximum area rectangle.
 
-        Input : ((()
-        Output : 2
-        Explanation : ()
+    Eg 1: 
 
-    Eg 2. : 
+        Input: heights = [2,1,5,6,2,3]
+        Output: 10
+        Explanation: The above is a histogram where width of each bar is 1.
+        The largest rectangle is by taking 5 and 6 height buildings, which has an area = 10 units.
 
-        Input: )()())
-        Output : 4
-        Explanation: ()() 
+    Eg 2: 
+
+        Input: heights = [2,4]
+        Output: 4
+     
+
+#!csharp
+
+LargestRectangle = arr =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
 
 #!markdown
 
@@ -865,35 +872,28 @@ It should return an integer, representing the length of the longest valid parent
 #!model-answer
 // this should pass
 
-LongestValidParenthesisLength = str => 
+LargestRectangle = heights => 
 {   
-        int n = str.Length;
-        Stack<int> stk = new Stack<int>();
-        stk.Push(-1);
-        int result = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (str[i] == '(') {
-                stk.Push(i);
+        var st = new Stack<int>();
+        st.Push(-1);
+        int maxArea = 0;
+        int i;
+        for (i = 0; i < heights.Length; i++) {
+            while (st.Peek() != -1 && heights[st.Peek()] >= heights[i]) {
+                int h = heights[st.Pop()];
+                int w = i - st.Peek() - 1;
+                maxArea = Math.Max(maxArea, w * h);
             }
- 
-            else 
-            {
-                if (stk.Count > 0)
-                    stk.Pop();
-                if (stk.Count > 0)
-                {
-                    result
-                        = Math.Max(result,
-                                   i - stk.Peek());
-                }
-                else {
-                    stk.Push(i);
-                }
-            }
+            st.Push(i);
         }
- 
-        return result;
+        
+        while (st.Peek() != -1) {
+            int h = heights[st.Pop()];
+            int w = i - st.Peek() - 1;
+            maxArea = Math.Max(maxArea, w * h);
+        }
+        
+        return maxArea;
 };
 
 #!csharp
