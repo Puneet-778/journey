@@ -72,7 +72,27 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing a solution ot find the counts of even and odd numbers present in the array.
+
+An even number is one which is divisible properly by 2, and odd numbers are which which are not.
+
+The type you will be working with is `int[]`. It represents the array that is given to you.
+
+Your will write your answer as a lambda and assign it to `EvenOdd`. The lambda should have type `Func<int[] , int[]>`.
+
+It should output an array of length 2, containing total odd counts and even counts.
+
+Eg 1.
+
+      arr: [1,2,3,4,5,7,11,13]
+        
+      output: [6,2]
+
+Eg 2.
+
+      arr: [10,12,33]
+        
+      output: [1,2]
 
 #!csharp
 
@@ -161,7 +181,28 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing a solution to find the maximum frequency element in an unsorted array.
+
+A maximum frequency element is one, which is present the maximum number of times in the array, if two maximum frequency elements are present, you should return the mathematically smaller one.
+
+The type you will be working with is `int[]`. It represents the array that is given to you.
+
+Your will write your answer as a lambda and assign it to `MaxFreq`. The lambda should have type `Func<int[] , int>`.
+
+It should output the maximum frequency element.
+
+      Eg 1.
+
+            arr: [4,1,3,8,4,1,1,8,2,8,10]
+            
+            output: 1
+            Explanation: 1 and 8 are present 3 number of times, but 1 is mathematically smaller.
+
+      Eg 2.
+
+            arr: [3,1,7,3]
+            
+            output: 3
 
 #!csharp
 
@@ -263,7 +304,28 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing a solution to find the maximum frequency element in an Sorted array.
+
+A maximum frequency element is one, which is present the maximum number of times in the array, if two maximum frequency elements are present, you should return the mathematically smaller one.
+
+The type you will be working with is `int[]`. It represents the array that is given to you.
+
+Your will write your answer as a lambda and assign it to `MaxFreqSorted`. The lambda should have type `Func<int[] , int>`.
+
+It should output the maximum frequency element.
+
+      Eg 1.
+
+            arr: [1,1,1,1,1,3,3,3,5,5,5,5,5,10]
+            
+            output: 1
+            Explanation: 1 and 5 are present 5 number of times, but 1 is mathematically smaller.
+
+      Eg 2.
+
+            arr: [10,10,20]
+            
+            output: 10
 
 #!csharp
 
@@ -363,7 +425,25 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to reverse the array in Place.
+
+The type you will be working with is `int[]`. It represents the array that is given to you.
+
+Your will write your answer as a lambda and assign it to `ReverseArray`. The lambda should have type `Func<int[] , int[]>`.
+
+It should output the reversed array.
+
+      Eg 1.
+
+            arr: [1,2,3,4,5]
+            
+            output: [5,4,3,2,1]
+
+      Eg 2.
+
+            arr: [8,1,4,2,13,11]
+            
+            output: [11,13,2,4,1,8]
 
 #!csharp
 
@@ -455,7 +535,34 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to left rotate the array in place.
+
+A k times left rotated array is the one whose every ith element is at (i-k)th index, and all the indexes where (i-k) < 0 are wrapped back to the end.
+
+The type you will be working with is `int[]`. It represents the array that is given to you.
+
+Your will write your answer as a lambda and assign it to `RotateArray`. The lambda should have type `Func<int[] ,int,  int[]>`.
+
+It should output the rotated array.
+
+      Eg 1.
+
+            arr: [1,2,3,4,5]
+            k : 2
+            output: [3,4,5,1,2]
+            Explanation: 
+                  First rotate: [2,3,4,5,1]
+                  Second rotate: [3,4,5,1,2]
+
+      Eg 2.
+
+            arr: [11,2,5,1]
+            k : 3
+            output: [1,11,2,5]
+            Explanation: 
+                  First rotate: [2,5,1,11]
+                  Second rotate: [5,1,11,2]
+                  Third rotate: [1,11,2,5]
 
 #!csharp
 
@@ -553,7 +660,27 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to left rotate the array in place.
+
+Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+
+The type you will be working with is `int[]`. It represents the array that is given to you.
+
+Your will write your answer as a lambda and assign it to `SortedSquared`. The lambda should have type `Func<int[] , int[]>`.
+
+It should output the sorted squared array.
+
+      Eg 1.
+
+            Input: nums = [-4,-1,0,3,10]
+            Output: [0,1,9,16,100]
+            Explanation: After squaring, the array becomes [16,1,0,9,100].
+            After sorting, it becomes [0,1,9,16,100].
+
+      Eg 2.
+
+            Input: nums = [-7,-3,2,3,11]
+            Output: [4,9,9,49,121]  
 
 #!csharp
 
@@ -657,7 +784,26 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to move all the occurences of the given element to the end of the array in place.
+
+You're given an array of integers and an integer. you have to move all instances of that integer in the array to the end of the array and return the array.
+
+
+
+The type you will be working with is `int[]` and `int`. It represents the array that is given to you and the element that has to be moved to the end.
+
+Your will write your answer as a lambda and assign it to `MoveElementToEnd`. The lambda should have type `Func<int[] , int ,int[]>`.
+
+It should output the array with all the occurences of the given element moved to the end.
+
+      Eg:
+
+            Input:
+            array = [2, 1, 2, 2, 2, 3, 4, 2]
+            toMove = 2
+
+            Output: [1, 3, 4, 2, 2, 2, 2, 2] 
+            Note: the numbers 1, 3, and 4 could be ordered differently   
 
 #!csharp
 
@@ -751,7 +897,31 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to find the array of products.
+
+Each element in the output array is equal to the product of every other number in the input array.
+
+In other words, the value at output [i] is equal to the product of every number in the input array other than input[i] .
+Note: `You're expected to solve this problem without using the division(/) operator`.
+
+
+The type you will be working with is `int[]`. It represents the array that is given to you.
+
+Your will write your answer as a lambda and assign it to `ArrayOfProducts`. The lambda should have type `Func<int[] ,int[]>`.
+
+It should output the array of products.
+
+      Eg:
+
+        Input:
+        array = [5, 1, 4, 2]
+        
+        Output: [8, 40, 10, 20]
+        Explanation: 
+          8 is equal to 1 x 4 x 2
+          40 is equal to 5 x 4 x 2
+          10 is equal to 5 x 1 x 2
+          20 is equal to 5 x 1 x 4
 
 #!csharp
 
@@ -845,7 +1015,28 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to find the two number sum.
+
+If any two numbers in the input array sum up to the target sum,you should return them in an array, in any order. If no two numbers sum up to the target sum, you should return an empty array.
+
+Note: `The target sum has to be obtained by summing two different integers in the array; you can't add a single integer to itself in order to obtain the target sum`.
+You can assume that there will be at most one pair of numbers summing up to the target sum.
+
+
+The type you will be working with is `int[]` and `int`. It represents the array that is given to you and the target sum.
+
+Your will write your answer as a lambda and assign it to `TwoSum`. The lambda should have type `Func<int[] ,int, int[]>`.
+
+It should output the pair containing two elements whose sum is equal to target sum.
+
+      Eg:
+
+        Input:
+        array = [3, 5, -4, 8, 11, 1, -1, 6]
+        targetSum = 10
+
+        Sample Output: [-1, 11] 
+        Note: The numbers could be in reverse order
 
 #!csharp
 
@@ -943,7 +1134,27 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to find the Three number sum.
+
+Your algorithm should find all triplets in the array that sum up to the target sum and return a two-dimensional array of all these triplets. The numbers in each triplet should be ordered in ascending order,and the triplets themselves should be ordered in ascending order with respect to the numbers they hold.
+
+If no three numbers sum up to the target sum, you should return an empty array.
+
+
+The type you will be working with is `int[]` and `int`. It represents the array that is given to you and the target sum.
+
+Your will write your answer as a lambda and assign it to `ThreeSum`. The lambda should have type `Func<int[] ,int, int[]>`.
+
+It should output all the triplets having sum equal to the target sum.
+
+      Eg:
+
+        Input:
+        array = [12, 3, 1, 2, -6, 5, -8, 6]
+        targetSum = 0
+
+        Output:
+        [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]
 
 #!csharp
 
@@ -1052,7 +1263,28 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to find the Four number sum.
+
+Your algorithm should find all quadruplets in the array that sum up to the target sum and return a two-dimensional array of all these quadruplets in no particular order.
+
+If no four numbers sum up to the target sum, the function should return an empty array.
+
+
+The type you will be working with is `int[]` and `int`. It represents the array that is given to you and the target sum.
+
+Your will write your answer as a lambda and assign it to `FourSum`. The lambda should have type `Func<int[] ,int, int[]>`.
+
+It should output all the quadruplets having sum equal to the target sum.
+
+      Eg:
+
+        Input:
+        array = [7, 6, 4, -1, 1, 2]
+        targetSum = 16
+
+        Output:
+        [[7, 6, 4, -1], [7, 6, 1, 2]] 
+        Note:`The quadruplets could be ordered differently`
 
 #!csharp
 
@@ -1158,7 +1390,21 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to count the number of vowels and consonants present in the string.
+
+The type you will be working with is `string`. It represents the string that is given to you.
+
+Your will write your answer as a lambda and assign it to `CountVowelsNConsonants`. The lambda should have type `Func<string, IEnumerable<int>>`.
+
+It should output a pair containing the count of vowels and consonants.
+
+      Eg. 1:
+          inputString = "aabbcced"
+          output = [3,5]
+      
+      Eg. 2:
+          inputString = "athena"
+          output = [3,3]
 
 #!csharp
 
@@ -1247,7 +1493,23 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to find if the given string is palindrome.
+
+A palindrome is a word, phrase, or sequence that reads the same backwards as forwards, e.g. madam.
+
+The type you will be working with is `string`. It represents the string that is given to you.
+
+Your will write your answer as a lambda and assign it to `CheckIfPalindrome`. The lambda should have type `Func<string, bool>`.
+
+It should output a boolean representing whether the string is palindrome or not.
+
+      Eg. 1:
+          inputString = "athena"
+          output = false
+      
+      Eg. 2:
+          inputString = "naman"
+          output = true
 
 #!csharp
 
@@ -1334,7 +1596,30 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to perform the Caesar cipher encryption.
+
+Given a non-empty string of lowercase letters and a non-negative integer representing a key, you have to write an algorithm that returns a new string obtained by shifting every letter in the input string by k positions in the alphabet, where k is the key.
+Note : `Letters should "wrap" around the alphabet; in other words, the letter z shifted by one returns the letter a`
+
+The type you will be working with is `string` and `int`. It represents the string that is given to you and the caesar key.
+
+Your will write your answer as a lambda and assign it to `CaesorCipher`. The lambda should have type `Func<string, bool>`.
+
+It should output the caesar cypher encrypted string.
+
+      Eg. 1:
+         Input:
+         string = "xyz"
+         key = 2
+
+         Output: "zab"
+      
+      Eg. 2:
+          Input:
+          string = "xyz"
+          key = 5
+
+          Output: "cde"
 
 #!csharp
 
@@ -1423,7 +1708,23 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to find the longest palindromic substring.
+
+Given a string s, you should write an algorithm to print the longest palindromic substring in s.
+Note: `A substring is a contiguous sequence of characters within a string.`
+
+The type you will be working with is `string`. It represents the string that is given to you.
+
+Your will write your answer as a lambda and assign it to `LPS`. The lambda should have type `Func<string, string>`.
+
+It should output the Longest palindromic substring.
+
+      Eg. 1:
+         Input: s = "cbbd"
+         Output: "bb"
+      Eg. 2:
+          Input: s = "aedbcbxyz"
+          Output: "bcb"
 
 #!csharp
 
@@ -1533,7 +1834,25 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to find the Minimum characters for words.
+
+You have to write an algorithm that takes in an array of words and returns the smallest array of characters needed to form all of the words. The characters don't need to be in any particular order.
+For example, the characters `["y", "r", "o", "u" ]` are needed to form the words `["your", "you", "or", "yo"]`.
+
+Note: `The input words won't contain any spaces; however, they might contain punctuation and/or special characters`.
+
+The type you will be working with is `string[]`. It represents the string that is given to you.
+
+Your will write your answer as a lambda and assign it to `MinCharForWords`. The lambda should have type `Func<string[], char[]>`.
+
+It should output the Minimum characters for the given words.
+
+      Eg. 1:
+
+         Input:
+            words = ["this", "that", "did", "deed", "them!", "a"]
+         Output: ["t", "t", "h", "i", "s", "a", "d", "d", "e", "e", "m", "!"]
+           Note: The characters could be ordered differently.
 
 #!csharp
 
@@ -1645,7 +1964,31 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to check if the two strings are anagrams of each other or not.
+
+You have to write an algorithm to check whether two given strings are anagram of each other or not. 
+`An anagram of a string is another string that contains the same characters, only the order of characters can be different`. 
+For example, “abcd” and “dabc” are an anagram of each other.
+
+The type you will be working with is/are `string`. It represents both the strings that are given to you.
+
+Your will write your answer as a lambda and assign it to `ValidAnagram`. The lambda should have type `Func<string, string,bool>`.
+
+It should output the if the two strings are anagrams .
+
+      Eg. 1:
+
+         Input:
+            string1 = "abc"
+            string2 = "bac"
+         Output: true
+
+      Eg. 2:
+
+         Input:
+            string1 = "aabc"
+            string2 = "bbac"
+         Output: false
 
 #!csharp
 
@@ -1748,7 +2091,28 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to group anagrams.
+
+Given an array of strings strs, group the anagrams together. You can return the answer in any order. 
+Note :  `An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once`.
+
+The type you will be working with is/are `string[]`. It represents the string array that is given to you.
+
+Your will write your answer as a lambda and assign it to `GroupAnagrams`. The lambda should have type `Func<string[],List<List<string>>>`.
+
+It should output grouping of anagrams together.
+
+      Eg. 1:
+
+         Input: 
+         words = ["eat","tea","tan","ate","nat","bat"]
+         Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+      Eg. 2:
+
+         Input:
+         words: ["zxc", "asd", "weq", "sda", "qwe", "xcz"]
+         Output:[["asd", "sda"],["qwe", "weq"],["xcz", "zxc"]]
 
 #!csharp
 
@@ -1843,7 +2207,30 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an algorithm to check if the two strings follow same pattern.
+
+Given two strings, you have to check if the two strings follow similar pattern or not.
+
+The type you will be working with is/are `string`. It represents both the strings that are given to you.
+
+Your will write your answer as a lambda and assign it to `PatternMatcher`. The lambda should have type `Func<string,string,bool>`.
+
+It should output whether two strings follow the same pattern or not.
+
+      Eg. 1:
+
+         Input: 
+         str1 = "cat cat dog dog cat"
+         str2 = "aabba"
+         Output: true
+         Explanation: In first string, if we replace `cat` by `a`, and `dog` by `b`, the string1 converges to string2.
+
+      Eg. 2:
+
+         Input:
+         str1 = "cat cat dog bull"
+         str2 = "aaba
+         Output:false
 
 #!csharp
 
@@ -1933,7 +2320,147 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-XYZ
+In this challenge, you will be writing an KMP algorithm for pattern searching.
+
+Given a text txt[0..n-1] and a pattern pat[0..m-1], write a function search(char pat[], char txt[]) that prints all occurrences of pat[] in txt[]. You may assume that n > m.
+
+`Working of KMP:(CREDITS: GFG)`
+
+Preprocessing Overview:
+
+KMP algorithm preprocesses pat[] and constructs an auxiliary lps[] of size m (same as size of pattern) which is used to skip characters while matching.
+The name lps indicates longest proper prefix which is also suffix.
+`A proper prefix is prefix with whole string not allowed`. For example, prefixes of `“ABC”` are `“”, “A”, “AB” and “ABC”`. `Proper prefixes are “”, “A” and “AB”`. Suffixes of the string are `“”, “C”, “BC” and “ABC”`.
+We search for lps in sub-patterns. More clearly we focus on sub-strings of patterns that are either prefix and suffix.
+For each sub-pattern pat[0..i] where i = 0 to m-1, lps[i] stores length of the maximum matching proper prefix which is also a suffix of the sub-pattern pat[0..i].
+   lps[i] = the longest proper prefix of pat[0..i] 
+              which is also a suffix of pat[0..i]. 
+Note : `lps[i] could also be defined as longest prefix which is also proper suffix. We need to use properly at one place to make sure that the whole substring is not considered`.
+
+Examples of lps[] construction:
+For the pattern “AAAA”, 
+lps[] is [0, 1, 2, 3]
+
+For the pattern “ABCDE”, 
+lps[] is [0, 0, 0, 0, 0]
+
+For the pattern “AABAACAABAA”, 
+lps[] is [0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 5]
+
+For the pattern “AAACAAAAAC”, 
+lps[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4] 
+
+For the pattern “AAABAAA”, 
+lps[] is [0, 1, 2, 0, 1, 2, 3]
+
+
+Searching Algorithm:
+
+Unlike Naive algorithm, where we slide the pattern by one and compare all characters at each shift, `we use a value from lps[] to decide the next characters to be matched. The idea is to not match a character that we know will anyway match.`
+
+How to use lps[] to decide next positions (or to know a number of characters to be skipped)?
+
+`We start comparison of pat[j] with j = 0 with characters of current window of text.`
+`We keep matching characters txt[i] and pat[j] and keep incrementing i and j while pat[j] and txt[i] keep matching.`
+`When we see a mismatch,We know that characters pat[0..j-1] match with txt[i-j…i-1] (Note that j starts with 0 and increment it only when there is a match).`
+`We also know (from above definition) that lps[j-1] is count of characters of pat[0…j-1] that are both proper prefix and suffix.`
+`From above two points, we can conclude that we do not need to match these lps[j-1] characters with txt[i-j…i-1] because we know that these characters will anyway match.`
+
+Working Example to understand this: 
+
+txt[] = "AAAAABAAABA" 
+pat[] = "AAAA"
+lps[] = {0, 1, 2, 3} 
+
+i = 0, j = 0
+txt[] = "AAAAABAAABA" 
+pat[] = "AAAA"
+txt[i] and pat[j] match, do i++, j++
+
+i = 1, j = 1
+txt[] = "AAAAABAAABA" 
+pat[] = "AAAA"
+txt[i] and pat[j] match, do i++, j++
+
+i = 2, j = 2
+txt[] = "AAAAABAAABA" 
+pat[] = "AAAA"
+pat[i] and pat[j] match, do i++, j++
+
+i = 3, j = 3
+txt[] = "AAAAABAAABA" 
+pat[] = "AAAA"
+txt[i] and pat[j] match, do i++, j++
+
+i = 4, j = 4
+Since j == M, print pattern found and reset j,
+j = lps[j-1] = lps[3] = 3
+
+`Here unlike Naive algorithm, we do not match first three characters of this window. Value of lps[j-1] (in above step) gave us index of next character to match.`
+i = 4, j = 3
+txt[] = "AAAAABAAABA" 
+pat[] =  "AAAA"
+txt[i] and pat[j] match, do i++, j++
+
+i = 5, j = 4
+Since j == M, print pattern found and reset j,
+j = lps[j-1] = lps[3] = 3
+
+`Again unlike Naive algorithm, we do not match first three characters of this window. Value of lps[j-1] (in above step) gave us index of next character to match.`
+i = 5, j = 3
+txt[] = "AAAAABAAABA" 
+pat[] =   "AAAA"
+txt[i] and pat[j] do NOT match and j > 0, change only j
+j = lps[j-1] = lps[2] = 2
+
+i = 5, j = 2
+txt[] = "AAAAABAAABA" 
+pat[] =    "AAAA"
+txt[i] and pat[j] do NOT match and j > 0, change only j
+j = lps[j-1] = lps[1] = 1 
+
+i = 5, j = 1
+txt[] = "AAAAABAAABA" 
+pat[] =     "AAAA"
+txt[i] and pat[j] do NOT match and j > 0, change only j
+j = lps[j-1] = lps[0] = 0
+
+i = 5, j = 0
+txt[] = "AAAAABAAABA" 
+pat[] =      "AAAA"
+txt[i] and pat[j] do NOT match and j is 0, we do i++.
+
+i = 6, j = 0
+txt[] = "AAAAABAAABA" 
+pat[] =       "AAAA"
+txt[i] and pat[j] match, do i++ and j++
+
+i = 7, j = 1
+txt[] = "AAAAABAAABA" 
+pat[] =       "AAAA"
+txt[i] and pat[j] match, do i++ and j++
+
+`We continue this way...`
+
+The type you will be working with is/are `string`. It represents both the strings that are given to you.
+
+Your will write your answer as a lambda and assign it to `KMP`. The lambda should have type `Func<string,string,List<int>>`.
+
+It should output whether two strings follow the same pattern or not.
+
+      Eg. 1:
+
+         Input: 
+         txt = "AABAACAADAABAABA"
+         str2 = "AABA"
+         Output: [0,9,12]
+
+      Eg. 2:
+
+         Input: 
+         txt = "catcatdogdogcatdog"
+         str2 = "dog"
+         Output: [6,9,15]
 
 #!csharp
 
