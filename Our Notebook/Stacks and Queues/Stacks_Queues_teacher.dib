@@ -364,9 +364,7 @@ It should return an array having next greater elements to the right for each ele
 
 Note : If an element does not have any element on it's right side greater than it, consider -1 as it's "next greater element on right".
 
-Can you solve it in O(n) time complexity ?
-
-Hint : use Stack data Structure
+`Can you solve it in O(n) time complexity ?`
 
 Eg : 
 
@@ -414,6 +412,488 @@ NGR = arr =>
                 Stack.Push(i);
         }
         return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Nearest greater element to left
+
+#!csharp
+
+Func<int[], int[]> NGL = arr => new int[0];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Next greater element on right", context =>
+{   
+  
+    int[] input = {2, 5, 9, 3, 1, 12, 6, 8, 7};
+    
+    int[] correctans = {-1,-1,-1,9,3,-1,12,12,8};
+
+    int[] ans = NGL(input);
+
+    if (correctans.SequenceEqual(ans))
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer","use Stack data Structure");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 4 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 4 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 4: Next greater element to the left
+
+#!markdown
+
+In this challenge, you will be given an array of integers, you have to write an algorithm to generate an array having "next greater element on the left" for all elements of the array.
+
+Your will write your answer as a lambda and assign it to `NGL`. The lambda should have type `Func<int[], IEnumerable<int>>`.
+
+It should return an array having next greater elements to the left for each element. 
+
+Note : If an element does not have any element on it's left side greater than it, consider -1 as it's "next greater element on left".
+
+`Can you solve it in O(n) time complexity ?`
+
+Eg : 
+
+    for the array [2 5 9 3 1 12 6 8 7]
+    Next greater for 2 is -1
+    Next greater for 5 is -1
+    Next greater for 9 is -1
+    Next greater for 3 is 9
+    Next greater for 1 is 3
+    Next greater for 12 is -1
+    Next greater for 6 is 12
+    Next greater for 8 is 12
+    Next greater for 7 is 8
+
+    Output : [5 9 12 12 12 -1 8 -1 -1]
+     
+
+#!csharp
+
+NGL = arr =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+NGL = arr => 
+{   
+        Stack<int> Stack = new Stack<int>();
+        int[] ans = new int[arr.Length];
+
+        for(int i = arr.Length-1; i >=0;i--){
+                ans[i] = -1;
+                while(Stack.Count != 0 && arr[i] > arr[Stack.Peek()]){
+                        int solvedidx = Stack.Pop();
+                        ans[solvedidx] = arr[i];
+                }
+                Stack.Push(i);
+        }
+        return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Largest rectangle under Skyline
+
+#!csharp
+
+Func<int[], int> LargestRectangle = arr => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking for largest rectangle under skyline", context =>
+{   
+  
+    int[] input = {2,1,5,6,2,3};
+    
+    int correctAns = 10;
+
+    int ans = LargestRectangle(input);
+
+    if (correctAns == ans)
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer","There's a way to solve this problem in linear 0(n) time by using a stack(Use your knowledge of previous two problems). When should you push and pop buildings on and off the stack if you were to loop through the buildings from left to right? Try to think of each building on the stack as a pillar of a potential height.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 5 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 5 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 5: Largest Rectangle under Skyline
+
+#!markdown
+
+In this challenge, you will be given an array of integers, you have to write an algorithm to find the maximum area under the skyline.
+
+Given an array of positive integers representing the heights of adjacent buildings, return the area of the largest rectangle that can be created by any number of adjacent buildings, including just one building. `Note that all buildings have the same width of 1 unit.`
+For example, given buildings = [2, 1, 2] , the area of the largest rectangle that can be created is 3,using all three buildings. Since the minimum height of the three buildings is 1 , you can create a rectangle that has a height of 1 and a width of 3 (the number of buildings). You could also create rectangles of area 2 by using only the first building or the last building, but these clearly wouldn't be the largest rectangles. Similarly, you could create rectangles of area 2 by using the first and second building
+or the second and third building.
+
+`To clarify, the width of a created rectangle is the number of buildings used to create the rectangle, and its height is the height of the smallest building used to create it.`
+
+Your will write your answer as a lambda and assign it to `LargestRectangle`. The lambda should have type `Func<int[], int>`
+
+It should return an integer representing the maximum area rectangle.
+
+    Eg 1: 
+
+        Input: heights = [2,1,5,6,2,3]
+        Output: 10
+        Explanation: The above is a histogram where width of each bar is 1.
+        The largest rectangle is by taking 5 and 6 height buildings, which has an area = 10 units.
+
+    Eg 2: 
+
+        Input: heights = [2,4]
+        Output: 4
+     
+
+#!csharp
+
+LargestRectangle = arr =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+LargestRectangle = heights => 
+{   
+        var st = new Stack<int>();
+        st.Push(-1);
+        int maxArea = 0;
+        int i;
+        for (i = 0; i < heights.Length; i++) {
+            while (st.Peek() != -1 && heights[st.Peek()] >= heights[i]) {
+                int h = heights[st.Pop()];
+                int w = i - st.Peek() - 1;
+                maxArea = Math.Max(maxArea, w * h);
+            }
+            st.Push(i);
+        }
+        
+        while (st.Peek() != -1) {
+            int h = heights[st.Pop()];
+            int w = i - st.Peek() - 1;
+            maxArea = Math.Max(maxArea, w * h);
+        }
+        
+        return maxArea;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Daily Temperatures
+
+#!csharp
+
+Func<int[], int[]> DailyTemp = arr => new int[0];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Daily Temperatures", context =>
+{   
+  
+    int[] input = {73,74,75,71,69,72,76,73};
+    
+    var correctAns = new int[]{1,1,4,2,1,1,0,0};
+
+    var ans = DailyTemp(input);
+
+    if (correctAns.Length == ans.Length && ans.SequenceEqual(correctAns))
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer","Think of using the concept from next greater to right.");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 6 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 6 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 6: Daily temperature
+
+#!markdown
+
+In this challenge, you will be given an array of integers, you have to write an algorithm to return for each day, the number of days to wait for a warmer temperature.
+
+Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+
+Your will write your answer as a lambda and assign it to `DailyTemp`. The lambda should have type `Func<int[], IEnumerable<int>>`.
+
+It should return an array, having for each day, number of days after which there will be a warmer temperature. 
+
+`Can you solve it in O(n) time complexity ?`
+
+    Eg 1. : 
+
+        Input: temperatures = [73,74,75,71,69,72,76,73]
+        Output: [1,1,4,2,1,1,0,0]
+
+    Eg 2. : 
+
+        Input: temperatures = [30,60,90]
+        Output: [1,1,0]
+
+
+     
+
+#!csharp
+
+DailyTemp = arr =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+DailyTemp = arr => 
+{   
+        Stack<int> Stack = new Stack<int>();
+        int[] ans = new int[arr.Length];
+
+        for(int i = 0; i < arr.Length;i++){
+                ans[i] = 0;
+                while(Stack.Count != 0 && arr[i] > arr[Stack.Peek()]){
+                        int solvedidx = Stack.Pop();
+                        ans[solvedidx] = i-solvedidx;
+                }
+                Stack.Push(i);
+        }
+        return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Length of longest valid substring
+
+#!csharp
+
+Func<string, int> LongestValidParenthesisLength = str => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Checking Length of longest valid parenthesis", context =>
+{   
+  
+    string input = "()(()))))";
+    
+    var correctAns = 6;
+
+    var ans = LongestValidParenthesisLength(input);
+
+    if (correctAns == ans)
+    {
+        context.Pass("Correct answer");
+    }
+    else
+    {
+        context.Fail("Incorrect answer","Think of using stacks");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 7 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 7 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 7: Length of longest valid substring
+
+#!markdown
+
+In this challenge, you will be given an array of integers, you have to write an algorithm to return the length of longest valid parenthesis substring.
+
+Given a string consisting of opening and closing parenthesis, find the length of the longest valid parenthesis substring.
+
+Your will write your answer as a lambda and assign it to `LongestValidParenthesisLength`. The lambda should have type `Func<string, int>`.
+
+It should return an integer, representing the length of the longest valid parenthesis string. 
+
+    Eg 1. : 
+
+        Input : ((()
+        Output : 2
+        Explanation : ()
+
+    Eg 2. : 
+
+        Input: )()())
+        Output : 4
+        Explanation: ()() 
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+LongestValidParenthesisLength = str => 
+{   
+        int n = str.Length;
+        Stack<int> stk = new Stack<int>();
+        stk.Push(-1);
+        int result = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (str[i] == '(') {
+                stk.Push(i);
+            }
+ 
+            else 
+            {
+                if (stk.Count > 0)
+                    stk.Pop();
+                if (stk.Count > 0)
+                {
+                    result
+                        = Math.Max(result,
+                                   i - stk.Peek());
+                }
+                else {
+                    stk.Push(i);
+                }
+            }
+        }
+ 
+        return result;
 };
 
 #!csharp
