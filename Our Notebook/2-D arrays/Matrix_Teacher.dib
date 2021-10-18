@@ -15,6 +15,124 @@ using System.IO;
 
 #!markdown
 
+# [Challenge] Matrix Transpose
+
+#!csharp
+
+Func<int[,], int[,]> Transpose = mat => new int[0,0];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Matrix Transpose", context =>
+{   
+  int[,] mat = new int[,]{
+       {1, 2, 3},
+       {4, 5, 6}
+    };
+
+    int[,] correctans = new int[,]{
+       {1, 4},
+       {2, 5},
+       {3, 6}
+    };
+    
+    int[,] ans = Transpose(mat);
+
+    for(int i = 0;i < correctans.GetLength(0); i++){
+        for(int j = 0;j < correctans.GetLength(1); j++){
+            if(correctans[i,j] != ans[i,j]){
+                context.Fail("Incorrect answer");
+            }
+        }
+    }
+
+    context.Pass("Correct answer");
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 1 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 1 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 1: Find the transpose of the given matrix
+
+#!markdown
+
+In this challenge, you will be writing an algorithm to Transpose the given matrix. 
+
+Your will write your answer as a lambda and assign it to `Transpose`. The lambda should have type `Func<int[,], int[,]>`.
+
+It should return a 2-D matrix which is the result of transpose of the given matrix.
+
+(Note :`Transpose of a matrix flips the matrix over its diagonal and this brings the row elements on the column and column elements on the row`).
+
+Eg 1. 
+
+    Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+    Output: [[1,4,7],[2,5,8],[3,6,9]]
+
+Eg 2.
+
+    Input: matrix = [[1,2,3],[4,5,6]]
+    Output: [[1,4],[2,5],[3,6]] 
+
+#!csharp
+
+Transpose = mat =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Transpose = mat=> 
+{   
+    int n = mat.GetLength(0);
+    int m = mat.GetLength(1);
+    int[,] transpose = new int[m,n];
+    
+     for (int i = 0; i < n; i++) {
+         for (int j = 0; j < m; j++) {
+
+            transpose[j, i] = mat[i, j];
+         }
+      }
+    
+    return transpose;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge]Matrix Multiplication
 
 #!csharp
