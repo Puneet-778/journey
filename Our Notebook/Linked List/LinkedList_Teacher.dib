@@ -216,6 +216,16 @@ Your will write your answer as a lambda and assign it to `AddLast`. The lambda s
 
 It should return head of LinkedList after adding given node at the end of LinkedList.
 
+Eg.
+
+    Input : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
+
+    int x = 11;
+
+    output =  1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11
+    
+    
+
 #!csharp
 
 AddLast = (root, val) =>
@@ -340,6 +350,12 @@ Your will write your answer as a lambda and assign it to `AddFirst`. The lambda 
 
 It should return the head of LinkedList after adding given node at the beginning of LinkedList.
 
+    Input : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
+
+    int x = 11;
+
+    Output : 11 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
+
 #!csharp
 
 AddFirst = (root, val) =>
@@ -454,6 +470,10 @@ The type you will be working with is `ListNode`. It represents the node of the L
 Your will write your answer as a lambda and assign it to `Reverse`. The lambda should have type `Func<ListNode, ListNode>`.
 
 It should return the head of LinkedList after reversing the LinkedList.
+
+    Input : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
+
+    Output : 10 -> 9 -> 8 -> 7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1
 
 #!csharp
 
@@ -576,10 +596,16 @@ Your will write your answer as a lambda and assign it to `MidPoint`. The lambda 
 
 It should return the address of node which is present at the mid-point of  LinkedList.
 
-For odd number of nodes mid-node is at n/2.
-For even number of nodes mid-node is at n/2 + 1.
+Note : If there are two middle nodes, return the second middle node.
 
-where n--> total number of nodes.
+    Input : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 
+    
+    mid-point of above linkedlist : 5
+
+
+    Input : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
+    
+    mid-point of above linkedlist : 6
 
 #!csharp
 
@@ -702,6 +728,15 @@ Your will write your answer as a lambda and assign it to `KnodeFromEnd`. The lam
 
 It should return the address of node which is k-th node from end of LinkedList.
 
+Note : 
+
+
+    Input : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 
+
+    k = 2
+     
+    k-th node from end of linkedlist : 8
+
 #!markdown
 
 ## [Scratchpad]
@@ -823,7 +858,13 @@ Your will write your answer as a lambda and assign it to `DeleteNode`. The lambd
 
 It should return the address of root node after deleting N-th node.
 
-Note: 1st Node is at 0-th index.
+Note : 
+
+    Input : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 
+        
+    N = 3
+    
+    Output : 1 -> 2 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 
 
 #!csharp
 
