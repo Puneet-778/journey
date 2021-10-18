@@ -15,7 +15,7 @@ using System.IO;
 
 #!markdown
 
-# [Challenge] Matrix Transpose
+# [Challenge] Transpose of a Matrix
 
 #!csharp
 
@@ -133,6 +133,137 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Addition of Matrices
+
+#!csharp
+
+Func<int[,], int[,], int[,]> Add = (mat1, mat2) => new int[0,0];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Matrix Addition", context =>
+{   
+
+   int [,]mat1 = { {1, 1, 1, 1},
+                        {2, 2, 2, 2},
+                        {3, 3, 3, 3},
+                        {4, 4, 4, 4}};
+     
+   int [,]mat2 = { {1, 1, 1, 1},
+                        {2, 2, 2, 2},
+                        {3, 3, 3, 3},
+                        {4, 4, 4, 4}};
+
+    int[,] correctans = new int[,]{
+        {2, 2, 2, 2},
+        {4, 4, 4, 4},
+        {6 ,6, 6, 6},
+        {8 ,8, 8 ,8}
+    };
+    
+    int[,] ans = Add(mat1, mat2);
+
+    for(int i = 0;i < correctans.GetLength(0); i++){
+        for(int j = 0;j < correctans.GetLength(1); j++){
+            if(correctans[i,j] != ans[i,j]){
+                context.Fail("Incorrect answer");
+            }
+        }
+    }
+
+    context.Pass("Correct answer");
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 2 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 2 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 2: Addition of Two matrices
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for Adding two given matrices. 
+
+Your will write your answer as a lambda and assign it to `Add`. The lambda should have type `Func<int[,], int[,], int[,]>`.
+
+It should return a 2-D matrix which is the result of Addition of two given matrices.
+
+(Note : `It is always possible to Add two matrices i.e, columns of first matrix is equal to Column of second matrix, and row of first matrix is equal to row of second matrix`).
+
+Eg 1. 
+
+    Input: mat1 = [[1,2,3],[4,5,6],[7,8,9]]
+           mat2 = [[3,2,1],[5,5,2],[1,8,3]]
+    Output: [[4,4,4],[9,10,8],[8,16,12]]
+
+Eg 2.
+
+    Input: mat1 = [[1,2,3],[4,5,6]]
+           mat2 = [[6,2,8],[1,5,5]]
+    Output: [[7,4,11],[5,10,11]] 
+
+#!csharp
+
+Add = (mat1, mat2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Add = (mat1, mat2) => 
+{
+    int n1 = mat1.GetLength(0);
+    int m1 = mat1.GetLength(1);
+    int n2 = mat2.GetLength(0);
+    int m2 = mat2.GetLength(1);
+    if(n1!=n2 || m1!=m2){
+        Console.WriteLine("Incorrect Dimensions for matrix addition");
+        return new int[1,1];
+    }
+    int[,] ans = new int[n1,m1];
+
+    int i, j;
+        for (i = 0; i < n1; i++)
+            for (j = 0; j < m1; j++)
+                ans[i,j] = mat1[i,j] + mat2[i,j];
+
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge]Matrix Multiplication
 
 #!csharp
@@ -143,20 +274,6 @@ Func<int[,], int[,], int[,]> Multiply = (mat1, mat2) => new int[0,0];
 
 Lesson.CurrentChallenge.AddRule("Matrix Multiplication", context =>
 {   
-    // int[,] mat1 = new int[,]{
-    //     {1, 1, 1, 1},
-    //     {2, 2, 2, 2},
-    //     {3, 3, 3, 3},
-    //     {4, 4, 4, 4}
-    // };
-
-    // int[,] mat2 = new int[,]{
-    //     {1, 1, 1, 1},
-    //     {2, 2, 2, 2},
-    //     {3, 3, 3, 3},
-    //     {4, 4, 4, 4}
-    // };
-
     int[,] mat1 = new int[,]{
         {1, 1},
         {2, 2},
