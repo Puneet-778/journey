@@ -1,7 +1,7 @@
 #!csharp
 
 #r "nuget: Interactive.Journey"
-// #r "nuget: Interactive.Extension.ImageSharp, *-*"
+#r "nuget: Interactive.Extension.ImageSharp, *-*"
 
 #!csharp
 
@@ -23,7 +23,7 @@ Func<int, IEnumerable<int>> Printing = num => Enumerable.Empty<int>();
 
 #!csharp
 
-Lesson.CurrentChallenge.AddRule("Checking traversal", context =>
+Lesson.CurrentChallenge.AddRule("Printing numbers upto N", context =>
 {    
     var correctans = new int[] { 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10};
 
@@ -106,6 +106,292 @@ Lesson.ResetChallenge();
 
 #!markdown
 
+# [Challenge] Factorial
+
+#!csharp
+
+Func<int, int> Factorial = num => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Calculating Factorial", context =>
+{    
+    int n = 10;
+
+    int correctans = 3628800;
+
+    var ans = Factorial(n);
+    
+    if (ans == correctans)
+    {
+        context.Pass("Correct ans");
+    }
+    else
+    {
+        context.Fail("Incorrect ans");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 2 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 2 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 2: Find factorial of given input.
+
+#!markdown
+
+xyz
+
+#!csharp
+
+Factorial = n =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Factorial = n => 
+{
+    if(n == 1){
+        return 1;
+    }
+
+    return n * Factorial(n-1);
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Linear Power
+
+#!csharp
+
+Func<int, int, int> Pow = (x, n) => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Calculating power of a number ", context =>
+{    
+    int x = 8;
+
+    int n = 6;
+
+    int correctans = 262144;
+
+    var ans = Pow(x, n);
+    
+    if (ans == correctans)
+    {
+        context.Pass("Correct ans");
+    }
+    else
+    {
+        context.Fail("Incorrect ans");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 3 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 3 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 3 : Linear Power
+
+#!markdown
+
+In this challenge, you will be given a number x and n, you are required to calculate x raised to the power n i.e. x multiplied n times...
+
+Your will write your answer as a lambda and assign it to `Power`. The lambda should have type `Func<int, int, int>`.
+
+It should return a value which is equal to x raised to the power n.
+
+Note : Expected time Complexity O(n).
+         
+
+#!csharp
+
+Pow = (x, n) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Pow = (x, n) => 
+{
+    if(n == 1){
+        return x;
+    }
+
+    return x * Power(x, n-1);
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Logarithmic Power
+
+#!csharp
+
+Func<int, int, int> Power = (x, n) => 0;
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Calculating power of a number ", context =>
+{    
+    int x = 8;
+
+    int n = 6;
+
+    int correctans = 262144;
+
+    var ans = Power(x, n);
+    
+    if (ans == correctans)
+    {
+        context.Pass("Correct ans");
+    }
+    else
+    {
+        context.Fail("Incorrect ans");
+    }
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 4 completed!");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 4 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 4 : Logarithmic Power
+
+#!markdown
+
+In this challenge, you will be given a number x and n, you are required to calculate x raised to the power n i.e. x multiplied n times...
+
+Your will write your answer as a lambda and assign it to `Power`. The lambda should have type `Func<int, int, int>`.
+
+It should return a value which is equal to x raised to the power n.
+
+Note : Expected time Complexity O(log n).         
+
+#!csharp
+
+Power = (x, n) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Power = (x, n) => 
+{
+    if(n == 1){
+        return x;
+    }
+
+    int temp = Power(x, n/2);
+
+    int ans = temp * temp;
+
+    if(n % 2 != 0){
+        return ans * x;
+    }
+
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge] Palindrome Check Using Recursion
 
 #!csharp
@@ -143,12 +429,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 2 completed!");
+            context.SetMessage("Challenge 5 completed!");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 2 not complete");
+            context.SetMessage("Challenge 5 not complete");
         }
     });
 
@@ -158,7 +444,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 2: Check if the string is Palindrome or Not
+# Challenge 5 : Check if the string is Palindrome or Not
 
 #!markdown
 
@@ -250,12 +536,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 3 completed!");
+            context.SetMessage("Challenge 6 completed!");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 3 not complete");
+            context.SetMessage("Challenge 6 not complete");
         }
     });
 
@@ -265,7 +551,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 3: Print the Sum of The Digits using Recursion
+# Challenge 6 : Print the Sum of The Digits using Recursion
 
 #!markdown
 
@@ -357,12 +643,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 4 completed!");
+            context.SetMessage("Challenge 7 completed!");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 4 not complete");
+            context.SetMessage("Challenge 7 not complete");
         }
     });
 
@@ -372,7 +658,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 4: Rope Cutting Problem
+# Challenge 7 : Rope Cutting Problem
 
 #!markdown
 
@@ -424,7 +710,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Generate Subsets
+# [Challenge] Generate Subsequences
 
 #!csharp
 
@@ -461,12 +747,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 5 completed!");
+            context.SetMessage("Challenge 8 completed!");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 5 not complete");
+            context.SetMessage("Challenge 8 not complete");
         }
     });
 
@@ -476,11 +762,11 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 5: Generate all the subsets of a given string
+# Challenge 8 : Generate all the subsequences of a given string
 
 #!markdown
 
-Given a set represented as a string, write a recursive code to print all subsets of it. The subsets can be printed in any order. 
+Given a set represented as a string, write a recursive code to print all subsequences of it. The subsequences can be printed in any order. 
 
 Example: 
 
@@ -572,12 +858,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 6 completed!");
+            context.SetMessage("Challenge 9 completed!");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 6 not complete");
+            context.SetMessage("Challenge 9 not complete");
         }
     });
 
@@ -587,7 +873,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 6: Tower of Hanoi
+# Challenge 9 : Tower of Hanoi
 
 #!markdown
 
@@ -689,12 +975,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 7 completed!");
+            context.SetMessage("Challenge 10 completed!");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 7 not complete");
+            context.SetMessage("Challenge 10 not complete");
         }
     });
 
@@ -704,7 +990,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 7: Josephus Problem
+# Challenge 10 : Josephus Problem
 
 #!markdown
 
