@@ -15,6 +15,255 @@ using System.IO;
 
 #!markdown
 
+# [Challenge] Transpose of a Matrix
+
+#!csharp
+
+Func<int[,], int[,]> Transpose = mat => new int[0,0];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Matrix Transpose", context =>
+{   
+  int[,] mat = new int[,]{
+       {1, 2, 3},
+       {4, 5, 6}
+    };
+
+    int[,] correctans = new int[,]{
+       {1, 4},
+       {2, 5},
+       {3, 6}
+    };
+    
+    int[,] ans = Transpose(mat);
+
+    for(int i = 0;i < correctans.GetLength(0); i++){
+        for(int j = 0;j < correctans.GetLength(1); j++){
+            if(correctans[i,j] != ans[i,j]){
+                context.Fail("Incorrect answer","Check the condition of switching rows with columns");
+            }
+        }
+    }
+
+    context.Pass("Correct answer");
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 1 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 1 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 1: Find the transpose of the given matrix
+
+#!markdown
+
+In this challenge, you will be writing an algorithm to Transpose the given matrix. 
+
+Your will write your answer as a lambda and assign it to `Transpose`. The lambda should have type `Func<int[,], int[,]>`.
+
+It should return a 2-D matrix which is the result of transpose of the given matrix.
+
+(Note :`Transpose of a matrix flips the matrix over its diagonal and this brings the row elements on the column and column elements on the row`).
+
+Eg 1. 
+
+    Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+    Output: [[1,4,7],[2,5,8],[3,6,9]]
+
+Eg 2.
+
+    Input: matrix = [[1,2,3],[4,5,6]]
+    Output: [[1,4],[2,5],[3,6]] 
+
+#!csharp
+
+Transpose = mat =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Transpose = mat=> 
+{   
+    int n = mat.GetLength(0);
+    int m = mat.GetLength(1);
+    int[,] transpose = new int[m,n];
+    
+     for (int i = 0; i < n; i++) {
+         for (int j = 0; j < m; j++) {
+
+            transpose[j, i] = mat[i, j];
+         }
+      }
+    
+    return transpose;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
+# [Challenge] Addition of Matrices
+
+#!csharp
+
+Func<int[,], int[,], int[,]> Add = (mat1, mat2) => new int[0,0];
+
+#!csharp
+
+Lesson.CurrentChallenge.AddRule("Matrix Addition", context =>
+{   
+
+   int [,]mat1 = { {1, 1, 1, 1},
+                        {2, 2, 2, 2},
+                        {3, 3, 3, 3},
+                        {4, 4, 4, 4}};
+     
+   int [,]mat2 = { {1, 1, 1, 1},
+                        {2, 2, 2, 2},
+                        {3, 3, 3, 3},
+                        {4, 4, 4, 4}};
+
+    int[,] correctans = new int[,]{
+        {2, 2, 2, 2},
+        {4, 4, 4, 4},
+        {6 ,6, 6, 6},
+        {8 ,8, 8 ,8}
+    };
+    
+    int[,] ans = Add(mat1, mat2);
+
+    for(int i = 0;i < correctans.GetLength(0); i++){
+        for(int j = 0;j < correctans.GetLength(1); j++){
+            if(correctans[i,j] != ans[i,j]){
+                context.Fail("Incorrect answer","Check for your dimensions, are you adding same row and columns only?");
+            }
+        }
+    }
+
+    context.Pass("Correct answer");
+});
+
+#!csharp
+
+Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
+    {
+        var numPassed = context.RuleEvaluations.Count(e => e.Passed);
+        var total = context.RuleEvaluations.Count();
+        // var history = context.SubmissionHistory ....
+        if (total == numPassed)
+        {
+            context.SetMessage("Challenge 2 completed! Proceed to next Challenge.");
+            await context.StartNextChallengeAsync();
+        }
+        else
+        {
+            context.SetMessage("Challenge 2 not complete");
+        }
+    });
+
+#!markdown
+
+# [Question]
+
+#!markdown
+
+# Challenge 2: Addition of Two matrices
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for Adding two given matrices. 
+
+Your will write your answer as a lambda and assign it to `Add`. The lambda should have type `Func<int[,], int[,], int[,]>`.
+
+It should return a 2-D matrix which is the result of Addition of two given matrices.
+
+(Note : `It is always possible to Add two matrices i.e, columns of first matrix is equal to Column of second matrix, and row of first matrix is equal to row of second matrix`).
+
+Eg 1. 
+
+    Input: mat1 = [[1,2,3],[4,5,6],[7,8,9]]
+           mat2 = [[3,2,1],[5,5,2],[1,8,3]]
+    Output: [[4,4,4],[9,10,8],[8,16,12]]
+
+Eg 2.
+
+    Input: mat1 = [[1,2,3],[4,5,6]]
+           mat2 = [[6,2,8],[1,5,5]]
+    Output: [[7,4,11],[5,10,11]] 
+
+#!csharp
+
+Add = (mat1, mat2) =>
+{
+    throw new NotImplementedException(); // write your answer here
+};
+
+#!markdown
+
+# [Scratchpad]
+
+#!csharp
+
+#!model-answer
+// this should pass
+
+Add = (mat1, mat2) => 
+{
+    int n1 = mat1.GetLength(0);
+    int m1 = mat1.GetLength(1);
+    int n2 = mat2.GetLength(0);
+    int m2 = mat2.GetLength(1);
+    if(n1!=n2 || m1!=m2){
+        Console.WriteLine("Incorrect Dimensions for matrix addition");
+        return new int[1,1];
+    }
+    int[,] ans = new int[n1,m1];
+
+    int i, j;
+        for (i = 0; i < n1; i++)
+            for (j = 0; j < m1; j++)
+                ans[i,j] = mat1[i,j] + mat2[i,j];
+
+    return ans;
+};
+
+#!csharp
+
+Lesson.ResetChallenge();
+
+#!markdown
+
 # [Challenge]Matrix Multiplication
 
 #!csharp
@@ -25,20 +274,6 @@ Func<int[,], int[,], int[,]> Multiply = (mat1, mat2) => new int[0,0];
 
 Lesson.CurrentChallenge.AddRule("Matrix Multiplication", context =>
 {   
-    // int[,] mat1 = new int[,]{
-    //     {1, 1, 1, 1},
-    //     {2, 2, 2, 2},
-    //     {3, 3, 3, 3},
-    //     {4, 4, 4, 4}
-    // };
-
-    // int[,] mat2 = new int[,]{
-    //     {1, 1, 1, 1},
-    //     {2, 2, 2, 2},
-    //     {3, 3, 3, 3},
-    //     {4, 4, 4, 4}
-    // };
-
     int[,] mat1 = new int[,]{
         {1, 1},
         {2, 2},
@@ -68,7 +303,7 @@ Lesson.CurrentChallenge.AddRule("Matrix Multiplication", context =>
     for(int i = 0;i < correctans.GetLength(0); i++){
         for(int j = 0;j < correctans.GetLength(1); j++){
             if(correctans[i,j] != ans[i,j]){
-                context.Fail("Incorrect answer");
+                context.Fail("Incorrect answer","You might want to try 3 nested loops!!");
             }
         }
     }
@@ -85,12 +320,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 1 completed! Proceed to next Challenge.");
+            context.SetMessage("Challenge 3 completed! Proceed to next Challenge.");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 1 not complete");
+            context.SetMessage("Challenge 3 not complete");
         }
     });
 
@@ -100,7 +335,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 1 : Matrix Multiplication
+# Challenge 3 : Matrix Multiplication
 
 #!markdown
 
@@ -178,7 +413,7 @@ Lesson.CurrentChallenge.AddRule("Spiral of Matrix", context =>
     }
     else
     {
-        context.Fail("Incorrect answer");
+        context.Fail("Incorrect answer","You can think of the spiral that you have to traverse as a set of rectangle perimeters that progressively get smaller(i.e., that progressively move inwards in the 2D array");
     }
 
 });
@@ -192,12 +427,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 2 completed! Proceed to next Challenge.");
+            context.SetMessage("Challenge 4 completed! Proceed to next Challenge.");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 2 not complete");
+            context.SetMessage("Challenge 4 not complete");
         }
     });
 
@@ -207,15 +442,27 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 2 : Spiral of Matrix
+# Challenge 4 : Spiral of Matrix
 
 #!markdown
 
 In this challenge, you will be writing an algorithm for displaying elements of an array in spiral way. 
 
+Spiral order starts at the top left corner of the two dimensional matrix, goes to the right, and proceeds in a spiral pattern all the way until every element has been visited.
+
 Your will write your answer as a lambda and assign it to `Spiral`. The lambda should have type `Func<int[,], IEnumerable<int>>`.
 
 It should return a list of elements of matrix in spiral way.
+
+    Eg 1. 
+
+    Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+    Output: [1,2,3,6,9,8,7,4,5]    
+
+    Eg 2.
+
+    Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+    Output: [1,2,3,4,8,12,11,10,9,5,6,7]
 
 #!csharp
 
@@ -304,18 +551,12 @@ Lesson.CurrentChallenge.AddRule("Rotate given Matrix", context =>
                                     {15, 11, 7, 3},
                                     {16, 12, 8, 4}};
 
-//     13 9 5 1 
-//     14 10 6 2 
-//     15 11 7 3 
-//     16 12 8 4 
-
-    // int[,] correctans = new int[,]{{4,3,2,1},{4,3,2,1},{4,3,2,1},{4,3,2,1}};
     int[,] ans = Rotate(mat1);
 
     for(int i = 0;i < correctans.GetLength(0); i++){
         for(int j = 0;j < correctans.GetLength(1); j++){
             if(correctans[i,j] != ans[i,j]){
-                context.Fail("Incorrect answer");
+                context.Fail("Incorrect answer","You can think of running a loop backwards!");
             }
         }
     }
@@ -333,12 +574,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 3 completed! Proceed to next Challenge.");
+            context.SetMessage("Challenge 5 completed! Proceed to next Challenge.");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 3 not complete");
+            context.SetMessage("Challenge 5 not complete");
         }
     });
 
@@ -348,7 +589,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 3 : Rotation of Matrix by 90 degree clockwise.
+# Challenge 5 : Rotation of Matrix by 90 degree clockwise.
 
 #!markdown
 
@@ -357,6 +598,25 @@ In this challenge, you will be writing an algorithm for rotating matrix by 90 de
 Your will write your answer as a lambda and assign it to `Rotate`. The lambda should have type `Func<int[,], int[,]> `.
 
 It should return a 90 degree clockwise rotated matrix.
+   
+    Eg 1.
+        Input:
+        1 2 3 
+        4 5 6
+        7 8 9  
+
+        Output:
+        7 4 1 
+        8 5 2
+        9 6 3
+
+    Eg 2.
+        Input:
+        1 2
+        3 4
+        Output:
+        3 1
+        4 2 
 
 #!csharp
 
@@ -408,10 +668,6 @@ Lesson.CurrentChallenge.AddRule("Saddle point of Matrix", context =>
 {   
     int[,] mat1 = new int[,]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
 
-    // int[,] mat1 = new int[,]{{1, 2, 3},
-    //                          {4, 5, 6},
-    //                         {10, 18, 4}};
-
     int correctans = 7;
     
     int ans = Saddle(mat1);
@@ -432,12 +688,12 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
         // var history = context.SubmissionHistory ....
         if (total == numPassed)
         {
-            context.SetMessage("Challenge 4 completed! Proceed to next Challenge.");
+            context.SetMessage("Challenge 6 completed! Proceed to next Challenge.");
             await context.StartNextChallengeAsync();
         }
         else
         {
-            context.SetMessage("Challenge 4 not complete");
+            context.SetMessage("Challenge 6 not complete");
         }
     });
 
@@ -447,7 +703,7 @@ Lesson.CurrentChallenge.OnCodeSubmitted(async context =>
 
 #!markdown
 
-# Challenge 4 : Find Saddle point of Matrix.
+# Challenge 6 : Find Saddle point of Matrix.
 
 #!markdown
 
@@ -459,23 +715,23 @@ Your will write your answer as a lambda and assign it to `Saddle`. The lambda sh
 
 It should return saddle point of matrix.
 
-Eg.
+Eg .
 
-Input: 
+    Input: 
 
-Mat[3][3] = { {1, 2, 3},
-                  {4, 5, 6},
-                  {7, 8, 9}}
-
-Output: 7
-
-7 is minimum in its row and maximum in its column.
-
-Input: Mat[3][3] = {{1, 2, 3},
+    Mat[3][3] = { {1, 2, 3},
                     {4, 5, 6},
-                    {10, 18, 4}}
-                    
-Output: -1 (No saddle point)
+                    {7, 8, 9}}
+ 
+    Output: 7
+
+    7 is minimum in its row and maximum in its column.
+
+    Input: Mat[3][3] = {{1, 2, 3},
+                        {4, 5, 6},
+                        {10, 18, 4}}
+                        
+    Output: -1 (No saddle point)
 
 #!csharp
 
