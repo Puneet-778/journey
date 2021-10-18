@@ -35,7 +35,7 @@ Lesson.CurrentChallenge.AddRule("Checking for duplicate brackets", context =>
     if(correctans == ans){
         context.Pass("Correct answer");
     }else{
-        context.Fail("Incorrect answer","");
+        context.Fail("Incorrect answer","use Stack data Structure");
     }
 
     
@@ -185,7 +185,7 @@ Lesson.CurrentChallenge.AddRule("Checking for Balanced brackets", context =>
     if(correctans == ans){
         context.Pass("Correct answer");
     }else{
-        context.Fail("Incorrect answer","");
+        context.Fail("Incorrect answer","use Stack data Structure");
     }
 
     
@@ -324,7 +324,7 @@ Lesson.CurrentChallenge.AddRule("Next greater element on right", context =>
     }
     else
     {
-        context.Fail("Incorrect answer");
+        context.Fail("Incorrect answer","use Stack data Structure");
     }
 });
 
@@ -362,7 +362,11 @@ Your will write your answer as a lambda and assign it to `NGR`. The lambda shoul
 
 It should return an array having next greater elements to the right for each element. 
 
-Note : If an element does not have any element on it's right side greater than it, consider -1 as it's "next greater element on right"
+Note : If an element does not have any element on it's right side greater than it, consider -1 as it's "next greater element on right".
+
+Can you solve it in O(n) time complexity ?
+
+Hint : use Stack data Structure
 
 Eg : 
 
