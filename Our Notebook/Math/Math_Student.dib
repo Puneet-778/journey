@@ -5,3 +5,26 @@
 #!csharp
 
 #!start-lesson --from-file "Math_Teacher.dib"
+
+#!markdown
+
+# Challenge 1: Reverse the given number
+
+#!markdown
+
+In this challenge, you will be writing an algorithm for reversing any given number. 
+
+The function needs to return the `reverse` of the provided number. 
+
+    Example:
+
+    Input: 692
+
+    Output: 296
+
+#!csharp
+
+ReverseNum = num =>
+{
+    throw new NotImplementedException(); // write your answer here
+};

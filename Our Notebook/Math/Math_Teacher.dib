@@ -71,11 +71,11 @@ In this challenge, you will be writing an algorithm for reversing any given numb
 
 The function needs to return the `reverse` of the provided number. 
 
-Example:
+    Example:
 
-Input: 692
+    Input: 692
 
-Output: 296
+    Output: 296
 
 #!csharp
 
@@ -167,15 +167,15 @@ In this challenge, you will be writing an algorithm for checking if any give num
 
 The function needs to return a `boolean value` indicating if the given number is a Palindrome. 
 
-Example:
+    Example:
 
-Input: 76367
+    Input: 76367
 
-Output: true
+    Output: true
 
-Input: 12389
+    Input: 12389
 
-Output: false
+    Output: false
 
 #!csharp
 
@@ -270,15 +270,15 @@ The function needs to return a `boolean value` indicating whether the given numb
 
 `Armstrong number` is a number that is equal to the sum of cubes of its digits.
 
-Example:
+    Example:
 
-Input: 153
+    Input: 153
 
-Output: true
+    Output: true
 
-Input 222
+    Input 222
 
-Output: false
+    Output: false
 
 #!csharp
 
@@ -377,15 +377,15 @@ The function needs to return an `integer`.
 
 `LCM` Stands for Lowest Common Multiple of two numbers.
 
-Example:
+    Example:
 
-Input: 2,3
+    Input: 2,3
 
-Output: 6
+    Output: 6
 
-Input 5,7
+    Input 5,7
 
-Output: 35
+    Output: 35
 
 #!csharp
 
@@ -483,15 +483,15 @@ The function needs to return an `integer`.
 
 `GCD` stands for Greatest Common Divisor. The GCD of two numbers is the largest number that divides both of them.
 
-Example:
+    Example:
 
-Input: 2,13
+    Input: 2,13
 
-Output: 1
+    Output: 1
 
-Input 27,81
+    Input 27,81
 
-Output: 27
+    Output: 27
 
 #!csharp
 
@@ -585,15 +585,15 @@ In this challenge, you will be writing an algorithm for checking if any give num
 
 The function needs to return a `boolean value` indicating if the given number is a Prime number. 
 
-Example:
+    Example:
 
-Input: 13
+    Input: 13
 
-Output: true
+    Output: true
 
-Input: 27
+    Input: 27
 
-Output: false
+    Output: false
 
 #!csharp
 
@@ -632,7 +632,7 @@ Lesson.ResetChallenge();
 
 #!markdown
 
-# [Challenge] Prime Numbers upto N
+# [Challenge] Sieve of Eratosthenes (Find primes upto N)
 
 #!csharp
 
